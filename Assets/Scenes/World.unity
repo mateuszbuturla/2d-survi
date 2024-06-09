@@ -506,50 +506,6 @@ Transform:
   - {fileID: 490758445}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &852171088
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 852171090}
-  - component: {fileID: 852171089}
-  m_Layer: 0
-  m_Name: WorldManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &852171089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 852171088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 948177c91f3fd244e862e775af622723, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &852171090
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 852171088}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.2074876, y: -0.075892076, z: 0.0024030157}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1017024681
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,6 +536,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseTile: {fileID: 11400000, guid: ac25c35997f3b824f8de7cdd1c872f4e, type: 2}
+  objects: []
 --- !u!4 &1017024683
 Transform:
   m_ObjectHideFlags: 0
@@ -627,8 +584,6 @@ MonoBehaviour:
   worldGenerationData: {fileID: 11400000, guid: 8d790ef891d9d4c4d84e49c90100b37c, type: 2}
   voronoiDistortionData: {fileID: 11400000, guid: 51c6caa576a0cff4bb484d3101d4ca85, type: 2}
   tilemap: {fileID: 490758447}
-  borderThickness: 1
-  segmentCount: 14
   biomeGeneratorsData:
   - biomeGenerator: {fileID: 1017024682}
   - biomeGenerator: {fileID: 2114666275}
@@ -696,6 +651,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseTile: {fileID: 11400000, guid: 8f7f5b08de0fd464f83109ca3d49aea5, type: 2}
+  objects: []
 --- !u!1 &2114666273
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,12 +697,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseTile: {fileID: 11400000, guid: ce376d127e3ce964494dad574d94d5d6, type: 2}
+  objects:
+  - {fileID: 11400000, guid: 14d61ea60dc26344291856392396c4cb, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 619394802}
-  - {fileID: 852171090}
   - {fileID: 811734614}
   - {fileID: 1637260366}
