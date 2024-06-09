@@ -14,6 +14,7 @@ public struct BiomeData
 
 public class GenerateWorld : MonoBehaviour
 {
+    public NoiseSettings noiseSettings;
     public WorldGenerationData worldGenerationData;
     public Tilemap tilemap;
 
@@ -22,7 +23,6 @@ public class GenerateWorld : MonoBehaviour
 
     private int width;
     private int height;
-    private float scale;
 
     public GenerateBiome generateBiome;
 
@@ -30,7 +30,6 @@ public class GenerateWorld : MonoBehaviour
     {
         this.width = this.worldGenerationData.worldWidth;
         this.height = this.worldGenerationData.worldHeight;
-        this.scale = this.worldGenerationData.worldScale;
         GenerateTilemap();
     }
 
@@ -40,9 +39,16 @@ public class GenerateWorld : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                float xCoord = (float)x / width * scale;
-                float yCoord = (float)y / height * scale;
-                float noiseValue = Mathf.PerlinNoise(xCoord, yCoord);
+                float xCoord = (float)x / width;
+                float yCoord = (float)y / height;
+
+
+                float noiseValue = MyNoise.OctavePerlin(
+                   x,
+                   y,
+                   noiseSettings
+                );
+
                 BiomeData biome = SelectBiomeData(noiseValue);
                 biome.biomeGenerator.GenerateTile(new Vector3Int(x, y, 0));
             }

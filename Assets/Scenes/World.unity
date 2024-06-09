@@ -522,7 +522,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &852171089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,16 +535,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948177c91f3fd244e862e775af622723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  noiseSettings: {fileID: 11400000, guid: 1778367bc4bfe3e4c9d4d5b330e7b7f5, type: 2}
   worldGenerationData: {fileID: 11400000, guid: 4003aa92dd595e046b5380aabf06005d, type: 2}
   tilemap: {fileID: 490758447}
   biomeGeneratorsData:
   - startThreshold: 0
-    endThreshold: 0.5
+    endThreshold: 0.39
     biomeGenerator: {fileID: 1017024682}
-  - startThreshold: 0.5
-    endThreshold: 0.85
+  - startThreshold: 0.39
+    endThreshold: 0.55
     biomeGenerator: {fileID: 2114666275}
-  - startThreshold: 0.85
+  - startThreshold: 0.55
     endThreshold: 1
     biomeGenerator: {fileID: 1805217935}
   generateBiome: {fileID: 1017024682}
@@ -610,6 +611,58 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 852171090}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1637260364
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1637260366}
+  - component: {fileID: 1637260365}
+  m_Layer: 0
+  m_Name: VoronoiLine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1637260365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637260364}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b446c241a75ca644af93fbae0ccd35d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 490758447}
+  biomeTiles:
+  - {fileID: 11400000, guid: ac25c35997f3b824f8de7cdd1c872f4e, type: 2}
+  - {fileID: 11400000, guid: ce376d127e3ce964494dad574d94d5d6, type: 2}
+  - {fileID: 11400000, guid: 8f7f5b08de0fd464f83109ca3d49aea5, type: 2}
+  size: 1000
+  borderThickness: 1
+  segmentCount: 20
+--- !u!4 &1637260366
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1637260364}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 45.441856, y: 33.699703, z: 0.039168466}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1805217933
 GameObject:
@@ -709,3 +762,4 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 852171090}
   - {fileID: 811734614}
+  - {fileID: 1637260366}

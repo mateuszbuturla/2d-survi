@@ -7,5 +7,4 @@ public class WorldGenerationData : ScriptableObject
 {
     public int worldWidth;
     public int worldHeight;
-    public float worldScale;
 }
