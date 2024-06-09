@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: MainLev2.0_447
+  m_Name: seasonal sample (summer)_27
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 881612737, guid: ca2f4463c6fa98547a6d21cdaa13b77a, type: 3}
+  m_Sprite: {fileID: -218401296, guid: 88b86a21f49c7d941a4c26a39ff093cd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
