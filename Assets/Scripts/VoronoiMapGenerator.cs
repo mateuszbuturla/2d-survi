@@ -7,12 +7,19 @@ public class VoronoiMapGenerator : MonoBehaviour
 {
     public Tilemap tilemap;
     public TileBase[] biomeTiles;
-    public int size = 1000;
-    public int borderThickness = 1;
-    public int segmentCount = 20;
+    public int size;
+    public int borderThickness;
+    public int segmentCount;
 
     private List<Vector3Int> points;
 
+
+    public float baseScale = 50.0f;
+    public int octaveCount = 4;
+    public float amplitude = 5.0f;
+    public float lacunarity = 2.0f;
+    public float persistence = 0.5f;
+    public Vector2 seed = new Vector2(-71, 37);
 
     void Start()
     {
@@ -22,7 +29,8 @@ public class VoronoiMapGenerator : MonoBehaviour
 
     void GenerateMap()
     {
-        for (int x = 0; x < size; x++) {
+        for (int x = 0; x < size; x++)
+        {
             for (int y = 0; y < size; y++)
             {
                 Vector3Int closestPoint = FindClosestPoint(new Vector3Int(x, y, 0));
@@ -31,14 +39,35 @@ public class VoronoiMapGenerator : MonoBehaviour
         }
     }
 
+    Vector3Int Get2DTurbulence(Vector2 input)
+    {
+
+        input = input / baseScale + seed;
+        float a = 2f * amplitude;
+
+        Vector3Int noise = Vector3Int.zero;
+
+        for (int octave = 0; octave < octaveCount; octave++)
+        {
+            noise.x += (int)(a * (Mathf.PerlinNoise(input.x, input.y) - 0.5f));
+            noise.y += (int)(a * (Mathf.PerlinNoise(input.x + seed.y, input.y + seed.y) - 0.5f));
+            input = input * lacunarity + seed;
+            a *= persistence;
+        }
+
+        return noise;
+}
+
     Vector3Int FindClosestPoint(Vector3Int position)
     {
         Vector3Int closestPoint = Vector3Int.zero;
         float closestDistance = float.MaxValue;
 
+        Vector3Int newPos = position + Get2DTurbulence(new Vector2Int(position.x, position.y));
+
         foreach (Vector3Int point in points)
         {
-            float distance = Vector3Int.Distance(position, point);
+            float distance = Vector3Int.Distance(newPos, point);
             if (distance < closestDistance)
             {
                 closestDistance = distance;

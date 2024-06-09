@@ -646,9 +646,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ac25c35997f3b824f8de7cdd1c872f4e, type: 2}
   - {fileID: 11400000, guid: ce376d127e3ce964494dad574d94d5d6, type: 2}
   - {fileID: 11400000, guid: 8f7f5b08de0fd464f83109ca3d49aea5, type: 2}
-  size: 1000
+  size: 500
   borderThickness: 1
-  segmentCount: 20
+  segmentCount: 14
+  baseScale: 10
+  octaveCount: 1
+  amplitude: 4
+  lacunarity: 1
+  persistence: 1
+  seed: {x: -71, y: 37}
 --- !u!4 &1637260366
 Transform:
   m_ObjectHideFlags: 0
