@@ -535,20 +535,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948177c91f3fd244e862e775af622723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noiseSettings: {fileID: 11400000, guid: 1778367bc4bfe3e4c9d4d5b330e7b7f5, type: 2}
-  worldGenerationData: {fileID: 11400000, guid: 4003aa92dd595e046b5380aabf06005d, type: 2}
-  tilemap: {fileID: 490758447}
-  biomeGeneratorsData:
-  - startThreshold: 0
-    endThreshold: 0.39
-    biomeGenerator: {fileID: 1017024682}
-  - startThreshold: 0.39
-    endThreshold: 0.55
-    biomeGenerator: {fileID: 2114666275}
-  - startThreshold: 0.55
-    endThreshold: 1
-    biomeGenerator: {fileID: 1805217935}
-  generateBiome: {fileID: 1017024682}
 --- !u!4 &852171090
 Transform:
   m_ObjectHideFlags: 0
@@ -561,10 +547,7 @@ Transform:
   m_LocalPosition: {x: 2.2074876, y: -0.075892076, z: 0.0024030157}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1017024683}
-  - {fileID: 2114666274}
-  - {fileID: 1805217934}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1017024681
@@ -605,12 +588,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017024681}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -43.234367, y: -33.775597, z: -0.03676545}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 852171090}
+  m_Father: {fileID: 1637260366}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1637260364
 GameObject:
@@ -641,20 +624,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b446c241a75ca644af93fbae0ccd35d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldGenerationData: {fileID: 11400000, guid: 8d790ef891d9d4c4d84e49c90100b37c, type: 2}
+  voronoiDistortionData: {fileID: 11400000, guid: 51c6caa576a0cff4bb484d3101d4ca85, type: 2}
   tilemap: {fileID: 490758447}
-  biomeTiles:
-  - {fileID: 11400000, guid: ac25c35997f3b824f8de7cdd1c872f4e, type: 2}
-  - {fileID: 11400000, guid: ce376d127e3ce964494dad574d94d5d6, type: 2}
-  - {fileID: 11400000, guid: 8f7f5b08de0fd464f83109ca3d49aea5, type: 2}
-  size: 500
   borderThickness: 1
   segmentCount: 14
-  baseScale: 10
-  octaveCount: 1
-  amplitude: 4
-  lacunarity: 1
-  persistence: 1
-  seed: {x: -71, y: 37}
+  biomeGeneratorsData:
+  - biomeGenerator: {fileID: 1017024682}
+  - biomeGenerator: {fileID: 2114666275}
+  - biomeGenerator: {fileID: 1805217935}
 --- !u!4 &1637260366
 Transform:
   m_ObjectHideFlags: 0
@@ -667,7 +645,10 @@ Transform:
   m_LocalPosition: {x: 45.441856, y: 33.699703, z: 0.039168466}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1017024683}
+  - {fileID: 2114666274}
+  - {fileID: 1805217934}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1805217933
@@ -695,12 +676,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1805217933}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -43.234367, y: -33.775597, z: -0.03676545}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 852171090}
+  m_Father: {fileID: 1637260366}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1805217935
 MonoBehaviour:
@@ -740,12 +721,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2114666273}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -43.234367, y: -33.775597, z: -0.03676545}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 852171090}
+  m_Father: {fileID: 1637260366}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2114666275
 MonoBehaviour:

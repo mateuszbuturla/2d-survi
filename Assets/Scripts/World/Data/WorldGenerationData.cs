@@ -7,4 +7,6 @@ public class WorldGenerationData : ScriptableObject
 {
     public int worldWidth;
     public int worldHeight;
+    public int borderThickness;
+    public int segmentCount;
 }

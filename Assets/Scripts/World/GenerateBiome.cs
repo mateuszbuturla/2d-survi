@@ -9,7 +9,7 @@ public class GenerateBiome : MonoBehaviour
 
     public void GenerateTile(Vector3Int pos)
     {
-        GenerateWorld generateWorld = transform.parent.GetComponent<GenerateWorld>();
+        VoronoiMapGenerator generateWorld = transform.parent.GetComponent<VoronoiMapGenerator>();
         generateWorld.tilemap.SetTile(pos, baseTile);
     }
 }
