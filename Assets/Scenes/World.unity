@@ -122,6 +122,53 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &339060919
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 339060920}
+  - component: {fileID: 339060921}
+  m_Layer: 0
+  m_Name: Tundra
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &339060920
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339060919}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -43.234367, y: -33.775597, z: -0.03676545}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1637260366}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &339060921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339060919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa504bc2a36af8b4db795f874de29e5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseTile: {fileID: 11400000, guid: fca8b937e81bc3d479543241bf30cbd7, type: 2}
+  objects:
+  - {fileID: 11400000, guid: f6bf11f9cee7b364294cc874f767fec9, type: 2}
 --- !u!1 &490758444
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,7 +582,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa504bc2a36af8b4db795f874de29e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseTile: {fileID: 11400000, guid: ac25c35997f3b824f8de7cdd1c872f4e, type: 2}
+  baseTile: {fileID: 11400000, guid: d8591dc12b8b3f74295afecb0f450fe0, type: 2}
   objects: []
 --- !u!4 &1017024683
 Transform:
@@ -588,6 +635,7 @@ MonoBehaviour:
   - biomeGenerator: {fileID: 1017024682}
   - biomeGenerator: {fileID: 2114666275}
   - biomeGenerator: {fileID: 1805217935}
+  - biomeGenerator: {fileID: 339060921}
 --- !u!4 &1637260366
 Transform:
   m_ObjectHideFlags: 0
@@ -604,6 +652,7 @@ Transform:
   - {fileID: 1017024683}
   - {fileID: 2114666274}
   - {fileID: 1805217934}
+  - {fileID: 339060920}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1805217933
@@ -617,7 +666,7 @@ GameObject:
   - component: {fileID: 1805217934}
   - component: {fileID: 1805217935}
   m_Layer: 0
-  m_Name: Swamp
+  m_Name: Desert
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -650,8 +699,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa504bc2a36af8b4db795f874de29e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseTile: {fileID: 11400000, guid: 8f7f5b08de0fd464f83109ca3d49aea5, type: 2}
-  objects: []
+  baseTile: {fileID: 11400000, guid: 18bbc27844fdcc2429f0fa9146027694, type: 2}
+  objects:
+  - {fileID: 11400000, guid: 0e8d1ae2d81bd75468268a15ecac50dc, type: 2}
+  - {fileID: 11400000, guid: b0d6ac764cf548c42bf38d9fa79390e7, type: 2}
+  - {fileID: 11400000, guid: 4a2e21ef52de35e42a12becdc7f3e57a, type: 2}
+  - {fileID: 11400000, guid: f6bf11f9cee7b364294cc874f767fec9, type: 2}
 --- !u!1 &2114666273
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,9 +749,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa504bc2a36af8b4db795f874de29e5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseTile: {fileID: 11400000, guid: ce376d127e3ce964494dad574d94d5d6, type: 2}
+  baseTile: {fileID: 11400000, guid: 96ab14fbbf2ed61409fbeca0228c3a40, type: 2}
   objects:
   - {fileID: 11400000, guid: 14d61ea60dc26344291856392396c4cb, type: 2}
+  - {fileID: 11400000, guid: 4d9d77a3f8bf3cf4cbf09ff635369145, type: 2}
+  - {fileID: 11400000, guid: f6bf11f9cee7b364294cc874f767fec9, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

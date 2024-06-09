@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8778bbf72b7e7840be5569d2e9f959d, type: 3}
-  m_Name: OverworldForestTreeData
+  m_Name: OverworldDesertRockData
   m_EditorClassIdentifier: 
-  chance: 100
-  prefab: {fileID: 3230715129097761634, guid: 530bde09e369b8645bb4b23bf00fe758, type: 3}
+  chance: 30
+  prefab: {fileID: 662119771640645418, guid: 5a4dffb8805d827428ae146ba6107ff4, type: 3}

@@ -23,14 +23,14 @@ public class GenerateBiome : MonoBehaviour
     {
         foreach (var obj in objects)
         {
-            int rn = Random.Range(0, 1000);
+            int rn = Random.Range(0, 10000);
 
             if (rn <= obj.chance)
             {
                 VoronoiMapGenerator generateWorld = transform.parent.GetComponent<VoronoiMapGenerator>();
 
                 Vector3 worldPosition = generateWorld.tilemap.CellToWorld(pos);
-                Instantiate(obj.prefab, worldPosition, Quaternion.identity);
+                Instantiate(obj.prefab, worldPosition + new Vector3(0, 0, -1f), Quaternion.identity);
                 break;
             }
         }
