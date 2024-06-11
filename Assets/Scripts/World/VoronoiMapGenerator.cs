@@ -21,11 +21,14 @@ public class VoronoiMapGenerator : MonoBehaviour
 
     public List<Biome> biomes;
 
+    public GameObject tree;
+
     void Start()
     {
         biomes = GenerateBiomeBase();
 
         GenerateMap();
+        GenerateObjects();
     }
 
     void GenerateMap()
@@ -92,7 +95,39 @@ public class VoronoiMapGenerator : MonoBehaviour
         // }
     }
 
-    Biome FindClosestBiome(Vector3Int position)
+    public BiomeData GetBiomeGeneratorByBiomeType(BiomeType biomeType)
+    {
+        return biomeGeneratorsData.Find(x => x.biomeType == biomeType);
+    }
+
+    void GenerateObjects()
+    {
+        foreach (Biome biome in biomes)
+        {
+            BiomeData biomeGenerator = GetBiomeGeneratorByBiomeType(biome.biomeType);
+
+            if (biomeGenerator.biomeGenerator.objects.Count < 1)
+            {
+                continue;
+            }
+
+            foreach (BiomeObjectData biomeObject in biomeGenerator.biomeGenerator.objects)
+            {
+                List<Vector2Int> points = PoissonDiscSampling.GeneratePoints(biomeObject.radius, new Vector2Int(250, 250), biomeObject.numSamplesBeforeRejection);
+
+                foreach (Vector2Int obj in points)
+                {
+                    if (biome.biomePoints.Contains(obj))
+                    {
+                        Vector3 worldPosition = tilemap.CellToWorld(new Vector3Int(obj.x, obj.y, 0));
+                        Instantiate(biomeObject.prefab, worldPosition + new Vector3(0, 0, 0), Quaternion.Euler(45, 0, 0));
+                    }
+                }
+            }
+        }
+    }
+
+    public Biome FindClosestBiome(Vector3Int position)
     {
         Biome closestBiome = null;
         float closestDistance = float.MaxValue;
@@ -112,7 +147,7 @@ public class VoronoiMapGenerator : MonoBehaviour
         return closestBiome;
     }
 
-    List<Biome> GenerateBiomeBase()
+    public List<Biome> GenerateBiomeBase()
     {
         List<Biome> generatedBiomes = new List<Biome>();
 
@@ -151,7 +186,7 @@ public class VoronoiMapGenerator : MonoBehaviour
         return generatedBiomes;
     }
 
-    private List<Vector3Int> FindClosePoints(Vector3Int targetPoint, List<Vector3Int> points, float minDistance, float maxDistance)
+    List<Vector3Int> FindClosePoints(Vector3Int targetPoint, List<Vector3Int> points, float minDistance, float maxDistance)
     {
         List<Vector3Int> closePoints = new List<Vector3Int>();
 
@@ -171,7 +206,7 @@ public class VoronoiMapGenerator : MonoBehaviour
         return closePoints;
     }
 
-    public List<Vector2Int> GetLine(Vector2Int start, Vector2Int end)
+    List<Vector2Int> GetLine(Vector2Int start, Vector2Int end)
     {
         List<Vector2Int> points = new List<Vector2Int>();
 

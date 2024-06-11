@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8778bbf72b7e7840be5569d2e9f959d, type: 3}
   m_Name: OverworldForestTreeData
   m_EditorClassIdentifier: 
-  chance: 100
+  radius: 3
+  numSamplesBeforeRejection: 15
   prefab: {fileID: 3230715129097761634, guid: 530bde09e369b8645bb4b23bf00fe758, type: 3}

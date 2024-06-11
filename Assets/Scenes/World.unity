@@ -320,8 +320,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseTile: {fileID: 11400000, guid: fca8b937e81bc3d479543241bf30cbd7, type: 2}
-  objects:
-  - {fileID: 11400000, guid: f6bf11f9cee7b364294cc874f767fec9, type: 2}
+  objects: []
 --- !u!1 &490758444
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,6 +660,54 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &720511520
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 720511522}
+  - component: {fileID: 720511521}
+  m_Layer: 0
+  m_Name: Forest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &720511521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720511520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa504bc2a36af8b4db795f874de29e5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseTile: {fileID: 11400000, guid: ed891fb0ae169694b8a41d9ca8c33ed1, type: 2}
+  objects:
+  - {fileID: 11400000, guid: 14d61ea60dc26344291856392396c4cb, type: 2}
+  - {fileID: 11400000, guid: 4d9d77a3f8bf3cf4cbf09ff635369145, type: 2}
+--- !u!4 &720511522
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720511520}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -43.234367, y: -33.775597, z: -0.03676545}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1637260366}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &747517781
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,8 +886,11 @@ MonoBehaviour:
     biomeGenerator: {fileID: 1805217935}
   - biomeType: 3
     biomeGenerator: {fileID: 339060921}
+  - biomeType: 4
+    biomeGenerator: {fileID: 720511521}
   roadGenerator: {fileID: 1756961243}
   biomes: []
+  tree: {fileID: 8064027607133903878, guid: 8b1a58dd302e7f64181209e925a3fc19, type: 3}
 --- !u!4 &1637260366
 Transform:
   m_ObjectHideFlags: 0
@@ -858,6 +908,7 @@ Transform:
   - {fileID: 2114666274}
   - {fileID: 1805217934}
   - {fileID: 339060920}
+  - {fileID: 720511522}
   - {fileID: 1756961244}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -953,10 +1004,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseTile: {fileID: 11400000, guid: 18bbc27844fdcc2429f0fa9146027694, type: 2}
   objects:
-  - {fileID: 11400000, guid: 0e8d1ae2d81bd75468268a15ecac50dc, type: 2}
   - {fileID: 11400000, guid: b0d6ac764cf548c42bf38d9fa79390e7, type: 2}
+  - {fileID: 11400000, guid: 0e8d1ae2d81bd75468268a15ecac50dc, type: 2}
   - {fileID: 11400000, guid: 4a2e21ef52de35e42a12becdc7f3e57a, type: 2}
-  - {fileID: 11400000, guid: f6bf11f9cee7b364294cc874f767fec9, type: 2}
 --- !u!1 &1937593715
 GameObject:
   m_ObjectHideFlags: 0
@@ -1100,9 +1150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseTile: {fileID: 11400000, guid: 96ab14fbbf2ed61409fbeca0228c3a40, type: 2}
   objects:
-  - {fileID: 11400000, guid: 14d61ea60dc26344291856392396c4cb, type: 2}
-  - {fileID: 11400000, guid: 4d9d77a3f8bf3cf4cbf09ff635369145, type: 2}
-  - {fileID: 11400000, guid: f6bf11f9cee7b364294cc874f767fec9, type: 2}
+  - {fileID: 11400000, guid: 2f7f231c119b8dc47bf2e4138142c68d, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8778bbf72b7e7840be5569d2e9f959d, type: 3}
   m_Name: OverworldDesertUndergroundData
   m_EditorClassIdentifier: 
-  chance: 1
+  radius: 50
+  numSamplesBeforeRejection: 20
   prefab: {fileID: 7831424085740452397, guid: bc38b3f559d5dd84e9dafac1c7f53a00, type: 3}
