@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OverworldEmerald Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 4646590533762939668, guid: 61bf3a7b2757e9c4f90438382a02cfef, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.1291
+      objectReference: {fileID: 0}
     - target: {fileID: 5396949892583046311, guid: 61bf3a7b2757e9c4f90438382a02cfef, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -15,4 +15,4 @@ MonoBehaviour:
   worldWidth: 250
   worldHeight: 250
   borderThickness: 1
-  segmentCount: 250
+  segmentCount: 10

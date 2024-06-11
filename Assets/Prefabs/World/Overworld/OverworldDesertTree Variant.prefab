@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OverworldDesertTree Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 4805407032167845380, guid: 530bde09e369b8645bb4b23bf00fe758, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.1556
+      objectReference: {fileID: 0}
     - target: {fileID: 5199946806122252727, guid: 530bde09e369b8645bb4b23bf00fe758, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

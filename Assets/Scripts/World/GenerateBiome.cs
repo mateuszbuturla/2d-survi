@@ -30,7 +30,7 @@ public class GenerateBiome : MonoBehaviour
                 VoronoiMapGenerator generateWorld = transform.parent.GetComponent<VoronoiMapGenerator>();
 
                 Vector3 worldPosition = generateWorld.tilemap.CellToWorld(pos);
-                Instantiate(obj.prefab, worldPosition + new Vector3(0, 0, -1f), Quaternion.identity);
+                Instantiate(obj.prefab, worldPosition + new Vector3(0, 0, 0), Quaternion.Euler(45, 0, 0));
                 break;
             }
         }

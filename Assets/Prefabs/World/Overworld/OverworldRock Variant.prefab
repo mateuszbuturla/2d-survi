@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OverworldRock Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 6104462049080846447, guid: c10934e1f2fdd234bbf6841d9332c4ba, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.147
+      objectReference: {fileID: 0}
     - target: {fileID: 6786563764692873180, guid: c10934e1f2fdd234bbf6841d9332c4ba, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
