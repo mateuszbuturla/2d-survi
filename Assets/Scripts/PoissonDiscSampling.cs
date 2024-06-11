@@ -28,8 +28,8 @@ public static class PoissonDiscSampling
                 Vector2Int candidate = new Vector2Int(Mathf.RoundToInt(candidateFloat.x), Mathf.RoundToInt(candidateFloat.y));
                 if (IsValid(candidate, sampleRegionSize, cellSize, radius, points, grid))
                 {
-                    // float perlinValue = Mathf.PerlinNoise(candidate.x * 0.03f, candidate.y * 0.03f);
-                    // if (perlinValue > 0.5f)
+                    // float perlinValue = Mathf.PerlinNoise(candidate.x * 0.01f, candidate.y * 0.01f);
+                    // if (perlinValue > 0.4f)
                     // {
                     points.Add(candidate);
                     spawnPoints.Add(candidate);

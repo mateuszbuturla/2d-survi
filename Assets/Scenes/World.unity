@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 747517783}
-  smoothing: 5
+  smoothing: 3
   offset: {x: 0, y: 1, z: -1}
 --- !u!114 &121136455
 MonoBehaviour:
@@ -1151,6 +1151,7 @@ MonoBehaviour:
   baseTile: {fileID: 11400000, guid: 96ab14fbbf2ed61409fbeca0228c3a40, type: 2}
   objects:
   - {fileID: 11400000, guid: 2f7f231c119b8dc47bf2e4138142c68d, type: 2}
+  - {fileID: 11400000, guid: 2f1dcefe7c5f0a045bad50e0da74e548, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
