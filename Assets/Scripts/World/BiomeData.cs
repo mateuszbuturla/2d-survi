@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public struct BiomeData
 {
+    public BiomeTier biomeTier;
     public BiomeType biomeType;
     public int count;
     public GenerateBiome biomeGenerator;

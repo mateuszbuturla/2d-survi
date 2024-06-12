@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -44,9 +46,16 @@ public class WorldGenerator
         return tiles;
     }
 
+    private List<BiomeData> FilterBiomeDataByTier(BiomeTier biomeTier)
+    {
+        return (from biome in biomeGeneratorsData
+                where biome.biomeTier == biomeTier
+                select biome).ToList();
+    }
+
     private Dictionary<Vector2Int, BiomeType> GenerateBiomesDistribution()
     {
-        int minDistance = 4;
+        int minDistance = 0;
 
         Dictionary<Vector2Int, BiomeType> biomesDistribution = new Dictionary<Vector2Int, BiomeType>();
 
@@ -64,46 +73,104 @@ public class WorldGenerator
         int centerIndex = worldGenerationData.segmentCount / 2;
         biomesDistribution[new Vector2Int(centerIndex, centerIndex)] = BiomeType.GRASSLAND;
 
-        List<BiomeType> biomeDistributionOrder = new List<BiomeType>();
+        List<BiomeType> biomeDistributionOrderInner = new List<BiomeType>();
 
-        foreach (BiomeData biome in biomeGeneratorsData)
+        foreach (BiomeData biome in FilterBiomeDataByTier(BiomeTier.INNER))
         {
-            for (int i = 1; i < biome.count; i++)
+            for (int i = 0; i < biome.count; i++)
             {
-                biomeDistributionOrder.Add(biome.biomeType);
+                biomeDistributionOrderInner.Add(biome.biomeType);
             }
         }
 
-        foreach (BiomeType biomeType in biomeDistributionOrder)
+        foreach (BiomeType biomeType in biomeDistributionOrderInner)
         {
-            Vector2Int randomPos = GetRandomPositionWithoutNearby(biomesDistribution, minDistance);
+            Vector2Int randomPos = GetRandomPositionWithoutNearby(biomesDistribution, minDistance, BiomeTier.INNER);
+            biomesDistribution[randomPos] = biomeType;
+        }
+
+        List<BiomeType> biomeDistributionOrderOuter = new List<BiomeType>();
+
+        foreach (BiomeData biome in FilterBiomeDataByTier(BiomeTier.OUTER))
+        {
+            for (int i = 0; i < biome.count; i++)
+            {
+                biomeDistributionOrderOuter.Add(biome.biomeType);
+            }
+        }
+
+        foreach (BiomeType biomeType in biomeDistributionOrderOuter)
+        {
+            Vector2Int randomPos = GetRandomPositionWithoutNearby(biomesDistribution, minDistance, BiomeTier.OUTER);
             biomesDistribution[randomPos] = biomeType;
         }
 
         return biomesDistribution;
     }
 
-    private Vector2Int GetRandomPositionWithoutNearby(Dictionary<Vector2Int, BiomeType> biomesDistribution, int minDistance)
+    private Vector2Int ConvertToGridPoint(Vector2Int center, Vector2 randomPoint)
+    {
+        int x = Mathf.Clamp(center.x + Mathf.RoundToInt(randomPoint.x), 0, worldGenerationData.segmentCount - 1);
+        int y = Mathf.Clamp(center.y + Mathf.RoundToInt(randomPoint.y), 0, worldGenerationData.segmentCount - 1);
+
+        return new Vector2Int(x, y);
+    }
+
+    private Vector2Int GetRandomPositionWithoutNearby(Dictionary<Vector2Int, BiomeType> biomesDistribution, int minDistance, BiomeTier biomeTier)
     {
         int attemptCount = 0;
-        int maxAttempts = 1000;
+        int maxAttempts = 3000;
+
+        Vector2Int center = new Vector2Int(worldGenerationData.segmentCount / 2, worldGenerationData.segmentCount / 2);
 
         while (true)
         {
             int randomX = Random.Range(1, worldGenerationData.segmentCount - 1);
             int randomY = Random.Range(1, worldGenerationData.segmentCount - 1);
 
-            Vector2Int randomPos = new Vector2Int(randomX, randomY);
+            //Vector2Int randomPos = new Vector2Int(randomX, randomY);
+
             bool valid = true;
 
-            foreach (var pos in biomesDistribution.Keys)
+            float angle = Random.Range(0f, Mathf.PI * 2);
+            float distance;
+
+            if (biomeTier == BiomeTier.INNER)
             {
-                if (Vector2Int.Distance(randomPos, pos) < minDistance)
-                {
-                    valid = false;
-                    break;
-                }
+                distance = Random.Range(1, 9);
             }
+            else
+            {
+                distance = Random.Range(9, 10);
+            }
+
+            float x = distance * Mathf.Cos(angle);
+            float y = distance * Mathf.Sin(angle);
+
+            Vector2Int randomPos = ConvertToGridPoint(center, new Vector2(x, y));
+
+            Debug.Log(randomPos);
+
+            // if (biomeTier == BiomeTier.INNER && distance >= worldGenerationData.outerRingDistance)
+            // {
+            //     valid = false;
+            // }
+            // if (biomeTier == BiomeTier.OUTER && distance < worldGenerationData.outerRingDistance)
+            // {
+            //     valid = false;
+            // }
+
+            // if (valid)
+            // {
+            //     foreach (var pos in biomesDistribution.Keys)
+            //     {
+            //         if (Vector2Int.Distance(randomPos, pos) < minDistance)
+            //         {
+            //             valid = false;
+            //             break;
+            //         }
+            //     }
+            // }
 
             if (valid)
             {

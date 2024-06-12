@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: OverwolrdGenerationData
   m_EditorClassIdentifier: 
   worldSize: 1000
-  segmentCount: 25
+  segmentCount: 50
   borderThickness: 1
   startBiome: 1
   startBiomeMinSize: 2
+  outerRingDistance: 3

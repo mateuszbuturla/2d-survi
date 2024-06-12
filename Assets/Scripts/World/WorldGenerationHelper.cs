@@ -7,6 +7,6 @@ public static class WorldGenerationHelper
 
     public static int GetWorldCenter(WorldGenerationData wgd)
     {
-        return (int)(wgd.segmentCount / 2) - 1;
+        return (int)(wgd.segmentCount / 2);
     }
 }

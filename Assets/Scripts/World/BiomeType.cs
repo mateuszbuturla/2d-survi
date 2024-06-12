@@ -4,5 +4,9 @@ public enum BiomeType
     GRASSLAND,
     DESERT,
     TUNDRA,
-    FOREST
+    FOREST,
+    CORRUPTED,
+    WASTELAND,
+    JUNGLE,
+    HALLOW,
 }
