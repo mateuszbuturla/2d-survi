@@ -6,4 +6,6 @@ public abstract class Projectile : MonoBehaviour
 {
     public Entity owner;
     public ProjectileWeapon projectileWeapon;
+
+    public float projectileSpeed;
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bow : ProjectileWeapon
 {
-    public override void Use(Player player)
+    public override void PrimaryUseEffect(Player player)
     {
         //Create projectile
         GameObject arrow = Instantiate(projectiles[0]);
@@ -23,6 +23,13 @@ public class Bow : ProjectileWeapon
         arrow.transform.rotation = rotation;
 
         //Add speed
-        arrow.GetComponent<Rigidbody2D>().AddForce(direction * projectileSpeed * Time.deltaTime);
+        arrow.GetComponent<Rigidbody2D>().AddForce(arrowProjectile.projectileSpeed * Time.deltaTime * direction);
+
+        StartPrimaryUseCooldown();
+    }
+
+    public override void SecondaryUseEffect(Player player)
+    {
+        
     }
 }

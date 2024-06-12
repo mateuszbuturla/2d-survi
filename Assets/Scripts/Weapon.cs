@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Weapon : Holdable, IUsable
+public abstract class Weapon : Holdable
 {
     public int weaponDamage;
 
-    public abstract void Use(Player player);
+    // -- Primary/Secondary use cooldowns control this now... a little awkward in naming, but it's clean
+    //public float weaponAttackSpeed; 
 }

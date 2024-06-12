@@ -10,6 +10,7 @@ public class Player : Entity, IDamagable
     public Holdable currentHeld;
 
     public Camera playerCamera;
+    public GameObject playerPivot;
     public PlayerController playerController;
     public Rigidbody2D playerRigidbody;
 
@@ -21,11 +22,19 @@ public class Player : Entity, IDamagable
         currentHeld.transform.position = transform.position;
     }
 
-    public void UseItem()
+    public void UseHeldPrimary()
     {
-        if (currentHeld is IUsable)
+        if (currentHeld is Holdable)
         {
-            (currentHeld as IUsable).Use(this);
+            currentHeld.UsePrimary(this);
+        }
+    }
+
+    public void UseHeldSecondary()
+    {
+        if (currentHeld is Holdable)
+        {
+            currentHeld.UseSecondary(this);
         }
     }
 

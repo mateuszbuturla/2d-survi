@@ -31,9 +31,13 @@ public class PlayerController : MonoBehaviour
         {
             movementDirection.x -= 1;
         }
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
         {
-            player.UseItem();
+            player.UseHeldPrimary();
+        }
+        if (Input.GetMouseButtonDown(1))
+        {
+            player.UseHeldSecondary();
         }
 
         MovePlayer();

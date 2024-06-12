@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class ProjectileWeapon : Weapon
 {
     public float weaponRange;
-    public float projectileSpeed;
 
     public List<GameObject> projectiles;
 }

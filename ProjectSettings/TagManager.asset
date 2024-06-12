@@ -14,7 +14,7 @@ TagManager:
   - player
   - collision
   - projectile
-  - 
+  - enemy
   - 
   - 
   - 
@@ -40,4 +40,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: playerProjectile
+    uniqueID: 1104603085
+    locked: 0
+  - name: enemyProjectile
+    uniqueID: 2967585323
+    locked: 0
+  - name: playerMelee
+    uniqueID: 4163344999
+    locked: 0
+  - name: enemyMelee
+    uniqueID: 3778786239
     locked: 0

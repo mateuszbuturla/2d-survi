@@ -1,8 +1,9 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IUsable
+public interface IUsable 
 {
-    public abstract void Use(Player player);
+    public void PrimaryUseEffect(Player player);
+    public abstract void SecondaryUseEffect(Player player);
 }
