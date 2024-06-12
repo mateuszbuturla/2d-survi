@@ -9,4 +9,6 @@ public class WorldGenerationData : ScriptableObject
     public int worldHeight;
     public int borderThickness;
     public int segmentCount;
+    public BiomeType startBiome;
+    public int startBiomeMinSize; // size in regions
 }

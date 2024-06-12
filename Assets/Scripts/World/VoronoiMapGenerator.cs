@@ -163,10 +163,16 @@ public class VoronoiMapGenerator : MonoBehaviour
                 int startY = ySegment * segmentSizeY;
                 int endY = (ySegment + 1) * segmentSizeY;
 
+                int mapCenter = (int)(worldGenerationData.segmentCount / 2) - 1;
+
                 BiomeType biomeType;
                 if (xSegment <= worldGenerationData.borderThickness || xSegment >= worldGenerationData.segmentCount - worldGenerationData.borderThickness || ySegment <= worldGenerationData.borderThickness || ySegment >= worldGenerationData.segmentCount - worldGenerationData.borderThickness)
                 {
                     biomeType = BiomeType.WATER;
+                }
+                else if (xSegment >= mapCenter && xSegment < mapCenter + worldGenerationData.startBiomeMinSize && ySegment >= mapCenter && ySegment < mapCenter + worldGenerationData.startBiomeMinSize)
+                {
+                    biomeType = worldGenerationData.startBiome;
                 }
                 else
                 {

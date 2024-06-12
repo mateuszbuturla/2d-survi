@@ -11,7 +11,7 @@ public class PlayerController3D : MonoBehaviour
     {
         // Odczytanie wejścia gracza
         movement.x = Input.GetAxis("Horizontal");
-        movement.z = Input.GetAxis("Vertical");
+        movement.y = Input.GetAxis("Vertical");
     }
 
     void FixedUpdate()

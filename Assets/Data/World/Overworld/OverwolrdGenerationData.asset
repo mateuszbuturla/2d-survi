@@ -16,3 +16,5 @@ MonoBehaviour:
   worldHeight: 250
   borderThickness: 1
   segmentCount: 10
+  startBiome: 1
+  startBiomeMinSize: 2
