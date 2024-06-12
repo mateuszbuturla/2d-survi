@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bb8eef09c87c524b9a4e1470788de38, type: 3}
   m_Name: OverwolrdGenerationData
   m_EditorClassIdentifier: 
-  worldWidth: 2000
-  worldHeight: 2000
+  worldSize: 500
+  segmentCount: 10
   borderThickness: 1
-  segmentCount: 100
   startBiome: 1
   startBiomeMinSize: 2
