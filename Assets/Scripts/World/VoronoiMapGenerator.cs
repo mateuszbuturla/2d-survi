@@ -120,7 +120,7 @@ public class VoronoiMapGenerator : MonoBehaviour
                     if (biome.biomePoints.Contains(obj))
                     {
                         Vector3 worldPosition = tilemap.CellToWorld(new Vector3Int(obj.x, obj.y, 0));
-                        Instantiate(biomeObject.prefab, worldPosition + new Vector3(0, 0, 0), Quaternion.Euler(45, 0, 0));
+                        Instantiate(biomeObject.prefab, worldPosition + new Vector3(0, 0, 0), Quaternion.identity);
                     }
                 }
             }
