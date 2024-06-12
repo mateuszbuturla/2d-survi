@@ -6,5 +6,6 @@ using UnityEngine;
 public struct BiomeData
 {
     public BiomeType biomeType;
+    public int count;
     public GenerateBiome biomeGenerator;
 }

@@ -8,6 +8,7 @@ public class WorldGenerator
     List<BiomeData> biomeGeneratorsData = new List<BiomeData>();
     VoronoiDistortionData voronoiDistortionData;
 
+    Dictionary<Vector2Int, BiomeType> biomeDistribution;
     Dictionary<Vector2Int, List<Biome>> biomeGrid;
     List<Biome> biomes;
 
@@ -21,6 +22,8 @@ public class WorldGenerator
     public Dictionary<Vector2Int, TileBase> GenerateWorld()
     {
         Dictionary<Vector2Int, TileBase> tiles;
+
+        biomeDistribution = GenerateBiomesDistribution();
 
         System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
         stopwatch.Start();
@@ -41,6 +44,81 @@ public class WorldGenerator
         return tiles;
     }
 
+    private Dictionary<Vector2Int, BiomeType> GenerateBiomesDistribution()
+    {
+        int minDistance = 4;
+
+        Dictionary<Vector2Int, BiomeType> biomesDistribution = new Dictionary<Vector2Int, BiomeType>();
+
+        for (int x = 0; x < worldGenerationData.segmentCount; x++)
+        {
+            for (int y = 0; y < worldGenerationData.segmentCount; y++)
+            {
+                if (x == 0 || y == 0 || x == worldGenerationData.segmentCount - 1 || y == worldGenerationData.segmentCount - 1)
+                {
+                    biomesDistribution[new Vector2Int(x, y)] = BiomeType.WATER;
+                }
+            }
+        }
+
+        int centerIndex = worldGenerationData.segmentCount / 2;
+        biomesDistribution[new Vector2Int(centerIndex, centerIndex)] = BiomeType.GRASSLAND;
+
+        List<BiomeType> biomeDistributionOrder = new List<BiomeType>();
+
+        foreach (BiomeData biome in biomeGeneratorsData)
+        {
+            for (int i = 1; i < biome.count; i++)
+            {
+                biomeDistributionOrder.Add(biome.biomeType);
+            }
+        }
+
+        foreach (BiomeType biomeType in biomeDistributionOrder)
+        {
+            Vector2Int randomPos = GetRandomPositionWithoutNearby(biomesDistribution, minDistance);
+            biomesDistribution[randomPos] = biomeType;
+        }
+
+        return biomesDistribution;
+    }
+
+    private Vector2Int GetRandomPositionWithoutNearby(Dictionary<Vector2Int, BiomeType> biomesDistribution, int minDistance)
+    {
+        int attemptCount = 0;
+        int maxAttempts = 1000;
+
+        while (true)
+        {
+            int randomX = Random.Range(1, worldGenerationData.segmentCount - 1);
+            int randomY = Random.Range(1, worldGenerationData.segmentCount - 1);
+
+            Vector2Int randomPos = new Vector2Int(randomX, randomY);
+            bool valid = true;
+
+            foreach (var pos in biomesDistribution.Keys)
+            {
+                if (Vector2Int.Distance(randomPos, pos) < minDistance)
+                {
+                    valid = false;
+                    break;
+                }
+            }
+
+            if (valid)
+            {
+                return randomPos;
+            }
+
+            attemptCount++;
+            if (attemptCount >= maxAttempts)
+            {
+                Debug.LogError("Cannot find matching position");
+                return Vector2Int.zero;
+            }
+        }
+    }
+
     private List<Biome> GenerateBiomeBase()
     {
         List<Biome> generatedBiomes = new List<Biome>();
@@ -56,22 +134,7 @@ public class WorldGenerator
                 int startY = ySegment * segmentSize;
                 int endY = (ySegment + 1) * segmentSize;
 
-                int mapCenter = WorldGenerationHelper.GetWorldCenter(worldGenerationData);
-
-                BiomeType biomeType;
-                if (xSegment <= worldGenerationData.borderThickness || xSegment >= worldGenerationData.segmentCount - worldGenerationData.borderThickness || ySegment <= worldGenerationData.borderThickness || ySegment >= worldGenerationData.segmentCount - worldGenerationData.borderThickness)
-                {
-                    biomeType = BiomeType.WATER;
-                }
-                else if (xSegment >= mapCenter && xSegment < mapCenter + worldGenerationData.startBiomeMinSize && ySegment >= mapCenter && ySegment < mapCenter + worldGenerationData.startBiomeMinSize)
-                {
-                    biomeType = worldGenerationData.startBiome;
-                }
-                else
-                {
-                    int randomBiome = Random.Range(0, biomeGeneratorsData.Count);
-                    biomeType = biomeGeneratorsData[randomBiome].biomeType;
-                }
+                BiomeType biomeType = GetClosestBiomeTypeFromDistribution(new Vector2Int(xSegment, ySegment));
 
                 int x = Random.Range(startX, endX);
                 int y = Random.Range(startY, endY);
@@ -83,6 +146,24 @@ public class WorldGenerator
         }
 
         return generatedBiomes;
+    }
+
+    private BiomeType GetClosestBiomeTypeFromDistribution(Vector2Int position)
+    {
+        BiomeType closestPosition = BiomeType.WATER;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (Vector2Int biomePosition in biomeDistribution.Keys)
+        {
+            float distance = Vector2Int.Distance(biomePosition, position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closestPosition = biomeDistribution[biomePosition];
+            }
+        }
+
+        return closestPosition;
     }
 
     private Dictionary<Vector2Int, List<Biome>> CreateBiomeGrid()
