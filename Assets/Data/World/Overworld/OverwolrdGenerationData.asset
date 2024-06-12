@@ -17,4 +17,4 @@ MonoBehaviour:
   borderThickness: 1
   startBiome: 1
   startBiomeMinSize: 2
-  outerRingDistance: 3
+  outerRingDistance: 15

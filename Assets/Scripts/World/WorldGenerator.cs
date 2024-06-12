@@ -21,6 +21,11 @@ public class WorldGenerator
         this.voronoiDistortionData = voronoiDistortionData;
     }
 
+    public Dictionary<Vector2Int, BiomeType> Test()
+    {
+        return biomeDistribution;
+    }
+
     public Dictionary<Vector2Int, TileBase> GenerateWorld()
     {
         Dictionary<Vector2Int, TileBase> tiles;
@@ -55,22 +60,24 @@ public class WorldGenerator
 
     private Dictionary<Vector2Int, BiomeType> GenerateBiomesDistribution()
     {
-        int minDistance = 0;
+        int minDistance = 2;
 
         Dictionary<Vector2Int, BiomeType> biomesDistribution = new Dictionary<Vector2Int, BiomeType>();
 
-        for (int x = 0; x < worldGenerationData.segmentCount; x++)
+        int half = worldGenerationData.segmentCount / 2;
+
+        for (int x = -half; x < half; x++)
         {
-            for (int y = 0; y < worldGenerationData.segmentCount; y++)
+            for (int y = -half; y < half; y++)
             {
-                if (x == 0 || y == 0 || x == worldGenerationData.segmentCount - 1 || y == worldGenerationData.segmentCount - 1)
+                if (x == -half || y == -half || x == half - 1 || y == half - 1)
                 {
                     biomesDistribution[new Vector2Int(x, y)] = BiomeType.WATER;
                 }
             }
         }
 
-        int centerIndex = worldGenerationData.segmentCount / 2;
+        int centerIndex = 0;
         biomesDistribution[new Vector2Int(centerIndex, centerIndex)] = BiomeType.GRASSLAND;
 
         List<BiomeType> biomeDistributionOrderInner = new List<BiomeType>();
@@ -110,8 +117,10 @@ public class WorldGenerator
 
     private Vector2Int ConvertToGridPoint(Vector2Int center, Vector2 randomPoint)
     {
-        int x = Mathf.Clamp(center.x + Mathf.RoundToInt(randomPoint.x), 0, worldGenerationData.segmentCount - 1);
-        int y = Mathf.Clamp(center.y + Mathf.RoundToInt(randomPoint.y), 0, worldGenerationData.segmentCount - 1);
+        int half = worldGenerationData.segmentCount / 2;
+
+        int x = Mathf.Clamp(center.x + Mathf.RoundToInt(randomPoint.x), -half, half - 1);
+        int y = Mathf.Clamp(center.y + Mathf.RoundToInt(randomPoint.y), -half, half - 1);
 
         return new Vector2Int(x, y);
     }
@@ -121,15 +130,10 @@ public class WorldGenerator
         int attemptCount = 0;
         int maxAttempts = 3000;
 
-        Vector2Int center = new Vector2Int(worldGenerationData.segmentCount / 2, worldGenerationData.segmentCount / 2);
+        Vector2Int center = new Vector2Int(0, 0);
 
         while (true)
         {
-            int randomX = Random.Range(1, worldGenerationData.segmentCount - 1);
-            int randomY = Random.Range(1, worldGenerationData.segmentCount - 1);
-
-            //Vector2Int randomPos = new Vector2Int(randomX, randomY);
-
             bool valid = true;
 
             float angle = Random.Range(0f, Mathf.PI * 2);
@@ -137,11 +141,11 @@ public class WorldGenerator
 
             if (biomeTier == BiomeTier.INNER)
             {
-                distance = Random.Range(1, 9);
+                distance = Random.Range(0f, worldGenerationData.outerRingDistance);
             }
             else
             {
-                distance = Random.Range(9, 10);
+                distance = Random.Range(worldGenerationData.outerRingDistance, worldGenerationData.segmentCount / 2 - worldGenerationData.borderThickness);
             }
 
             float x = distance * Mathf.Cos(angle);
@@ -160,17 +164,17 @@ public class WorldGenerator
             //     valid = false;
             // }
 
-            // if (valid)
-            // {
-            //     foreach (var pos in biomesDistribution.Keys)
-            //     {
-            //         if (Vector2Int.Distance(randomPos, pos) < minDistance)
-            //         {
-            //             valid = false;
-            //             break;
-            //         }
-            //     }
-            // }
+            if (valid)
+            {
+                foreach (var pos in biomesDistribution.Keys)
+                {
+                    if (Vector2Int.Distance(randomPos, pos) < minDistance)
+                    {
+                        valid = false;
+                        break;
+                    }
+                }
+            }
 
             if (valid)
             {
@@ -191,10 +195,11 @@ public class WorldGenerator
         List<Biome> generatedBiomes = new List<Biome>();
 
         int segmentSize = WorldGenerationHelper.GetWorldSegmentSize(worldGenerationData);
+        int half = worldGenerationData.segmentCount / 2;
 
-        for (int xSegment = 0; xSegment < worldGenerationData.segmentCount; xSegment++)
+        for (int xSegment = -half; xSegment < half; xSegment++)
         {
-            for (int ySegment = 0; ySegment < worldGenerationData.segmentCount; ySegment++)
+            for (int ySegment = -half; ySegment < half; ySegment++)
             {
                 int startX = xSegment * segmentSize;
                 int endX = (xSegment + 1) * segmentSize;
@@ -222,8 +227,11 @@ public class WorldGenerator
 
         foreach (Vector2Int biomePosition in biomeDistribution.Keys)
         {
+            BiomeData biomData = biomeGeneratorsData.Find(biome => biome.biomeType == biomeDistribution[biomePosition]);
+
             float distance = Vector2Int.Distance(biomePosition, position);
-            if (distance < closestDistance)
+
+            if (distance < closestDistance && distance < 10)
             {
                 closestDistance = distance;
                 closestPosition = biomeDistribution[biomePosition];
@@ -258,9 +266,11 @@ public class WorldGenerator
     {
         Dictionary<Vector2Int, TileBase> tiles = new Dictionary<Vector2Int, TileBase>();
 
-        for (int x = 0; x < worldGenerationData.worldSize; x++)
+        int half = worldGenerationData.worldSize / 2;
+
+        for (int x = -half; x < half; x++)
         {
-            for (int y = 0; y < worldGenerationData.worldSize; y++)
+            for (int y = -half; y < half; y++)
             {
                 Biome closestBiome = FindClosestBiome(new Vector3Int(x, y, 0));
                 BiomeData biomeGenerator = biomeGeneratorsData.Find(bg => bg.biomeType == closestBiome.biomeType);

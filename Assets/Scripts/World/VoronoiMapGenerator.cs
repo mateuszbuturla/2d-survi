@@ -31,7 +31,23 @@ public class VoronoiMapGenerator : MonoBehaviour
         Dictionary<Vector2Int, TileBase> tiles = wg.GenerateWorld();
 
         FillTilemap(tiles);
-        GenerateIceHouse1();
+
+        Dictionary<Vector2Int, BiomeType> test = wg.Test();
+
+        foreach (Vector2Int pos in test.Keys)
+        {
+            Vector2Int scaled = new Vector2Int(pos.x * WorldGenerationHelper.GetWorldSegmentSize(worldGenerationData), pos.y * WorldGenerationHelper.GetWorldSegmentSize(worldGenerationData));
+            for (int x = scaled.x - 10; x < scaled.x + 10; x++)
+            {
+                for (int y = scaled.y - 10; y < scaled.y + 10; y++)
+                {
+                    BiomeData biomeData = biomeGeneratorsData.Find(i => i.biomeType == test[pos]);
+                    tilemapObjects.SetTile(new Vector3Int(x, y, 0), biomeData.biomeGenerator.baseTile);
+                }
+            }
+        }
+
+        // GenerateIceHouse1();
     }
 
     void FillTilemap(Dictionary<Vector2Int, TileBase> tiles)
