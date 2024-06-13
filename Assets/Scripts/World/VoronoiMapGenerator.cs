@@ -36,47 +36,47 @@ public class VoronoiMapGenerator : MonoBehaviour
 
     public void GenerateWorld()
     {
-        ClearDebugTilemap();
+        // ClearDebugTilemap();
         WorldGenerator wg = new WorldGenerator(biomeGeneratorsData, worldGenerationData, voronoiDistortionData, seed);
 
         Dictionary<Vector2Int, TileBase> tiles = wg.GenerateWorld();
 
         FillTilemap(tiles);
 
-        Dictionary<Vector2Int, BiomeType> test = wg.Test();
+        // Dictionary<Vector2Int, BiomeType> test = wg.Test();
 
-        foreach (Vector2Int pos in test.Keys)
-        {
-            Vector2Int scaled = new Vector2Int(pos.x * WorldGenerationHelper.GetWorldSegmentSize(worldGenerationData), pos.y * WorldGenerationHelper.GetWorldSegmentSize(worldGenerationData));
-            for (int x = scaled.x - 10; x < scaled.x + 10; x++)
-            {
-                for (int y = scaled.y - 10; y < scaled.y + 10; y++)
-                {
-                    BiomeData biomeData = biomeGeneratorsData.Find(i => i.biomeType == test[pos]);
-                    tilemapObjects.SetTile(new Vector3Int(x, y, 0), biomeData.biomeGenerator.baseTile);
-                }
-            }
-        }
+        // foreach (Vector2Int pos in test.Keys)
+        // {
+        //     Vector2Int scaled = new Vector2Int(pos.x * WorldGenerationHelper.GetWorldSegmentSize(worldGenerationData), pos.y * WorldGenerationHelper.GetWorldSegmentSize(worldGenerationData));
+        //     for (int x = scaled.x - 10; x < scaled.x + 10; x++)
+        //     {
+        //         for (int y = scaled.y - 10; y < scaled.y + 10; y++)
+        //         {
+        //             BiomeData biomeData = biomeGeneratorsData.Find(i => i.biomeType == test[pos]);
+        //             tilemapObjects.SetTile(new Vector3Int(x, y, 0), biomeData.biomeGenerator.baseTile);
+        //         }
+        //     }
+        // }
     }
 
-    void ClearDebugTilemap()
-    {
-        BoundsInt bounds = tilemapObjects.cellBounds;
+    // void ClearDebugTilemap()
+    // {
+    //     BoundsInt bounds = tilemapObjects.cellBounds;
 
-        for (int x = bounds.xMin; x < bounds.xMax; x++)
-        {
-            for (int y = bounds.yMin; y < bounds.yMax; y++)
-            {
-                for (int z = bounds.zMin; z < bounds.zMax; z++)
-                {
-                    Vector3Int position = new Vector3Int(x, y, z);
-                    tilemapObjects.SetTile(position, null);
-                }
-            }
-        }
+    //     for (int x = bounds.xMin; x < bounds.xMax; x++)
+    //     {
+    //         for (int y = bounds.yMin; y < bounds.yMax; y++)
+    //         {
+    //             for (int z = bounds.zMin; z < bounds.zMax; z++)
+    //             {
+    //                 Vector3Int position = new Vector3Int(x, y, z);
+    //                 tilemapObjects.SetTile(position, null);
+    //             }
+    //         }
+    //     }
 
-        tilemapObjects.RefreshAllTiles();
-    }
+    //     tilemapObjects.RefreshAllTiles();
+    // }
 
     void FillTilemap(Dictionary<Vector2Int, TileBase> tiles)
     {
