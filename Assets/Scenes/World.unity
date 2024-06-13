@@ -463,7 +463,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startTileHandler: {fileID: 0}
   baseTile: {fileID: 11400000, guid: fca8b937e81bc3d479543241bf30cbd7, type: 2}
-  objects: []
+  objects:
+  - {fileID: 11400000, guid: 8edfc9ece096ec84b888b425c8fb9aa4, type: 2}
 --- !u!1 &490758444
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,9 +835,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startTileHandler: {fileID: 0}
   baseTile: {fileID: 11400000, guid: ed891fb0ae169694b8a41d9ca8c33ed1, type: 2}
-  objects:
-  - {fileID: 11400000, guid: 14d61ea60dc26344291856392396c4cb, type: 2}
-  - {fileID: 11400000, guid: 4d9d77a3f8bf3cf4cbf09ff635369145, type: 2}
+  objects: []
 --- !u!4 &720511522
 Transform:
   m_ObjectHideFlags: 0
@@ -1359,7 +1358,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Next: {fileID: 0}
   tile: {fileID: 11400000, guid: f8478ee0cbf1a8d4c9b06b2f714dc3ad, type: 2}
-  settings: {fileID: 11400000, guid: 0dd10c422710e92409e0278bf7ae5d23, type: 2}
+  settings: {fileID: 11400000, guid: c8b558d645b7024419518d04d8bba9c3, type: 2}
   threshold: 0.576
 --- !u!1 &1539466824
 GameObject:
@@ -1533,9 +1532,6 @@ MonoBehaviour:
     biomeType: 8
     count: 2
     biomeGenerator: {fileID: 208797145}
-  roadGenerator: {fileID: 1756961243}
-  biomes: []
-  tree: {fileID: 8064027607133903878, guid: 8b1a58dd302e7f64181209e925a3fc19, type: 3}
   iceHouse1: {fileID: 3990737529351718263, guid: 48b965ee537682d48aecd61277f0bd39, type: 3}
   seed: 839476
 --- !u!4 &1637260366
@@ -1821,8 +1817,6 @@ MonoBehaviour:
   baseTile: {fileID: 11400000, guid: 18bbc27844fdcc2429f0fa9146027694, type: 2}
   objects:
   - {fileID: 11400000, guid: b0d6ac764cf548c42bf38d9fa79390e7, type: 2}
-  - {fileID: 11400000, guid: 0e8d1ae2d81bd75468268a15ecac50dc, type: 2}
-  - {fileID: 11400000, guid: 4a2e21ef52de35e42a12becdc7f3e57a, type: 2}
 --- !u!1 &1903688871
 GameObject:
   m_ObjectHideFlags: 0
@@ -2000,9 +1994,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startTileHandler: {fileID: 0}
   baseTile: {fileID: 11400000, guid: 96ab14fbbf2ed61409fbeca0228c3a40, type: 2}
-  objects:
-  - {fileID: 11400000, guid: 2f7f231c119b8dc47bf2e4138142c68d, type: 2}
-  - {fileID: 11400000, guid: 2f1dcefe7c5f0a045bad50e0da74e548, type: 2}
+  objects: []
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

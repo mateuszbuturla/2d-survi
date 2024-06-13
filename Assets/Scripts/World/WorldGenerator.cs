@@ -22,47 +22,17 @@ public class WorldGenerator
         random = new System.Random(seed);
     }
 
-    public Dictionary<Vector2Int, TileBase> GenerateWorld()
+    public WorldDataDto GenerateWorld()
     {
         BiomesGenerator biomesGenerator = new BiomesGenerator(biomeGeneratorsData, worldGenerationData, ref random);
-
-        System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
-        stopwatch.Start();
         Dictionary<Vector2Int, List<Biome>> biomeGrid = biomesGenerator.GenerateBiomes();
-        stopwatch.Stop();
-        Debug.Log($"GenerateBiomes: {stopwatch.ElapsedMilliseconds} ms");
 
-        stopwatch.Reset();
-        stopwatch.Start();
         Dictionary<Vector2Int, TileBase> tiles = GenerateMap(biomeGrid);
-        stopwatch.Stop();
-        Debug.Log($"GenerateMap: {stopwatch.ElapsedMilliseconds} ms");
 
-        // stopwatch.Reset();
-        // stopwatch.Start();
-        // TilemapUpscaler upscaler = new TilemapUpscaler();
-        // Dictionary<Vector2Int, TileBase> upscaledTiles = upscaler.UpscaleTiles(tiles, worldGenerationData.worldSize, worldGenerationData.worldSize * 2);
-        // stopwatch.Stop();
-        // Debug.Log($"Upscale: {stopwatch.ElapsedMilliseconds} ms");
+        EntitiesGenerator eg = new EntitiesGenerator(biomeGeneratorsData, biomeGrid, ref random);
+        Dictionary<Vector2Int, GameObject> entities = eg.GenerateEntities();
 
-        // stopwatch.Reset();
-        // stopwatch.Start();
-        // foreach (var b in biomeGrid.Keys)
-        // {
-        //     if (biomeGrid[b].Count > 0 && biomeGrid[b][0].biomeType == BiomeType.DESERT)
-        //     {
-        //         int randomBiomePart = random.Next(0, biomeGrid[b].Count);
-        //         Biome biome = biomeGrid[b][randomBiomePart];
-        //         int randomTile = random.Next(0, biome.biomePoints.Count);
-        //         Vector2Int tile = biome.biomePoints[randomTile];
-
-
-        //     }
-        // }
-        // stopwatch.Stop();
-        // Debug.Log($"Random objects: {stopwatch.ElapsedMilliseconds} ms");
-
-        return tiles;
+        return new WorldDataDto(tiles, entities);
     }
 
     public Dictionary<Vector2Int, TileBase> UpscaleTiles(Dictionary<Vector2Int, TileBase> originalTiles, int originalSize, int newSize)

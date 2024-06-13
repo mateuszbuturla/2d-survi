@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a476a912ffe9bd4c9e77bc967df429d, type: 3}
-  m_Name: WastelandToxicWaterNoiseSettings
+  m_Script: {fileID: 11500000, guid: f8778bbf72b7e7840be5569d2e9f959d, type: 3}
+  m_Name: DesertDungeon
   m_EditorClassIdentifier: 
-  noiseZoom: 0.01
-  octaves: 3
-  offest: {x: 0, y: 0}
-  persistance: 1
-  redistributionModifier: 1
-  exponent: 1
+  count: 1
+  prefab: {fileID: 3990737529351718263, guid: 48b965ee537682d48aecd61277f0bd39, type: 3}

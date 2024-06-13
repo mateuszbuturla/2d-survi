@@ -20,7 +20,6 @@ public class BiomesGenerator
     {
         Dictionary<Vector2Int, BiomeType> biomeDistribution = GenerateBiomesDistribution();
         Dictionary<Vector2Int, List<Biome>> biomes = GenerateBiomeBase(biomeDistribution);
-        // Dictionary<Vector2Int, List<Biome>> biomeGrid = CreateBiomeGrid(biomes);
 
         return biomes;
     }
