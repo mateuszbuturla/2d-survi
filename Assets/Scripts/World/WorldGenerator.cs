@@ -69,9 +69,10 @@ public class WorldGenerator
                 select biome).ToList();
     }
 
+    // Function for generating a world sketch (selects where to place each biome)
     private Dictionary<Vector2Int, BiomeType> GenerateBiomesDistribution()
     {
-        int minDistance = worldGenerationData.minDistanceBetweenBiomeCenters;
+        int minDistance = worldGenerationData.minDistanceBetweenBiomeCenters; // It means what is the minimum distance between the centers of biomes
 
         Dictionary<Vector2Int, BiomeType> biomesDistribution = new Dictionary<Vector2Int, BiomeType>();
 
@@ -81,7 +82,7 @@ public class WorldGenerator
         {
             for (int y = -half; y < half; y++)
             {
-                if (x == -half || y == -half || x == half - 1 || y == half - 1)
+                if (x == -half || y == -half || x == half - 1 || y == half - 1) // Generate water on the world edges
                 {
                     biomesDistribution[new Vector2Int(x, y)] = BiomeType.WATER;
                 }
@@ -89,8 +90,10 @@ public class WorldGenerator
         }
 
         int centerIndex = 0;
-        biomesDistribution[new Vector2Int(centerIndex, centerIndex)] = BiomeType.GRASSLAND;
+        biomesDistribution[new Vector2Int(centerIndex, centerIndex)] = BiomeType.GRASSLAND; // Sets default biome at the center of a world
 
+
+        // Generate inner biomes
         List<BiomeType> biomeDistributionOrderInner = new List<BiomeType>();
 
         foreach (BiomeData biome in FilterBiomeDataByTier(BiomeTier.INNER))
@@ -106,7 +109,9 @@ public class WorldGenerator
             Vector2Int randomPos = GetRandomPositionWithoutNearby(biomesDistribution, minDistance, BiomeTier.INNER);
             biomesDistribution[randomPos] = biomeType;
         }
+        // Generate inner biomes
 
+        // Generate outer biomes
         List<BiomeType> biomeDistributionOrderOuter = new List<BiomeType>();
 
         foreach (BiomeData biome in FilterBiomeDataByTier(BiomeTier.OUTER))
@@ -122,6 +127,7 @@ public class WorldGenerator
             Vector2Int randomPos = GetRandomPositionWithoutNearby(biomesDistribution, minDistance, BiomeTier.OUTER);
             biomesDistribution[randomPos] = biomeType;
         }
+        // Generate outer biomes
 
         return biomesDistribution;
     }
@@ -136,6 +142,7 @@ public class WorldGenerator
         return new Vector2Int(x, y);
     }
 
+    // Function for finding where a new biome can be placed
     private Vector2Int GetRandomPositionWithoutNearby(Dictionary<Vector2Int, BiomeType> biomesDistribution, int minDistance, BiomeTier biomeTier)
     {
         int attemptCount = 0;
@@ -152,11 +159,11 @@ public class WorldGenerator
 
             if (biomeTier == BiomeTier.INNER)
             {
-                distance = (float)RandomRange(0, worldGenerationData.outerRingDistance);
+                distance = (float)RandomRange(0, worldGenerationData.outerRingDistance); // Generate random position for inner biome
             }
             else
             {
-                distance = (float)RandomRange(worldGenerationData.outerRingDistance, worldGenerationData.segmentCount / 2 - worldGenerationData.borderThickness);
+                distance = (float)RandomRange(worldGenerationData.outerRingDistance, worldGenerationData.segmentCount / 2 - worldGenerationData.borderThickness); // Generate random position for outer biome
             }
 
             float x = distance * Mathf.Cos(angle);
@@ -190,6 +197,7 @@ public class WorldGenerator
         }
     }
 
+    // Function for generating actual biomes: after receiving data about each biome's location, this function uses a Voronoi diagram to determine the closest biome, aiming to create a more chaotic world
     private List<Biome> GenerateBiomeBase()
     {
         List<Biome> generatedBiomes = new List<Biome>();
@@ -206,7 +214,7 @@ public class WorldGenerator
                 int startY = ySegment * segmentSize;
                 int endY = (ySegment + 1) * segmentSize;
 
-                BiomeType biomeType = GetClosestBiomeTypeFromDistribution(new Vector2Int(xSegment, ySegment));
+                BiomeType biomeType = GetClosestBiomeTypeFromDistribution(new Vector2Int(xSegment, ySegment)); // Gets biome type from biomeDistribution
 
                 int x = random.Next(startX, endX);
                 int y = random.Next(startY, endY);
@@ -220,6 +228,7 @@ public class WorldGenerator
         return generatedBiomes;
     }
 
+    // Function for finding closest biome from biomeDistribution (it uses voronoi diagram)
     private BiomeType GetClosestBiomeTypeFromDistribution(Vector2Int position)
     {
         BiomeType closestPosition = BiomeType.WATER;
@@ -229,23 +238,18 @@ public class WorldGenerator
         {
             BiomeData biomData = biomeGeneratorsData.Find(biome => biome.biomeType == biomeDistribution[biomePosition]);
 
-            float distance = Vector2Int.Distance(biomePosition, position);
-            float distanceToCenter = Vector2Int.Distance(position, new Vector2Int(0, 0));
-            float distanceToBiomeCenter = Vector2Int.Distance(position, biomePosition);
+            float distance = Vector2Int.Distance(biomePosition, position); // The distance between the location and the currently checked biome
+            float distanceToCenter = Vector2Int.Distance(position, new Vector2Int(0, 0)); // Distance to center of the world 
 
-            if (distance < closestDistance && distanceToBiomeCenter < worldGenerationData.maxDistanceFromBiomeCenter)
+            if (distance < closestDistance && distance < worldGenerationData.maxDistanceFromBiomeCenter)
             {
-                if (biomData.biomeTier == BiomeTier.INNER && distanceToCenter > worldGenerationData.outerRingDistance)
-                {
-
-                }
+                if (biomData.biomeTier == BiomeTier.INNER && distanceToCenter > worldGenerationData.outerRingDistance) { }
                 else if (biomData.biomeTier == BiomeTier.OUTER && distanceToCenter < worldGenerationData.outerRingDistance) { }
                 else
                 {
                     closestDistance = distance;
                     closestPosition = biomeDistribution[biomePosition];
                 }
-
             }
         }
 
@@ -273,6 +277,7 @@ public class WorldGenerator
         return biomeGrid;
     }
 
+    // Function for generating each tile based on the closest biome using voronoi diagram
     private Dictionary<Vector2Int, TileBase> GenerateMap()
     {
         Dictionary<Vector2Int, TileBase> tiles = new Dictionary<Vector2Int, TileBase>();
@@ -299,6 +304,7 @@ public class WorldGenerator
         return tiles;
     }
 
+    // Function for finding the closest biome (it uses voronoi diagram)
     private Biome FindClosestBiome(Vector3Int position)
     {
         Biome closestBiome = null;
