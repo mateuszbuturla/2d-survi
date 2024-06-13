@@ -5,6 +5,7 @@ using UnityEngine.Tilemaps;
 
 public class GenerateBiome : MonoBehaviour
 {
+    public TileHandler startTileHandler;
     public TileBase baseTile;
 
     [SerializeField]
@@ -34,6 +35,23 @@ public class GenerateBiome : MonoBehaviour
         generateWorld.tilemap.SetTile(pos, baseTile);
 
         //GenerateObject(pos);
+    }
+
+    public TileBase GetTile(Vector2Int pos)
+    {
+        TileBase result = null;
+
+        if (startTileHandler)
+        {
+            result = startTileHandler.Handle(pos);
+        }
+
+        if (result == null)
+        {
+            return baseTile;
+        }
+
+        return result;
     }
 
     // private void GenerateObject(Vector3Int pos)

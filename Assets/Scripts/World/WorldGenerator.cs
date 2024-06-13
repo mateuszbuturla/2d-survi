@@ -58,7 +58,7 @@ public class WorldGenerator
                     closestBiome.biomePoints.Add(pos);
                 }
 
-                tiles[pos] = biomeGenerator.biomeGenerator.baseTile;
+                tiles[pos] = biomeGenerator.biomeGenerator.GetTile(pos);
             }
         }
 
