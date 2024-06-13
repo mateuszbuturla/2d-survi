@@ -23,8 +23,18 @@ public class WorldGenerator
     public Dictionary<Vector2Int, TileBase> GenerateWorld()
     {
         BiomesGenerator biomesGenerator = new BiomesGenerator(biomeGeneratorsData, worldGenerationData, ref random);
+
+        System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
+        stopwatch.Start();
         Dictionary<Vector2Int, List<Biome>> biomeGrid = biomesGenerator.GenerateBiomes();
+        stopwatch.Stop();
+        Debug.Log($"GenerateBiomes: {stopwatch.ElapsedMilliseconds} ms");
+
+        stopwatch.Reset();
+        stopwatch.Start();
         Dictionary<Vector2Int, TileBase> tiles = GenerateMap(biomeGrid);
+        stopwatch.Stop();
+        Debug.Log($"GenerateMap: {stopwatch.ElapsedMilliseconds} ms");
         return tiles;
     }
 

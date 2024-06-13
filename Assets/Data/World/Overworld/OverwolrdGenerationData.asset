@@ -18,5 +18,5 @@ MonoBehaviour:
   startBiome: 1
   startBiomeMinSize: 2
   outerRingDistance: 15
-  minDistanceBetweenBiomeCenters: 5
-  maxDistanceFromBiomeCenter: 7
+  minDistanceBetweenBiomeCenters: 4
+  maxDistanceFromBiomeCenter: 6

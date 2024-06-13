@@ -7,6 +7,7 @@ public class BiomesGenerator
     List<BiomeData> biomeGeneratorsData;
     WorldGenerationData worldGenerationData;
     System.Random random;
+    private Vector2Int worldCenter = new Vector2Int(0, 0);
 
     public BiomesGenerator(List<BiomeData> biomeGeneratorsData, WorldGenerationData worldGenerationData, ref System.Random random)
     {
@@ -34,25 +35,10 @@ public class BiomesGenerator
     // Function for generating a world sketch (selects where to place each biome)
     private Dictionary<Vector2Int, BiomeType> GenerateBiomesDistribution()
     {
-        int minDistance = worldGenerationData.minDistanceBetweenBiomeCenters; // It means what is the minimum distance between the centers of biomes
+        int minDistance = worldGenerationData.minDistanceBetweenBiomeCenters; // It means what is the minimum distance between the centers of the biomes
 
         Dictionary<Vector2Int, BiomeType> biomesDistribution = new Dictionary<Vector2Int, BiomeType>();
-
-        int half = worldGenerationData.segmentCount / 2;
-
-        for (int x = -half; x < half; x++)
-        {
-            for (int y = -half; y < half; y++)
-            {
-                if (x == -half || y == -half || x == half - 1 || y == half - 1) // Generate water on the world edges
-                {
-                    biomesDistribution[new Vector2Int(x, y)] = BiomeType.WATER;
-                }
-            }
-        }
-
-        int centerIndex = 0;
-        biomesDistribution[new Vector2Int(centerIndex, centerIndex)] = BiomeType.GRASSLAND; // Sets default biome at the center of a world
+        biomesDistribution[worldCenter] = BiomeType.GRASSLAND; // Sets default biome at the center of a world
 
 
         // Generate inner biomes
@@ -100,8 +86,6 @@ public class BiomesGenerator
         int attemptCount = 0;
         int maxAttempts = 3000;
 
-        Vector2Int center = new Vector2Int(0, 0);
-
         while (true)
         {
             bool valid = true;
@@ -121,7 +105,7 @@ public class BiomesGenerator
             float x = distance * Mathf.Cos(angle);
             float y = distance * Mathf.Sin(angle);
 
-            Vector2Int randomPos = ConvertToGridPoint(center, new Vector2(x, y));
+            Vector2Int randomPos = ConvertToGridPoint(worldCenter, new Vector2(x, y));
 
             if (valid)
             {
@@ -211,7 +195,7 @@ public class BiomesGenerator
             BiomeData biomData = biomeGeneratorsData.Find(biome => biome.biomeType == biomeDistribution[biomePosition]);
 
             float distance = Vector2Int.Distance(biomePosition, position); // The distance between the location and the currently checked biome
-            float distanceToCenter = Vector2Int.Distance(position, new Vector2Int(0, 0)); // Distance to center of the world 
+            float distanceToCenter = Vector2Int.Distance(position, worldCenter); // Distance to center of the world 
 
             if (distance < closestDistance && distance < worldGenerationData.maxDistanceFromBiomeCenter)
             {
