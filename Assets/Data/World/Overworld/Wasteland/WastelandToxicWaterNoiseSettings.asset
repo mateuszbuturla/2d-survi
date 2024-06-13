@@ -9,7 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 974387b45b7272647a63e882bd416013, type: 3}
-  m_Name: ToxicWaterTileHandler
+  m_Script: {fileID: 11500000, guid: 5a476a912ffe9bd4c9e77bc967df429d, type: 3}
+  m_Name: WastelandToxicWaterNoiseSettings
   m_EditorClassIdentifier: 
-  scale: 0.01
+  noiseZoom: 0.01
+  octaves: 3
+  offest: {x: 0, y: 0}
+  persistance: 1
+  redistributionModifier: 1
+  exponent: 1
