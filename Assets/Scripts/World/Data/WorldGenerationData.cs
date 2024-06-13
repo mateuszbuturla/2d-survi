@@ -11,4 +11,6 @@ public class WorldGenerationData : ScriptableObject
     public BiomeType startBiome;
     public int startBiomeMinSize; // size in regions
     public int outerRingDistance;
+    public int minDistanceBetweenBiomeCenters;
+    public int maxDistanceFromBiomeCenter;
 }

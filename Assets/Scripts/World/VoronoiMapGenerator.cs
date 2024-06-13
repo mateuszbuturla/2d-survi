@@ -24,21 +24,26 @@ public class VoronoiMapGenerator : MonoBehaviour
 
     public GameObject iceHouse1;
 
+    [Range(-12312312, 12312312)]
+    public int seed;
+
     void Start()
     {
-        WorldGenerator wg = new WorldGenerator(biomeGeneratorsData, worldGenerationData, voronoiDistortionData);
+        GenerateWorld();
+
+        // GenerateIceHouse1();
+    }
+
+    public void GenerateWorld()
+    {
+        ClearDebugTilemap();
+        WorldGenerator wg = new WorldGenerator(biomeGeneratorsData, worldGenerationData, voronoiDistortionData, seed);
 
         Dictionary<Vector2Int, TileBase> tiles = wg.GenerateWorld();
 
         FillTilemap(tiles);
 
         Dictionary<Vector2Int, BiomeType> test = wg.Test();
-
-        foreach (var r in test.Keys)
-        {
-            var dd = test[r];
-            UnityEngine.Debug.Log($"{test}:{dd}");
-        }
 
         foreach (Vector2Int pos in test.Keys)
         {
@@ -52,8 +57,25 @@ public class VoronoiMapGenerator : MonoBehaviour
                 }
             }
         }
+    }
 
-        // GenerateIceHouse1();
+    void ClearDebugTilemap()
+    {
+        BoundsInt bounds = tilemapObjects.cellBounds;
+
+        for (int x = bounds.xMin; x < bounds.xMax; x++)
+        {
+            for (int y = bounds.yMin; y < bounds.yMax; y++)
+            {
+                for (int z = bounds.zMin; z < bounds.zMax; z++)
+                {
+                    Vector3Int position = new Vector3Int(x, y, z);
+                    tilemapObjects.SetTile(position, null);
+                }
+            }
+        }
+
+        tilemapObjects.RefreshAllTiles();
     }
 
     void FillTilemap(Dictionary<Vector2Int, TileBase> tiles)
