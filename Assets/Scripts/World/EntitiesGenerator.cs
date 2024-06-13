@@ -14,6 +14,15 @@ public class EntitiesGenerator
         this.random = random;
     }
 
+    public Vector2Int GetRandomPosInBiome(List<Biome> biomeParts)
+    {
+        int randomBiomePart = random.Next(0, biomeParts.Count);
+        Biome biome = biomeParts[randomBiomePart];
+        int randomTile = random.Next(0, biome.biomePoints.Count);
+        Vector2Int tilePos = biome.biomePoints[randomTile];
+        return tilePos;
+    }
+
     public Dictionary<Vector2Int, GameObject> GenerateEntities()
     {
         Dictionary<Vector2Int, GameObject> entitiesPos = new Dictionary<Vector2Int, GameObject>();
@@ -30,18 +39,45 @@ public class EntitiesGenerator
 
             foreach (BiomeObjectData biomeObject in biomeData.biomeGenerator.objects)
             {
-                for (int i = 0; i < biomeObject.count; i++)
+                if (!biomeObject.staticCount)
                 {
-                    int randomBiomePart = random.Next(0, biomeGrid[biomeMainPos].Count);
-                    Biome biome = biomeGrid[biomeMainPos][randomBiomePart];
-                    int randomTile = random.Next(0, biome.biomePoints.Count);
-                    Vector2Int tile = biome.biomePoints[randomTile];
+                    List<Vector2Int> objectPositions = new List<Vector2Int>();
 
-                    entitiesPos[tile] = biomeObject.prefab;
+                    for (int i = 0; i < biomeObject.numSamplesBeforeRejection; i++)
+                    {
+                        Vector2Int randomPos = GetRandomPosInBiome(biomeGrid[biomeMainPos]);
+
+                        if (IsValid(randomPos, objectPositions, biomeObject.minDistanceBetween))
+                        {
+                            objectPositions.Add(randomPos);
+                            entitiesPos[randomPos] = biomeObject.prefab;
+                        }
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < biomeObject.count; i++)
+                    {
+                        Vector2Int randomPos = GetRandomPosInBiome(biomeGrid[biomeMainPos]);
+                        entitiesPos[randomPos] = biomeObject.prefab;
+                    }
                 }
             }
         }
 
         return entitiesPos;
+    }
+
+    private bool IsValid(Vector2Int candidate, List<Vector2Int> points, int radius)
+    {
+        foreach (Vector2Int point in points)
+        {
+            float distance = Vector2Int.Distance(point, candidate);
+            if (distance < radius)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

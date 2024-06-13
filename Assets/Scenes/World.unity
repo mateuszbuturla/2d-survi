@@ -1532,8 +1532,7 @@ MonoBehaviour:
     biomeType: 8
     count: 2
     biomeGenerator: {fileID: 208797145}
-  iceHouse1: {fileID: 3990737529351718263, guid: 48b965ee537682d48aecd61277f0bd39, type: 3}
-  seed: 839476
+  seed: 6715806
 --- !u!4 &1637260366
 Transform:
   m_ObjectHideFlags: 0
@@ -1848,7 +1847,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startTileHandler: {fileID: 0}
   baseTile: {fileID: 11400000, guid: db5ee36b203ab7d4d8818394ff97e47d, type: 2}
-  objects: []
+  objects:
+  - {fileID: 11400000, guid: cb5ddb2470256894f9ba6fd93c481f75, type: 2}
+  - {fileID: 11400000, guid: 8556b2a6a77bf854d904568a637cfe10, type: 2}
+  - {fileID: 11400000, guid: 2a4197162ca13a0439535577828cab8c, type: 2}
 --- !u!4 &1903688873
 Transform:
   m_ObjectHideFlags: 0

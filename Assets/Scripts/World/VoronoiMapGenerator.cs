@@ -13,8 +13,6 @@ public class VoronoiMapGenerator : MonoBehaviour
     [SerializeField]
     public List<BiomeData> biomeGeneratorsData = new List<BiomeData>();
 
-    public GameObject iceHouse1;
-
     [Range(-12312312, 12312312)]
     public int seed;
 
