@@ -31,7 +31,7 @@ public class VoronoiMapGenerator : MonoBehaviour
     {
         GenerateWorld();
 
-        // GenerateIceHouse1();
+        GenerateObject(iceHouse1, new Vector2Int(100, 100));
     }
 
     public void GenerateWorld()
@@ -114,21 +114,28 @@ public class VoronoiMapGenerator : MonoBehaviour
         return tiles;
     }
 
-    Tilemap GetTilemapFromPrefab(GameObject prefab)
+    (Tilemap, Tilemap) GetTilemapFromPrefab(GameObject prefab)
     {
-        return prefab.transform.GetChild(0).GetComponent<Tilemap>();
+        TileEntity te = prefab.GetComponent<TileEntity>();
+        return (te.baseTileMap, te.additionalTileMap);
     }
 
-    void GenerateIceHouse1()
+    void GenerateObject(GameObject prefab, Vector2Int pos)
     {
-        Tilemap tl = GetTilemapFromPrefab(iceHouse1);
-        Dictionary<Vector3Int, TileBase> tiles = GetTilesFromPrefab(tl);
+        (Tilemap, Tilemap) tls = GetTilemapFromPrefab(prefab);
+        Dictionary<Vector3Int, TileBase> tilesBase = GetTilesFromPrefab(tls.Item1);
+        Dictionary<Vector3Int, TileBase> tilesAdditional = GetTilesFromPrefab(tls.Item2);
 
-        Vector3Int basePosition = new Vector3Int(250, 250, 0);
+        Vector3Int basePosition = new Vector3Int(pos.x, pos.y, 0);
 
-        foreach (Vector3Int pos in tiles.Keys)
+        foreach (Vector3Int tilePos in tilesBase.Keys)
         {
-            tilemapObjects.SetTile(basePosition + pos, tiles[pos]);
+            tilemap.SetTile(basePosition + tilePos, tilesBase[tilePos]);
+        }
+
+        foreach (Vector3Int tilePos in tilesAdditional.Keys)
+        {
+            tilemapObjects.SetTile(basePosition + tilePos, tilesAdditional[tilePos]);
         }
 
     }

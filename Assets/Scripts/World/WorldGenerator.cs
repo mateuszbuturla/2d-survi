@@ -49,16 +49,14 @@ public class WorldGenerator
         // stopwatch.Start();
         // foreach (var b in biomeGrid.Keys)
         // {
-        //     if (biomeGrid[b].Count > 0 && biomeGrid[b][0].biomeType == BiomeType.TUNDRA)
+        //     if (biomeGrid[b].Count > 0 && biomeGrid[b][0].biomeType == BiomeType.DESERT)
         //     {
-        //         Biome d = biomeGrid[b][0];
+        //         int randomBiomePart = random.Next(0, biomeGrid[b].Count);
+        //         Biome biome = biomeGrid[b][randomBiomePart];
+        //         int randomTile = random.Next(0, biome.biomePoints.Count);
+        //         Vector2Int tile = biome.biomePoints[randomTile];
 
-        //         for (int i = 0; i < 1; i++)
-        //         {
-        //             int randomIndex = random.Next(0, d.biomePoints.Count);
 
-        //             tiles[d.biomePoints[randomIndex]] = null;
-        //         }
         //     }
         // }
         // stopwatch.Stop();
