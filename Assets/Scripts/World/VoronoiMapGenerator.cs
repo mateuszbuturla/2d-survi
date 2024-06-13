@@ -34,6 +34,12 @@ public class VoronoiMapGenerator : MonoBehaviour
 
         Dictionary<Vector2Int, BiomeType> test = wg.Test();
 
+        foreach (var r in test.Keys)
+        {
+            var dd = test[r];
+            UnityEngine.Debug.Log($"{test}:{dd}");
+        }
+
         foreach (Vector2Int pos in test.Keys)
         {
             Vector2Int scaled = new Vector2Int(pos.x * WorldGenerationHelper.GetWorldSegmentSize(worldGenerationData), pos.y * WorldGenerationHelper.GetWorldSegmentSize(worldGenerationData));

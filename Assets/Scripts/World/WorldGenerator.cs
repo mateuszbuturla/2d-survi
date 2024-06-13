@@ -14,8 +14,12 @@ public class WorldGenerator
     Dictionary<Vector2Int, List<Biome>> biomeGrid;
     List<Biome> biomes;
 
+    System.Random random;
+    public int seed = 3123333;
+
     public WorldGenerator(List<BiomeData> biomeGeneratorsData, WorldGenerationData worldGenerationData, VoronoiDistortionData voronoiDistortionData)
     {
+        random = new System.Random(seed);
         this.biomeGeneratorsData = biomeGeneratorsData;
         this.worldGenerationData = worldGenerationData;
         this.voronoiDistortionData = voronoiDistortionData;
@@ -60,7 +64,7 @@ public class WorldGenerator
 
     private Dictionary<Vector2Int, BiomeType> GenerateBiomesDistribution()
     {
-        int minDistance = 2;
+        int minDistance = 0;
 
         Dictionary<Vector2Int, BiomeType> biomesDistribution = new Dictionary<Vector2Int, BiomeType>();
 
@@ -136,24 +140,24 @@ public class WorldGenerator
         {
             bool valid = true;
 
-            float angle = Random.Range(0f, Mathf.PI * 2);
+            float angle = (float)(random.NextDouble() * (Mathf.PI * 2));
             float distance;
 
             if (biomeTier == BiomeTier.INNER)
             {
-                distance = Random.Range(0f, worldGenerationData.outerRingDistance);
+                // distance = Random.Range(0f, worldGenerationData.outerRingDistance);
+                distance = worldGenerationData.outerRingDistance / 2;
             }
             else
             {
-                distance = Random.Range(worldGenerationData.outerRingDistance, worldGenerationData.segmentCount / 2 - worldGenerationData.borderThickness);
+                // distance = Random.Range(worldGenerationData.outerRingDistance, worldGenerationData.segmentCount / 2 - worldGenerationData.borderThickness);
+                distance = worldGenerationData.outerRingDistance;
             }
 
             float x = distance * Mathf.Cos(angle);
             float y = distance * Mathf.Sin(angle);
 
             Vector2Int randomPos = ConvertToGridPoint(center, new Vector2(x, y));
-
-            Debug.Log(randomPos);
 
             // if (biomeTier == BiomeTier.INNER && distance >= worldGenerationData.outerRingDistance)
             // {
@@ -208,8 +212,8 @@ public class WorldGenerator
 
                 BiomeType biomeType = GetClosestBiomeTypeFromDistribution(new Vector2Int(xSegment, ySegment));
 
-                int x = Random.Range(startX, endX);
-                int y = Random.Range(startY, endY);
+                int x = random.Next(startX, endX);
+                int y = random.Next(startY, endY);
 
                 Vector2Int baseBiomePoint = new Vector2Int(x, y);
 
@@ -230,11 +234,21 @@ public class WorldGenerator
             BiomeData biomData = biomeGeneratorsData.Find(biome => biome.biomeType == biomeDistribution[biomePosition]);
 
             float distance = Vector2Int.Distance(biomePosition, position);
+            float distanceToCenter = Vector2Int.Distance(position, new Vector2Int(0, 0));
 
-            if (distance < closestDistance && distance < 10)
+            if (distance < closestDistance)
             {
-                closestDistance = distance;
-                closestPosition = biomeDistribution[biomePosition];
+                if (biomData.biomeTier == BiomeTier.INNER && distanceToCenter > worldGenerationData.outerRingDistance)
+                {
+
+                }
+                else if (biomData.biomeTier == BiomeTier.OUTER && distanceToCenter < worldGenerationData.outerRingDistance) { }
+                else
+                {
+                    closestDistance = distance;
+                    closestPosition = biomeDistribution[biomePosition];
+                }
+
             }
         }
 
