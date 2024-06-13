@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using System.Collections.Concurrent;
+using System.Threading.Tasks;
 
 public class WorldGenerator
 {
@@ -36,27 +38,55 @@ public class WorldGenerator
         stopwatch.Stop();
         Debug.Log($"GenerateMap: {stopwatch.ElapsedMilliseconds} ms");
 
+        // stopwatch.Reset();
+        // stopwatch.Start();
+        // TilemapUpscaler upscaler = new TilemapUpscaler();
+        // Dictionary<Vector2Int, TileBase> upscaledTiles = upscaler.UpscaleTiles(tiles, worldGenerationData.worldSize, worldGenerationData.worldSize * 2);
+        // stopwatch.Stop();
+        // Debug.Log($"Upscale: {stopwatch.ElapsedMilliseconds} ms");
 
-        stopwatch.Reset();
-        stopwatch.Start();
-        foreach (var b in biomeGrid.Keys)
+        // stopwatch.Reset();
+        // stopwatch.Start();
+        // foreach (var b in biomeGrid.Keys)
+        // {
+        //     if (biomeGrid[b].Count > 0 && biomeGrid[b][0].biomeType == BiomeType.TUNDRA)
+        //     {
+        //         Biome d = biomeGrid[b][0];
+
+        //         for (int i = 0; i < 1; i++)
+        //         {
+        //             int randomIndex = random.Next(0, d.biomePoints.Count);
+
+        //             tiles[d.biomePoints[randomIndex]] = null;
+        //         }
+        //     }
+        // }
+        // stopwatch.Stop();
+        // Debug.Log($"Random objects: {stopwatch.ElapsedMilliseconds} ms");
+
+        return tiles;
+    }
+
+    public Dictionary<Vector2Int, TileBase> UpscaleTiles(Dictionary<Vector2Int, TileBase> originalTiles, int originalSize, int newSize)
+    {
+        int factor = newSize / originalSize;
+        Dictionary<Vector2Int, TileBase> upscaledTiles = new Dictionary<Vector2Int, TileBase>();
+
+        foreach (var kvp in originalTiles)
         {
-            if (biomeGrid[b].Count > 0 && biomeGrid[b][0].biomeType == BiomeType.TUNDRA)
+            Vector2Int originalPos = kvp.Key;
+            TileBase originalTile = kvp.Value;
+
+            for (int dx = 0; dx < factor; dx++)
             {
-                Biome d = biomeGrid[b][0];
-
-                for (int i = 0; i < 1; i++)
+                for (int dy = 0; dy < factor; dy++)
                 {
-                    int randomIndex = random.Next(0, d.biomePoints.Count);
-
-                    tiles[d.biomePoints[randomIndex]] = null;
+                    Vector2Int newPos = new Vector2Int(originalPos.x * factor + dx, originalPos.y * factor + dy);
+                    upscaledTiles[newPos] = originalTile;
                 }
             }
         }
-        stopwatch.Stop();
-        Debug.Log($"Random objects: {stopwatch.ElapsedMilliseconds} ms");
-
-        return tiles;
+        return upscaledTiles;
     }
 
     // Function for generating each tile based on the closest biome using voronoi diagram
@@ -73,27 +103,52 @@ public class WorldGenerator
             }
         }
 
-
         int half = worldGenerationData.worldSize / 2;
+        int chunkSize = 50;
 
-        for (int x = -half; x < half; x++)
+        ConcurrentDictionary<Vector2Int, TileBase> concurrentTiles = new ConcurrentDictionary<Vector2Int, TileBase>();
+
+        List<(int startX, int startY)> chunks = new List<(int startX, int startY)>();
+
+        // Generate list of chunk start positions
+        for (int x = -half; x < half; x += chunkSize)
         {
-            for (int y = -half; y < half; y++)
+            for (int y = -half; y < half; y += chunkSize)
             {
-                Biome closestBiome = FindClosestBiome(simplifiedBiomes, new Vector3Int(x, y, 0));
-                if (closestBiome != null)
-                {
-                    BiomeData biomeGenerator = biomeGeneratorsData.Find(bg => bg.biomeType == closestBiome.biomeType);
-                    Vector2Int pos = new Vector2Int(x, y);
+                chunks.Add((x, y));
+            }
+        }
 
+        Parallel.ForEach(chunks, chunk =>
+        {
+            int startX = chunk.startX;
+            int startY = chunk.startY;
+
+            for (int x = startX; x < startX + chunkSize && x < half; x++)
+            {
+                for (int y = startY; y < startY + chunkSize && y < half; y++)
+                {
+                    Biome closestBiome = FindClosestBiome(simplifiedBiomes, new Vector3Int(x, y, 0));
                     if (closestBiome != null)
                     {
-                        closestBiome.biomePoints.Add(pos);
-                    }
+                        BiomeData biomeGenerator = biomeGeneratorsData.Find(bg => bg.biomeType == closestBiome.biomeType);
+                        Vector2Int pos = new Vector2Int(x, y);
 
-                    tiles[pos] = biomeGenerator.biomeGenerator.GetTile(pos);
+                        lock (closestBiome)
+                        {
+                            closestBiome.biomePoints.Add(pos);
+                        }
+
+                        concurrentTiles[pos] = biomeGenerator.biomeGenerator.GetTile(pos);
+                    }
                 }
             }
+        });
+
+        // Convert ConcurrentDictionary back to Dictionary
+        foreach (var kvp in concurrentTiles)
+        {
+            tiles[kvp.Key] = kvp.Value;
         }
 
         return tiles;

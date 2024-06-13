@@ -891,7 +891,7 @@ Transform:
   m_GameObject: {fileID: 747517781}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.4, y: 18.98, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1360,7 +1360,7 @@ MonoBehaviour:
   Next: {fileID: 0}
   tile: {fileID: 11400000, guid: f8478ee0cbf1a8d4c9b06b2f714dc3ad, type: 2}
   settings: {fileID: 11400000, guid: 0dd10c422710e92409e0278bf7ae5d23, type: 2}
-  threshold: 0.515
+  threshold: 0.576
 --- !u!1 &1539466824
 GameObject:
   m_ObjectHideFlags: 0
@@ -1537,7 +1537,7 @@ MonoBehaviour:
   biomes: []
   tree: {fileID: 8064027607133903878, guid: 8b1a58dd302e7f64181209e925a3fc19, type: 3}
   iceHouse1: {fileID: 7098300048614301266, guid: 26de6135e5e32a143998b06cf2e7b203, type: 3}
-  seed: 0
+  seed: 839476
 --- !u!4 &1637260366
 Transform:
   m_ObjectHideFlags: 0
