@@ -35,6 +35,27 @@ public class WorldGenerator
         Dictionary<Vector2Int, TileBase> tiles = GenerateMap(biomeGrid);
         stopwatch.Stop();
         Debug.Log($"GenerateMap: {stopwatch.ElapsedMilliseconds} ms");
+
+
+        stopwatch.Reset();
+        stopwatch.Start();
+        foreach (var b in biomeGrid.Keys)
+        {
+            if (biomeGrid[b].Count > 0 && biomeGrid[b][0].biomeType == BiomeType.TUNDRA)
+            {
+                Biome d = biomeGrid[b][0];
+
+                for (int i = 0; i < 1; i++)
+                {
+                    int randomIndex = random.Next(0, d.biomePoints.Count);
+
+                    tiles[d.biomePoints[randomIndex]] = null;
+                }
+            }
+        }
+        stopwatch.Stop();
+        Debug.Log($"Random objects: {stopwatch.ElapsedMilliseconds} ms");
+
         return tiles;
     }
 
@@ -43,22 +64,35 @@ public class WorldGenerator
     {
         Dictionary<Vector2Int, TileBase> tiles = new Dictionary<Vector2Int, TileBase>();
 
+        Dictionary<Vector2Int, Biome> simplifiedBiomes = new Dictionary<Vector2Int, Biome>();
+        foreach (Vector2Int e in biomeGrid.Keys)
+        {
+            foreach (Biome biome in biomeGrid[e])
+            {
+                simplifiedBiomes[biome.segmentPos] = biome;
+            }
+        }
+
+
         int half = worldGenerationData.worldSize / 2;
 
         for (int x = -half; x < half; x++)
         {
             for (int y = -half; y < half; y++)
             {
-                Biome closestBiome = FindClosestBiome(biomeGrid, new Vector3Int(x, y, 0));
-                BiomeData biomeGenerator = biomeGeneratorsData.Find(bg => bg.biomeType == closestBiome.biomeType);
-                Vector2Int pos = new Vector2Int(x, y);
-
+                Biome closestBiome = FindClosestBiome(simplifiedBiomes, new Vector3Int(x, y, 0));
                 if (closestBiome != null)
                 {
-                    closestBiome.biomePoints.Add(pos);
-                }
+                    BiomeData biomeGenerator = biomeGeneratorsData.Find(bg => bg.biomeType == closestBiome.biomeType);
+                    Vector2Int pos = new Vector2Int(x, y);
 
-                tiles[pos] = biomeGenerator.biomeGenerator.GetTile(pos);
+                    if (closestBiome != null)
+                    {
+                        closestBiome.biomePoints.Add(pos);
+                    }
+
+                    tiles[pos] = biomeGenerator.biomeGenerator.GetTile(pos);
+                }
             }
         }
 
@@ -66,7 +100,7 @@ public class WorldGenerator
     }
 
     // Function for finding the closest biome (it uses voronoi diagram)
-    private Biome FindClosestBiome(Dictionary<Vector2Int, List<Biome>> biomeGrid, Vector3Int position)
+    private Biome FindClosestBiome(Dictionary<Vector2Int, Biome> simplifiedBiomes, Vector3Int position)
     {
         Biome closestBiome = null;
         float closestDistance = float.MaxValue;
@@ -82,9 +116,9 @@ public class WorldGenerator
             for (int y = -1; y <= 1; y++)
             {
                 Vector2Int neighborPos = gridPos + new Vector2Int(x, y);
-                if (biomeGrid.ContainsKey(neighborPos))
+                if (simplifiedBiomes.ContainsKey(neighborPos))
                 {
-                    nearbyBiomes.AddRange(biomeGrid[neighborPos]);
+                    nearbyBiomes.Add(simplifiedBiomes[neighborPos]);
                 }
             }
         }

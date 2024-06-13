@@ -19,10 +19,10 @@ public class BiomesGenerator
     public Dictionary<Vector2Int, List<Biome>> GenerateBiomes()
     {
         Dictionary<Vector2Int, BiomeType> biomeDistribution = GenerateBiomesDistribution();
-        List<Biome> biomes = GenerateBiomeBase(biomeDistribution);
-        Dictionary<Vector2Int, List<Biome>> biomeGrid = CreateBiomeGrid(biomes);
+        Dictionary<Vector2Int, List<Biome>> biomes = GenerateBiomeBase(biomeDistribution);
+        // Dictionary<Vector2Int, List<Biome>> biomeGrid = CreateBiomeGrid(biomes);
 
-        return biomeGrid;
+        return biomes;
     }
 
     private float RandomRange(float min, float max)
@@ -155,9 +155,9 @@ public class BiomesGenerator
     #region Generating actial biomes
 
     // Function for generating actual biomes: after receiving data about each biome's location, this function uses a Voronoi diagram to determine the closest biome, aiming to create a more chaotic world
-    private List<Biome> GenerateBiomeBase(Dictionary<Vector2Int, BiomeType> biomeDistribution)
+    private Dictionary<Vector2Int, List<Biome>> GenerateBiomeBase(Dictionary<Vector2Int, BiomeType> biomeDistribution)
     {
-        List<Biome> generatedBiomes = new List<Biome>();
+        Dictionary<Vector2Int, List<Biome>> generatedBiomes = new Dictionary<Vector2Int, List<Biome>>();
 
         int segmentSize = WorldGenerationHelper.GetWorldSegmentSize(worldGenerationData);
         int half = worldGenerationData.segmentCount / 2;
@@ -171,23 +171,30 @@ public class BiomesGenerator
                 int startY = ySegment * segmentSize;
                 int endY = (ySegment + 1) * segmentSize;
 
-                BiomeType biomeType = GetClosestBiomeTypeFromDistribution(biomeDistribution, new Vector2Int(xSegment, ySegment)); // Gets biome type from biomeDistribution
+                (Vector2Int, BiomeType) biomeData = GetClosestBiomeTypeFromDistribution(biomeDistribution, new Vector2Int(xSegment, ySegment)); // Gets biome type from biomeDistribution
 
                 int x = random.Next(startX, endX);
                 int y = random.Next(startY, endY);
 
                 Vector2Int baseBiomePoint = new Vector2Int(x, y);
+                Vector2Int segmentPost = new Vector2Int(xSegment, ySegment);
 
-                generatedBiomes.Add(new Biome(biomeType, baseBiomePoint));
+                if (!generatedBiomes.ContainsKey(biomeData.Item1))
+                {
+                    generatedBiomes[biomeData.Item1] = new List<Biome>();
+                }
+
+                generatedBiomes[biomeData.Item1].Add(new Biome(biomeData.Item2, baseBiomePoint, segmentPost));
             }
         }
 
         return generatedBiomes;
     }
 
-    private BiomeType GetClosestBiomeTypeFromDistribution(Dictionary<Vector2Int, BiomeType> biomeDistribution, Vector2Int position)
+    private (Vector2Int, BiomeType) GetClosestBiomeTypeFromDistribution(Dictionary<Vector2Int, BiomeType> biomeDistribution, Vector2Int position)
     {
-        BiomeType closestPosition = BiomeType.WATER;
+        Vector2Int closestPosition = Vector2Int.zero;
+        BiomeType closetType = BiomeType.WATER;
         float closestDistance = Mathf.Infinity;
 
         foreach (Vector2Int biomePosition in biomeDistribution.Keys)
@@ -204,35 +211,14 @@ public class BiomesGenerator
                 else
                 {
                     closestDistance = distance;
-                    closestPosition = biomeDistribution[biomePosition];
+                    closetType = biomeDistribution[biomePosition];
+                    closestPosition = biomePosition;
                 }
             }
         }
 
-        return closestPosition;
+        return (closestPosition, closetType);
     }
 
     #endregion
-
-    private Dictionary<Vector2Int, List<Biome>> CreateBiomeGrid(List<Biome> biomes)
-    {
-        Dictionary<Vector2Int, List<Biome>> biomeGrid = new Dictionary<Vector2Int, List<Biome>>();
-
-        int segmentSize = WorldGenerationHelper.GetWorldSegmentSize(worldGenerationData);
-
-        foreach (Biome biome in biomes)
-        {
-            Vector2Int gridPos = new Vector2Int(biome.mainBiomePoint.x / segmentSize, biome.mainBiomePoint.y / segmentSize);
-
-            if (!biomeGrid.ContainsKey(gridPos))
-            {
-                biomeGrid[gridPos] = new List<Biome>();
-            }
-
-            biomeGrid[gridPos].Add(biome);
-        }
-
-        return biomeGrid;
-    }
-
 }
