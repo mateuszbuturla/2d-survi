@@ -18,7 +18,11 @@ public class ItemSlot : MonoBehaviour, IAcceptItem, IPointerClickHandler
         Item returned = this.item;
 
         this.item = item;
-        if (item != null) this.spriteImage.sprite = item.sprite;
+        if (item != null)
+        {
+            this.spriteImage.sprite = item.sprite;
+            this.item.gameObject.transform.SetParent(this.transform);
+        }
         else this.spriteImage.sprite = transparentSprite;
 
         return returned;
@@ -42,6 +46,16 @@ public class ItemSlot : MonoBehaviour, IAcceptItem, IPointerClickHandler
             // -- Transfer items
             Item incomingItem = selectedItemSlot.item;
             selectedItemSlot.AcceptItem(AcceptItem(incomingItem, selectedItemSlot), this);
+
+            // -- Cleanup
+            // -- Put icons back where they belong
+            itemIcon.transform.localPosition = Vector3.zero;
+            selectedItemSlot.itemIcon.transform.localPosition = Vector3.zero;
+
+            // -- Lower the sort order by one, since you upped it on click (this time on the selectedItemSlot, since "perspective" changed)
+            selectedItemSlot.itemIcon.GetComponent<Canvas>().sortingOrder--;
+
+            selectedItemSlot = null;
         }
     }
 
@@ -57,15 +71,5 @@ public class ItemSlot : MonoBehaviour, IAcceptItem, IPointerClickHandler
             itemIcon.transform.position = Input.mousePosition;
             yield return null;
         }
-
-        // -- Put icons back where they belong
-        itemIcon.transform.localPosition = Vector3.zero;
-        selectedItemSlot.itemIcon.transform.localPosition = Vector3.zero;
-
-        // -- Lower the sort order by one, since you upped it on click (this time on the selectedItemSlot, since "perspective" changed)
-        selectedItemSlot.itemIcon.GetComponent<Canvas>().sortingOrder--;
-
-        // -- Has to be here to avoid nullref during cleanup
-        selectedItemSlot = null;
     }
 }

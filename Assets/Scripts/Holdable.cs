@@ -11,12 +11,14 @@ public abstract class Holdable : Item
     public float secondaryUseCooldown;
     public float currentSecondaryUseCooldown;
 
+    public virtual bool CanUsePrimary(Player player) { return true; }
     public abstract void PrimaryUseEffect(Player player);
+    public virtual bool CanUseSecondary(Player player) { return true; }
     public abstract void SecondaryUseEffect(Player player);
 
     public void UsePrimary(Player player)
     {
-        if (currentPrimaryUseCooldown <= 0) 
+        if (currentPrimaryUseCooldown <= 0 && CanUsePrimary(player)) 
         {
             PrimaryUseEffect(player);
         }
@@ -24,7 +26,7 @@ public abstract class Holdable : Item
 
     public void UseSecondary(Player player)
     {
-        if (currentSecondaryUseCooldown <= 0) 
+        if (currentSecondaryUseCooldown <= 0 && CanUseSecondary(player)) 
         {
             SecondaryUseEffect(player);
         }
@@ -38,6 +40,15 @@ public abstract class Holdable : Item
     protected void StartSecondaryUseCooldown()
     {
         currentSecondaryUseCooldown = secondaryUseCooldown;
+    }
+
+    protected void ReduceDurability()
+    {
+        remainingDurability--;
+        if (remainingDurability <= 0) 
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     void Update()

@@ -26,6 +26,7 @@ public class Bow : ProjectileWeapon
         arrow.GetComponent<Rigidbody2D>().AddForce(arrowProjectile.projectileSpeed * Time.deltaTime * direction);
 
         StartPrimaryUseCooldown();
+        remainingDurability--;
     }
 
     public override void SecondaryUseEffect(Player player)
