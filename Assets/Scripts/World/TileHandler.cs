@@ -5,11 +5,12 @@ public abstract class TileHandler : MonoBehaviour
 {
     [SerializeField]
     private TileHandler Next;
-    public TileBase tile;
 
     public TileBase Handle(Vector2Int pos)
     {
-        if (TryHandling(pos))
+        TileBase tile = TryHandling(pos);
+
+        if (tile != null)
             return tile;
 
         if (Next != null)
@@ -18,5 +19,5 @@ public abstract class TileHandler : MonoBehaviour
         return null;
     }
 
-    protected abstract bool TryHandling(Vector2Int pos);
+    protected abstract TileBase TryHandling(Vector2Int pos);
 }

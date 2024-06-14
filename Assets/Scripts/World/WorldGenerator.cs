@@ -27,7 +27,13 @@ public class WorldGenerator
         BiomesGenerator biomesGenerator = new BiomesGenerator(biomeGeneratorsData, worldGenerationData, ref random);
         Dictionary<Vector2Int, List<Biome>> biomeGrid = biomesGenerator.GenerateBiomes();
 
+        System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
+        stopwatch.Start();
+
         Dictionary<Vector2Int, TileBase> tiles = GenerateMap(biomeGrid);
+
+        stopwatch.Stop();
+        Debug.Log("GenerateMap: " + stopwatch.Elapsed.Milliseconds + " ms");
 
         EntitiesGenerator eg = new EntitiesGenerator(biomeGeneratorsData, biomeGrid, ref random);
         Dictionary<Vector2Int, GameObject> entities = eg.GenerateEntities();
