@@ -2,11 +2,6 @@ using UnityEngine;
 
 public static class MyNoise
 {
-    public static float Redistribution(float noise, NoiseSettings settings)
-    {
-        return Mathf.Pow(noise * settings.redistributionModifier, settings.exponent);
-    }
-
     public static float OctavePerlin(float x, float z, NoiseSettings settings)
     {
         x *= settings.noiseZoom;

@@ -7,6 +7,4 @@ public class NoiseSettings : ScriptableObject
     public int octaves;
     public Vector2Int offest;
     public float persistance;
-    public float redistributionModifier;
-    public float exponent;
 }

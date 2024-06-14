@@ -743,8 +743,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: VoronoiMapGenerator, Assembly-CSharp
+      - m_Target: {fileID: 1317371432}
+        m_TargetAssemblyTypeName: WorldGenerator, Assembly-CSharp
         m_MethodName: GenerateWorld
         m_Mode: 1
         m_Arguments:
@@ -915,6 +915,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1317371431}
+  - component: {fileID: 1317371432}
   m_Layer: 0
   m_Name: WorldGenerator
   m_TagString: Untagged
@@ -937,6 +938,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1317371432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317371430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bc0575acef25144487b0196900238f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  worldGenerationData: {fileID: 11400000, guid: 59d17b5d9259c0d42b244ca0be0b1b5d, type: 2}
+  noiseSettings: {fileID: 11400000, guid: 39dc71d50a99fe24c9451093621d724b, type: 2}
+  tilemap: {fileID: 490758447}
+  waterTile: {fileID: 11400000, guid: d8591dc12b8b3f74295afecb0f450fe0, type: 2}
+  grassTile: {fileID: 11400000, guid: cda6630299155ec4e87e65945b11d45b, type: 2}
 --- !u!1 &1539466824
 GameObject:
   m_ObjectHideFlags: 0
