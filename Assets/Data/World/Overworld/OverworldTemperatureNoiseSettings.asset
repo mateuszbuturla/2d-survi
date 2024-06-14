@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bb8eef09c87c524b9a4e1470788de38, type: 3}
-  m_Name: OverworldGenerationData
+  m_Script: {fileID: 11500000, guid: 5a476a912ffe9bd4c9e77bc967df429d, type: 3}
+  m_Name: OverworldTemperatureNoiseSettings
   m_EditorClassIdentifier: 
-  worldSize: 250
-  terrainThreshold: 0.502
+  noiseZoom: 0.02
+  octaves: 2
+  offest: {x: 0, y: 0}
+  persistance: 1

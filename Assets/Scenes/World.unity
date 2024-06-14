@@ -745,7 +745,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1317371432}
         m_TargetAssemblyTypeName: WorldGenerator, Assembly-CSharp
-        m_MethodName: GenerateWorld
+        m_MethodName: CreateWorld
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -952,9 +952,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldGenerationData: {fileID: 11400000, guid: 59d17b5d9259c0d42b244ca0be0b1b5d, type: 2}
   noiseSettings: {fileID: 11400000, guid: 39dc71d50a99fe24c9451093621d724b, type: 2}
+  temperatureNoiseSettings: {fileID: 11400000, guid: d8929d7f995bd134e94ef65032649f04, type: 2}
+  humidityNoiseSettings: {fileID: 11400000, guid: 8a5eb0a5d9bc5554ab8720be44c586cd, type: 2}
+  distortionNoiseSettings: {fileID: 11400000, guid: 76105e7d353f43f4bb8e4cb5289bd869, type: 2}
   tilemap: {fileID: 490758447}
   waterTile: {fileID: 11400000, guid: d8591dc12b8b3f74295afecb0f450fe0, type: 2}
-  grassTile: {fileID: 11400000, guid: cda6630299155ec4e87e65945b11d45b, type: 2}
+  forestTile: {fileID: 11400000, guid: cda6630299155ec4e87e65945b11d45b, type: 2}
+  grasslandTile: {fileID: 11400000, guid: 96ab14fbbf2ed61409fbeca0228c3a40, type: 2}
+  snowTile: {fileID: 11400000, guid: fca8b937e81bc3d479543241bf30cbd7, type: 2}
+  desertTile: {fileID: 11400000, guid: 54bbff13dd81d4a43a002602bd28ac7a, type: 2}
+  jungleTile: {fileID: 11400000, guid: db5ee36b203ab7d4d8818394ff97e47d, type: 2}
+  biomes:
+  - temperature: 0.4
+    humidity: 0.2
+    temperatureMax: 0.7
+    humidityMax: 0.6
+    biome: 1
+  - temperature: 0.3
+    humidity: 0.35
+    temperatureMax: 0.4
+    humidityMax: 0.5
+    biome: 4
+  - temperature: 0.6
+    humidity: 0.5
+    temperatureMax: 1
+    humidityMax: 1
+    biome: 5
+  - temperature: 0
+    humidity: 0.1
+    temperatureMax: 0.5
+    humidityMax: 0.7
+    biome: 3
+  - temperature: 0.6
+    humidity: 0
+    temperatureMax: 1
+    humidityMax: 0.4
+    biome: 2
 --- !u!1 &1539466824
 GameObject:
   m_ObjectHideFlags: 0

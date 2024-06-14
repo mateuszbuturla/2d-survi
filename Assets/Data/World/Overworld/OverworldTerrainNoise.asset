@@ -15,6 +15,4 @@ MonoBehaviour:
   noiseZoom: 0.01
   octaves: 5
   offest: {x: 0, y: 0}
-  persistance: 1
-  redistributionModifier: 1
-  exponent: 1
+  persistance: 0.7
