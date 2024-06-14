@@ -121,11 +121,7 @@ public class WorldGenerator
                         TileBase tile = biomeGenerator.biomeGenerator.GetTile(pos, random);
 
                         concurrentTiles[pos] = tile;
-                        // if (biomeGenerator.biomeGenerator.tilesForPlacingObjects.Contains(tile))
-                        // {
-                        decorationTiles[pos] = biomeGenerator.biomeGenerator.GetDecoration(pos, random);
-                        // }
-
+                        decorationTiles[pos] = biomeGenerator.biomeGenerator.GetDecoration(pos, random, tile);
                     }
                 }
             }

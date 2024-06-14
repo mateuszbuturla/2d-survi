@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1304e26971482d6498f5b0a1e8b4eb32, type: 3}
+  m_Name: GrasslandWater
+  m_EditorClassIdentifier: 
+  tiles:
+  - {fileID: 11400000, guid: 5bbaa60ab9c05de43a0fe71821b33757, type: 2}
+  - {fileID: 11400000, guid: 037ffb3e614ba6240b4c18f6150eefec, type: 2}
+  - {fileID: 11400000, guid: 7004e54c373dfbb488f41e375b19d14c, type: 2}
+  - {fileID: 11400000, guid: b3684bbe9c7b17e48b28e32da9e9e901, type: 2}
+  - {fileID: 11400000, guid: 9a429a94c66f91c4fabc457857b6ff86, type: 2}
+  - {fileID: 11400000, guid: 22cd936a30b2e534fb2fd1546edb8ebd, type: 2}
+  - {fileID: 11400000, guid: e046b66806917d9468bbecd9f3269fff, type: 2}
+  - {fileID: 11400000, guid: 94a41b227ba7d9542a4ef32add11c3e8, type: 2}
+  - {fileID: 11400000, guid: bad348e10891aa2428b192a5d62a0fae, type: 2}

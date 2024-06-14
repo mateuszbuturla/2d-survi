@@ -1025,7 +1025,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Next: {fileID: 0}
   settings: {fileID: 11400000, guid: c8b558d645b7024419518d04d8bba9c3, type: 2}
-  threshold: 0.619
+  threshold: 0.589
   tile: {fileID: 11400000, guid: ed891fb0ae169694b8a41d9ca8c33ed1, type: 2}
 --- !u!1 &647703723
 GameObject:
@@ -1086,6 +1086,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 730f4a0a0b66d8c44b9c2f7946052724, type: 2}
   - {fileID: 11400000, guid: 58a42c58aad6c8e45bf6b23d5b93362e, type: 2}
   threshold: 10
+  allowedTilesToPlaceOn: []
 --- !u!1 &718092653
 GameObject:
   m_ObjectHideFlags: 0
@@ -1130,7 +1131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9daa8a001ee1851448ef6a372f8dc37b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Next: {fileID: 646255108}
+  Next: {fileID: 1007287107}
   settings: {fileID: 11400000, guid: 99702378d800cce4cad2775e856254ea, type: 2}
   threshold: 0.589
   data: {fileID: 11400000, guid: 2b82dfaa275338542a9e6034e436dedf, type: 2}
@@ -2370,10 +2371,63 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 718092654}
+  - {fileID: 1007287106}
   - {fileID: 646255107}
   - {fileID: 1710640602}
   m_Father: {fileID: 1508175804}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1007287105
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1007287106}
+  - component: {fileID: 1007287107}
+  m_Layer: 0
+  m_Name: Water
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1007287106
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007287105}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 891486382}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1007287107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007287105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9daa8a001ee1851448ef6a372f8dc37b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Next: {fileID: 646255108}
+  settings: {fileID: 11400000, guid: 95f35364b9c3e8b4ca82e894792f94b0, type: 2}
+  threshold: 0.728
+  data: {fileID: 11400000, guid: bac6212883eae1c48af1c0acdac5a9bd, type: 2}
+  testTile: {fileID: 11400000, guid: 99eb5210858e7594b9151572be818b7a, type: 2}
+  testTile2: {fileID: 11400000, guid: 147b2bae0ded84540845ee12e56eafed, type: 2}
+  testTile3: {fileID: 11400000, guid: 01767ac629b69e7448752b7a3d362a6c, type: 2}
+  testTile4: {fileID: 11400000, guid: 29c59353f7020c04aac900c21e130e9b, type: 2}
 --- !u!1 &1017024681
 GameObject:
   m_ObjectHideFlags: 0
@@ -2844,7 +2898,7 @@ MonoBehaviour:
     biomeType: 8
     count: 2
     biomeGenerator: {fileID: 208797145}
-  seed: 8781235
+  seed: 5064310
 --- !u!4 &1637260366
 Transform:
   m_ObjectHideFlags: 0
@@ -2914,6 +2968,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 730f4a0a0b66d8c44b9c2f7946052724, type: 2}
   - {fileID: 11400000, guid: 58a42c58aad6c8e45bf6b23d5b93362e, type: 2}
   threshold: 10
+  allowedTilesToPlaceOn:
+  - {fileID: 11400000, guid: 437994de8554cb24d85edd56af8ca4e2, type: 2}
 --- !u!4 &1710640602
 Transform:
   m_ObjectHideFlags: 0
@@ -3336,7 +3392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startTileHandler: {fileID: 205923242}
-  startDecorationHandler: {fileID: 647703725}
+  startDecorationHandler: {fileID: 0}
   baseTile: {fileID: 11400000, guid: 437994de8554cb24d85edd56af8ca4e2, type: 2}
   objects:
   - {fileID: 11400000, guid: 4b07fdbeb26918b4392c85737139e72a, type: 2}

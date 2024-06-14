@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class GenerateBiome : MonoBehaviour
 {
     public TileHandler startTileHandler;
-    public TileHandler startDecorationHandler;
+    public TileDecorationHandler startDecorationHandler;
     public TileBase baseTile;
 
     [SerializeField]
@@ -55,13 +55,13 @@ public class GenerateBiome : MonoBehaviour
         return result;
     }
 
-    public TileBase GetDecoration(Vector2Int pos, System.Random random)
+    public TileBase GetDecoration(Vector2Int pos, System.Random random, TileBase tile)
     {
         TileBase result = null;
 
         if (startDecorationHandler)
         {
-            result = startDecorationHandler.Handle(pos, random);
+            result = startDecorationHandler.Handle(pos, random, tile);
         }
 
         return result;
