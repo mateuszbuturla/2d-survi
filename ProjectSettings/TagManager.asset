@@ -15,7 +15,7 @@ TagManager:
   - collision
   - projectile
   - enemy
-  - 
+  - droppedItem
   - 
   - 
   - 
@@ -52,4 +52,16 @@ TagManager:
     locked: 0
   - name: enemyMelee
     uniqueID: 3778786239
+    locked: 0
+  - name: UI
+    uniqueID: 2764380617
+    locked: 0
+  - name: 
+    uniqueID: 3429335865
+    locked: 0
+  - name: 
+    uniqueID: 1637546473
+    locked: 0
+  - name: 
+    uniqueID: 1555187463
     locked: 0

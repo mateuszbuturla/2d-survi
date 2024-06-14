@@ -2,7 +2,9 @@
 
 public class Entity : MonoBehaviour
 {
-    public int Health; 
+    public int health;
+    public float movementSpeed;
+    public float acceleration;
 
     public float curseResistance;
     public float miningResistance;

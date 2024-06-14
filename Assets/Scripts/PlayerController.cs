@@ -1,15 +1,33 @@
-﻿using UnityEditor;
+﻿using System.Collections;
+using TMPro;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public Player player;
 
+    [Header("Movement")]
     public bool allowMovement = true;
     public Vector2 movementDirection = Vector2.zero;
-
     public float startingAccelerationBonusThreshold = 1f;
     public float startingAccelerationBonusMultiplier = 1.5f;
+
+    [Header("Detection")]
+    //Detection Point
+    public Transform detectionPoint;
+    // -- Item pickup detection radius
+    public float detectionRadius = 1f;
+    // -- Detection Layer
+    public LayerMask detectionLayer;
+    // -- Cached Trigger Object
+    public GameObject detectedObject;
+    public static float detectionFrequency = .5f;
+
+    void Start()
+    {
+        StartCoroutine(DetectInteractables());
+    }
 
     private void Update()
     {
@@ -39,6 +57,14 @@ public class PlayerController : MonoBehaviour
         {
             player.UseHeldSecondary();
         }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            player.Interact();
+        }
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            player.inventoryWindow.SetActive(!player.inventoryWindow.activeSelf);
+        }
 
         MovePlayer();
     }
@@ -53,12 +79,32 @@ public class PlayerController : MonoBehaviour
         if (Mathf.Abs(player.playerRigidbody.velocity.x) < startingAccelerationBonusThreshold && 
             Mathf.Abs(player.playerRigidbody.velocity.y) < startingAccelerationBonusThreshold)
         {
-            return player.playerAcceleration * startingAccelerationBonusMultiplier;
+            return player.acceleration * startingAccelerationBonusMultiplier;
         }
         else
         {
-            return player.playerAcceleration;
+            return player.acceleration;
         }
     }
 
+    IEnumerator DetectInteractables()
+    {
+        while (true) 
+        { 
+            Collider2D collider = Physics2D.OverlapCircle(detectionPoint.position, detectionRadius, detectionLayer);
+
+            if (collider != null && collider.gameObject.GetComponent<IInteractable>() != null)
+            {
+                detectedObject = collider.gameObject;
+                player.interactableText.GetComponent<TextMeshProUGUI>().text = collider.gameObject.GetComponent<IInteractable>().InteractionText();
+            }
+            else
+            {
+                detectedObject = null;
+                player.interactableText.GetComponent<TextMeshProUGUI>().text = "";
+            }
+
+            yield return new WaitForSeconds(.5f);
+        }
+    }
 }

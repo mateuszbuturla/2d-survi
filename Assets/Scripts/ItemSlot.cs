@@ -10,7 +10,6 @@ public class ItemSlot : MonoBehaviour, IAcceptItem, IPointerClickHandler
     public int id;
     public Item item;
     public GameObject itemIcon;
-    private Vector3 itemIconStartPos;
     public Image spriteImage;
     public Sprite transparentSprite;
 
@@ -25,23 +24,24 @@ public class ItemSlot : MonoBehaviour, IAcceptItem, IPointerClickHandler
         return returned;
     }
 
+    // -- Sticky item cleanup moved to the coroutine
     public void OnPointerClick(PointerEventData eventData)
     {
-        print("click");
+        // -- Pick up item
         if (selectedItemSlot == null)
         {
             if (item == null) return;
 
             selectedItemSlot = this;
-            itemIcon.GetComponent<Image>().raycastTarget = false;
+
             StartCoroutine(StickItemIconToCursor(itemIcon));
         }
+        // -- If clicked on another item slot, transfer items. (This method only triggers on item slots, bcs of IPointerClickHandler)
         else
         {
-            itemIcon.transform.position = itemIconStartPos;
+            // -- Transfer items
             Item incomingItem = selectedItemSlot.item;
             selectedItemSlot.AcceptItem(AcceptItem(incomingItem, selectedItemSlot), this);
-            selectedItemSlot = null;
         }
     }
 
@@ -49,12 +49,23 @@ public class ItemSlot : MonoBehaviour, IAcceptItem, IPointerClickHandler
     {
         if (itemIcon == null) { yield return null; }
 
-        itemIconStartPos = itemIcon.transform.position;
+        // -- Up the sort order by one, so it renders over other items you hover over
+        itemIcon.GetComponent<Canvas>().sortingOrder++;
+
         while (selectedItemSlot != null)
         {
             itemIcon.transform.position = Input.mousePosition;
-            yield return 0;
+            yield return null;
         }
-        yield return null;
+
+        // -- Put icons back where they belong
+        itemIcon.transform.localPosition = Vector3.zero;
+        selectedItemSlot.itemIcon.transform.localPosition = Vector3.zero;
+
+        // -- Lower the sort order by one, since you upped it on click (this time on the selectedItemSlot, since "perspective" changed)
+        selectedItemSlot.itemIcon.GetComponent<Canvas>().sortingOrder--;
+
+        // -- Has to be here to avoid nullref during cleanup
+        selectedItemSlot = null;
     }
 }

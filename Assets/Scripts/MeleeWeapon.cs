@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class MeleeWeapon : Weapon
 {
-    // Multiple, for weapons with alt attacks etc.
+    public float attackDuration;
+
     public List<GameObject> projectiles;
 }

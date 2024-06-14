@@ -47,11 +47,11 @@ public class Sword : MeleeWeapon
         // negative swing direction: if start at -45, move towards +45 etc.
         Quaternion endRotation = rotation * Quaternion.Euler(0, 0, swingAngle/2 * swingDirection);
 
-        //hopefully, loop lasts as long as cooldown
-        for (float i = 0; i <= primaryUseCooldown; i += Time.deltaTime)
+        //loop lasts as long as attackDuration, cannot be longer than cooldown
+        for (float i = 0; i <= Mathf.Min(attackDuration, primaryUseCooldown); i += Time.deltaTime)
         {
             // again, multiplying quaternions is supposedly like adding euler
-            pivot.transform.rotation = Quaternion.Lerp(startRotation, endRotation, i / primaryUseCooldown);
+            pivot.transform.rotation = Quaternion.Lerp(startRotation, endRotation, i / Mathf.Min(attackDuration, primaryUseCooldown));
 
             sword.transform.position = pivot.transform.position;
             sword.transform.position += pivot.transform.up;
@@ -61,15 +61,10 @@ public class Sword : MeleeWeapon
 
         //pivot.transform.SetPositionAndRotation(pivot.transform.position, Quaternion.identity);
         sword.GetComponent<MeleeProjectile>().Deactivate();
-
-        yield return null;
     }
-
-
 
     // -- Helper
     int RandomSign(){
         return Random.value < .5? 1 : -1;
     }
-
 }

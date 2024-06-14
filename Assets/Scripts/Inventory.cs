@@ -27,9 +27,7 @@ public class Inventory : MonoBehaviour
 
         // -- DEBUG --
         itemSlots[0].GetComponent<ItemSlot>().AcceptItem(GameObject.Find("Bow").GetComponent<Bow>(), null);
-        print(itemSlots[0]);
-        print(itemSlots[0].GetComponent<ItemSlot>());
-        print(itemSlots[0].GetComponent<ItemSlot>().item);
+        itemSlots[1].GetComponent<ItemSlot>().AcceptItem(GameObject.Find("Sword").GetComponent<Sword>(), null);
         // -- DEBUG --
 
         AutoResizeItemGrid();

@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Dummy : Entity, IDamagable
 {
-    public float health = 20;
-
-    public void TakeDamage(Entity source, float damage)
+    public void TakeDamage(Entity source, int damage)
     {
         health -= damage;
         print("ow "+health);
