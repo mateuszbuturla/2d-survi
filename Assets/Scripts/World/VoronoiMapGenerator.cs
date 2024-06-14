@@ -63,13 +63,6 @@ public class VoronoiMapGenerator : MonoBehaviour
         tilemapDecoration.RefreshAllTiles();
     }
 
-
-    (Tilemap, Tilemap) GetTilemapFromPrefab(GameObject prefab)
-    {
-        TileEntity te = prefab.GetComponent<TileEntity>();
-        return (te.baseTileMap, te.additionalTileMap);
-    }
-
     void GenerateObject(GameObject prefab, Vector2Int pos)
     {
         Vector3Int basePosition = new Vector3Int(pos.x, pos.y, 0);

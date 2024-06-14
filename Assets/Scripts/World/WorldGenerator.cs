@@ -27,43 +27,15 @@ public class WorldGenerator
         BiomesGenerator biomesGenerator = new BiomesGenerator(biomeGeneratorsData, worldGenerationData, ref random);
         Dictionary<Vector2Int, List<Biome>> biomeGrid = biomesGenerator.GenerateBiomes();
 
-        System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
-        stopwatch.Start();
-
         var mapData = GenerateMap(biomeGrid);
 
         Dictionary<Vector2Int, TileBase> tiles = mapData.Item1;
         Dictionary<Vector2Int, TileBase> decorations = mapData.Item2;
 
-        stopwatch.Stop();
-        Debug.Log("GenerateMap: " + stopwatch.Elapsed.Milliseconds + " ms");
-
         EntitiesGenerator eg = new EntitiesGenerator(biomeGeneratorsData, biomeGrid, ref random);
         Dictionary<Vector2Int, GameObject> entities = eg.GenerateEntities(tiles);
 
         return new WorldDataDto(tiles, entities, decorations);
-    }
-
-    public Dictionary<Vector2Int, TileBase> UpscaleTiles(Dictionary<Vector2Int, TileBase> originalTiles, int originalSize, int newSize)
-    {
-        int factor = newSize / originalSize;
-        Dictionary<Vector2Int, TileBase> upscaledTiles = new Dictionary<Vector2Int, TileBase>();
-
-        foreach (var kvp in originalTiles)
-        {
-            Vector2Int originalPos = kvp.Key;
-            TileBase originalTile = kvp.Value;
-
-            for (int dx = 0; dx < factor; dx++)
-            {
-                for (int dy = 0; dy < factor; dy++)
-                {
-                    Vector2Int newPos = new Vector2Int(originalPos.x * factor + dx, originalPos.y * factor + dy);
-                    upscaledTiles[newPos] = originalTile;
-                }
-            }
-        }
-        return upscaledTiles;
     }
 
     // Function for generating each tile based on the closest biome using voronoi diagram
