@@ -2,15 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "WorldGenerationData", menuName = "ScriptableObjects/WorldGenerationData", order = 1)]
+[CreateAssetMenu(fileName = "WorldGenerationData", menuName = "WorldGenerationData", order = 0)]
 public class WorldGenerationData : ScriptableObject
 {
-    public int worldSize;
-    public int segmentCount;
-    public int borderThickness;
-    public BiomeType startBiome;
-    public int startBiomeMinSize; // size in regions
-    public int outerRingDistance;
-    public int minDistanceBetweenBiomeCenters;
-    public int maxDistanceFromBiomeCenter;
+
 }
