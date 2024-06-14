@@ -6,18 +6,18 @@ public abstract class TileHandler : MonoBehaviour
     [SerializeField]
     private TileHandler Next;
 
-    public TileBase Handle(Vector2Int pos)
+    public TileBase Handle(Vector2Int pos, System.Random random)
     {
-        TileBase tile = TryHandling(pos);
+        TileBase tile = TryHandling(pos, random);
 
         if (tile != null)
             return tile;
 
         if (Next != null)
-            return Next.Handle(pos);
+            return Next.Handle(pos, random);
 
         return null;
     }
 
-    protected abstract TileBase TryHandling(Vector2Int pos);
+    protected abstract TileBase TryHandling(Vector2Int pos, System.Random random);
 }

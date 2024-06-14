@@ -13,7 +13,7 @@ public class PerlinNoiseTileHandler : TileHandler
     public TileBase testTile3;
     public TileBase testTile4;
 
-    protected override TileBase TryHandling(Vector2Int pos)
+    protected override TileBase TryHandling(Vector2Int pos, System.Random random)
     {
         float value = MyNoise.OctavePerlin(pos.x, pos.y, settings);
         bool valueRight = MyNoise.OctavePerlin(pos.x + 1, pos.y, settings) > threshold;

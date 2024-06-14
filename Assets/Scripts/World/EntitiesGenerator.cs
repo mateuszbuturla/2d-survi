@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class EntitiesGenerator
 {
@@ -23,7 +25,7 @@ public class EntitiesGenerator
         return tilePos;
     }
 
-    public Dictionary<Vector2Int, GameObject> GenerateEntities()
+    public Dictionary<Vector2Int, GameObject> GenerateEntities(Dictionary<Vector2Int, TileBase> tiles)
     {
         Dictionary<Vector2Int, GameObject> entitiesPos = new Dictionary<Vector2Int, GameObject>();
 
@@ -47,7 +49,7 @@ public class EntitiesGenerator
                     {
                         Vector2Int randomPos = GetRandomPosInBiome(biomeGrid[biomeMainPos]);
 
-                        if (IsValid(randomPos, objectPositions, biomeObject.minDistanceBetween))
+                        if (IsValid(randomPos, objectPositions, biomeObject.minDistanceBetween) && biomeObject.tilesForPlacingObjects.Contains(tiles[randomPos]))
                         {
                             objectPositions.Add(randomPos);
                             entitiesPos[randomPos] = biomeObject.prefab;

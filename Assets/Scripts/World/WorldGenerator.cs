@@ -30,15 +30,18 @@ public class WorldGenerator
         System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
         stopwatch.Start();
 
-        Dictionary<Vector2Int, TileBase> tiles = GenerateMap(biomeGrid);
+        var mapData = GenerateMap(biomeGrid);
+
+        Dictionary<Vector2Int, TileBase> tiles = mapData.Item1;
+        Dictionary<Vector2Int, TileBase> decorations = mapData.Item2;
 
         stopwatch.Stop();
         Debug.Log("GenerateMap: " + stopwatch.Elapsed.Milliseconds + " ms");
 
         EntitiesGenerator eg = new EntitiesGenerator(biomeGeneratorsData, biomeGrid, ref random);
-        Dictionary<Vector2Int, GameObject> entities = eg.GenerateEntities();
+        Dictionary<Vector2Int, GameObject> entities = eg.GenerateEntities(tiles);
 
-        return new WorldDataDto(tiles, entities);
+        return new WorldDataDto(tiles, entities, decorations);
     }
 
     public Dictionary<Vector2Int, TileBase> UpscaleTiles(Dictionary<Vector2Int, TileBase> originalTiles, int originalSize, int newSize)
@@ -64,9 +67,10 @@ public class WorldGenerator
     }
 
     // Function for generating each tile based on the closest biome using voronoi diagram
-    private Dictionary<Vector2Int, TileBase> GenerateMap(Dictionary<Vector2Int, List<Biome>> biomeGrid)
+    private (Dictionary<Vector2Int, TileBase>, Dictionary<Vector2Int, TileBase>) GenerateMap(Dictionary<Vector2Int, List<Biome>> biomeGrid)
     {
         Dictionary<Vector2Int, TileBase> tiles = new Dictionary<Vector2Int, TileBase>();
+        Dictionary<Vector2Int, TileBase> decorations = new Dictionary<Vector2Int, TileBase>();
 
         Dictionary<Vector2Int, Biome> simplifiedBiomes = new Dictionary<Vector2Int, Biome>();
         foreach (Vector2Int e in biomeGrid.Keys)
@@ -81,6 +85,7 @@ public class WorldGenerator
         int chunkSize = 50;
 
         ConcurrentDictionary<Vector2Int, TileBase> concurrentTiles = new ConcurrentDictionary<Vector2Int, TileBase>();
+        ConcurrentDictionary<Vector2Int, TileBase> decorationTiles = new ConcurrentDictionary<Vector2Int, TileBase>();
 
         List<(int startX, int startY)> chunks = new List<(int startX, int startY)>();
 
@@ -113,7 +118,14 @@ public class WorldGenerator
                             closestBiome.biomePoints.Add(pos);
                         }
 
-                        concurrentTiles[pos] = biomeGenerator.biomeGenerator.GetTile(pos);
+                        TileBase tile = biomeGenerator.biomeGenerator.GetTile(pos, random);
+
+                        concurrentTiles[pos] = tile;
+                        // if (biomeGenerator.biomeGenerator.tilesForPlacingObjects.Contains(tile))
+                        // {
+                        decorationTiles[pos] = biomeGenerator.biomeGenerator.GetDecoration(pos, random);
+                        // }
+
                     }
                 }
             }
@@ -124,8 +136,12 @@ public class WorldGenerator
         {
             tiles[kvp.Key] = kvp.Value;
         }
+        foreach (var kvp in decorationTiles)
+        {
+            decorations[kvp.Key] = kvp.Value;
+        }
 
-        return tiles;
+        return (tiles, decorations);
     }
 
     // Function for finding the closest biome (it uses voronoi diagram)

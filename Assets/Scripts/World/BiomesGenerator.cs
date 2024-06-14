@@ -205,14 +205,14 @@ public class BiomesGenerator
 
             if (distance < closestDistance && distance < worldGenerationData.maxDistanceFromBiomeCenter)
             {
-                if (biomData.biomeTier == BiomeTier.INNER && distanceToCenter > worldGenerationData.outerRingDistance) { }
-                else if (biomData.biomeTier == BiomeTier.OUTER && distanceToCenter < worldGenerationData.outerRingDistance) { }
-                else
-                {
-                    closestDistance = distance;
-                    closetType = biomeDistribution[biomePosition];
-                    closestPosition = biomePosition;
-                }
+                // if (biomData.biomeTier == BiomeTier.INNER && distanceToCenter > worldGenerationData.outerRingDistance) { }
+                // else if (biomData.biomeTier == BiomeTier.OUTER && distanceToCenter < worldGenerationData.outerRingDistance) { }
+                // else
+                // {
+                closestDistance = distance;
+                closetType = biomeDistribution[biomePosition];
+                closestPosition = biomePosition;
+                // }
             }
         }
 

@@ -10,19 +10,18 @@ public class BiomeObjectDataEditor : Editor
     {
         BiomeObjectData dynamicSO = (BiomeObjectData)target;
 
-        dynamicSO.staticCount = EditorGUILayout.Toggle("Set static count", dynamicSO.staticCount);
+        DrawDefaultInspector();
 
-        if (dynamicSO.staticCount)
-        {
-            dynamicSO.count = EditorGUILayout.IntField("Static count", dynamicSO.count);
-        }
-        else
-        {
-            dynamicSO.numSamplesBeforeRejection = EditorGUILayout.IntField("Number of attempts to place object", dynamicSO.numSamplesBeforeRejection);
-            dynamicSO.minDistanceBetween = EditorGUILayout.IntField("Min distance between", dynamicSO.minDistanceBetween);
-        }
+        // if (dynamicSO.staticCount)
+        // {
+        //     dynamicSO.count = EditorGUILayout.IntField("Static count", dynamicSO.count);
+        // }
+        // else
+        // {
+        //     dynamicSO.numSamplesBeforeRejection = EditorGUILayout.IntField("Number of attempts to place object", dynamicSO.numSamplesBeforeRejection);
+        //     dynamicSO.minDistanceBetween = EditorGUILayout.IntField("Min distance between", dynamicSO.minDistanceBetween);
+        // }
 
-        dynamicSO.prefab = (GameObject)EditorGUILayout.ObjectField("Prefab", dynamicSO.prefab, typeof(GameObject), false);
 
         if (GUI.changed)
         {

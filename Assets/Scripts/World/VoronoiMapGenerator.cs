@@ -9,6 +9,7 @@ public class VoronoiMapGenerator : MonoBehaviour
 
     public Tilemap tilemap;
     public Tilemap tilemapObjects;
+    public Tilemap tilemapDecoration;
 
     [SerializeField]
     public List<BiomeData> biomeGeneratorsData = new List<BiomeData>();
@@ -28,6 +29,7 @@ public class VoronoiMapGenerator : MonoBehaviour
         WorldDataDto worldData = wg.GenerateWorld();
 
         FillTilemap(worldData.biomeTiles);
+        FillDecorations(worldData.decorationsTiles);
 
         foreach (Vector2Int entityPos in worldData.entities.Keys)
         {
@@ -48,6 +50,20 @@ public class VoronoiMapGenerator : MonoBehaviour
         tilemap.RefreshAllTiles();
     }
 
+    void FillDecorations(Dictionary<Vector2Int, TileBase> tiles)
+    {
+        foreach (KeyValuePair<Vector2Int, TileBase> tileEntry in tiles)
+        {
+            Vector2Int position = tileEntry.Key;
+            TileBase tile = tileEntry.Value;
+
+            tilemapDecoration.SetTile(new Vector3Int(position.x, position.y, 0), tile);
+        }
+
+        tilemapDecoration.RefreshAllTiles();
+    }
+
+
     (Tilemap, Tilemap) GetTilemapFromPrefab(GameObject prefab)
     {
         TileEntity te = prefab.GetComponent<TileEntity>();
@@ -56,21 +72,10 @@ public class VoronoiMapGenerator : MonoBehaviour
 
     void GenerateObject(GameObject prefab, Vector2Int pos)
     {
-        (Tilemap, Tilemap) tls = GetTilemapFromPrefab(prefab);
-        Dictionary<Vector3Int, TileBase> tilesBase = WorldGenerationHelper.GetTilesFromTilemap(tls.Item1);
-        Dictionary<Vector3Int, TileBase> tilesAdditional = WorldGenerationHelper.GetTilesFromTilemap(tls.Item2);
-
         Vector3Int basePosition = new Vector3Int(pos.x, pos.y, 0);
 
-        foreach (Vector3Int tilePos in tilesBase.Keys)
-        {
-            tilemap.SetTile(basePosition + tilePos, tilesBase[tilePos]);
-        }
+        Vector3 worldPosition = tilemap.CellToWorld(basePosition);
 
-        foreach (Vector3Int tilePos in tilesAdditional.Keys)
-        {
-            tilemapObjects.SetTile(basePosition + tilePos, tilesAdditional[tilePos]);
-        }
-
+        Instantiate(prefab, worldPosition, Quaternion.identity);
     }
 }
