@@ -10,6 +10,7 @@ public class Player : Entity, IDamagable
     public Rigidbody2D playerRigidbody;
     public GameObject inventoryWindow;
     public GameObject inventoryItemGrid;
+    public GameObject inventoryItemHotbar;
     public GameObject interactableText;
 
     private void Update()

@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
+  draggable: 1
   item: {fileID: 0}
   itemIcon: {fileID: 7454107917060517363}
   spriteImage: {fileID: 705826394855961295}

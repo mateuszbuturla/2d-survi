@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using TMPro;
 using UnityEditor;
+using UnityEditor.Build;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -27,6 +28,9 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         StartCoroutine(DetectInteractables());
+
+        // -- Should start off, but stuff needs to load there, so it has to run at least once
+        player.inventoryWindow.SetActive(false);
     }
 
     private void Update()
@@ -63,7 +67,13 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Tab))
         {
+            if (ItemSlot.selectedItemSlot != null) 
+            { 
+                ItemSlot.selectedItemSlot.StickyItemCleanup();
+            }
             player.inventoryWindow.SetActive(!player.inventoryWindow.activeSelf);
+            // -- Active hotbar only when inventoryWindow inactive
+            player.inventoryItemHotbar.SetActive(!player.inventoryWindow.activeSelf);
         }
 
         MovePlayer();
