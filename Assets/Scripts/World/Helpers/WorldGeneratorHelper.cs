@@ -53,4 +53,24 @@ public static class WorldGeneratorHelper
 
         return chunksToRemove;
     }
+
+    public static Biomes FindClosestBiome(Dictionary<Vector2Int, Biomes> biomes, Vector2Int position)
+    {
+        Vector2Int closestPosition = Vector2Int.zero;
+        float closestDistanceSqr = Mathf.Infinity;
+
+        foreach (KeyValuePair<Vector2Int, Biomes> biome in biomes)
+        {
+            Vector2Int diff = biome.Key - position;
+            float distanceSqr = diff.sqrMagnitude;
+
+            if (distanceSqr < closestDistanceSqr)
+            {
+                closestDistanceSqr = distanceSqr;
+                closestPosition = biome.Key;
+            }
+        }
+
+        return biomes[closestPosition];
+    }
 }
