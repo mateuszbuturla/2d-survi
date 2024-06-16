@@ -54,14 +54,21 @@ public static class WorldGeneratorHelper
         return chunksToRemove;
     }
 
-    public static Biomes FindClosestBiome(Dictionary<Vector2Int, Biomes> biomes, Vector2Int position)
+    public static Vector2Int GetChunkCenterPoint(WorldGenerationData worldGenerationData)
     {
+        return new Vector2Int(worldGenerationData.chunkSize / 2, worldGenerationData.chunkSize / 2);
+    }
+
+    public static Biomes FindClosestBiome(WorldGenerationData worldGenerationData, Dictionary<Vector2Int, Biomes> biomes, Vector2Int position)
+    {
+        Vector2Int chunkCenterPoint = GetChunkCenterPoint(worldGenerationData);
         Vector2Int closestPosition = Vector2Int.zero;
         float closestDistanceSqr = Mathf.Infinity;
 
         foreach (KeyValuePair<Vector2Int, Biomes> biome in biomes)
         {
-            Vector2Int diff = biome.Key - position;
+            Vector2Int biomeCenterFullPos = ChunkTilePositionToTilemap(worldGenerationData, biome.Key, chunkCenterPoint);
+            Vector2Int diff = biomeCenterFullPos - position;
             float distanceSqr = diff.sqrMagnitude;
 
             if (distanceSqr < closestDistanceSqr)

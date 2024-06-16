@@ -40,6 +40,8 @@ public class WorldGenerator : MonoBehaviour
         int minDistance = 40;
         Dictionary<Vector2Int, Biomes> generatedPoints = new Dictionary<Vector2Int, Biomes>();
 
+        generatedPoints[new Vector2Int(0, 0)] = Biomes.GRASSLAND;
+
         System.Random random = new System.Random(seed);
 
         while (generatedPoints.Count < 5)
@@ -143,7 +145,7 @@ public class WorldGenerator : MonoBehaviour
 
                 if (noiseValue > worldGenerationData.terrainThreshold)
                 {
-                    biome = WorldGeneratorHelper.FindClosestBiome(biomes, fullTilePos);
+                    biome = WorldGeneratorHelper.FindClosestBiome(worldGenerationData, biomes, fullTilePos);
                 }
 
                 chunk.tiles[tilePosInChunk] = biome;
