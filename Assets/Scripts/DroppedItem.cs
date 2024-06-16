@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class DroppedItem : MonoBehaviour, IInteractable
 {
-    public Item item;
+    public GameObject item;
     public static int despawnTimeout = 300;
     public SpriteRenderer spriteRenderer;
 
     private void Start()
     {
-        spriteRenderer.sprite = item.sprite;
+        spriteRenderer.sprite = item.GetComponent<Item>().sprite;
         StartCoroutine(DespawnTimeout());
     }
 
@@ -21,12 +21,12 @@ public class DroppedItem : MonoBehaviour, IInteractable
 
     public string InteractionText()
     {
-        return $"Pick up {item.name} [{item.amount}] ('E')";
+        return $"Pick up {item.name} [{item.GetComponent<Item>().amount}] ('E')";
     }
 
     public void Interact(Player player)
     {
-        if (player.inventoryItemGrid.GetComponent<Inventory>().AddItem(item))
+        if (player.inventoryItemGrid.GetComponent<Inventory>().AddItem(item.GetComponent<Item>()))
         {
             Destroy(this.gameObject);
         }
