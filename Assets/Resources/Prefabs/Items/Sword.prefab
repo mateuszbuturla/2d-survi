@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &351180247236965010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7814834268956436904}
+  - component: {fileID: 1923162872978781783}
+  m_Layer: 0
+  m_Name: Sword
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7814834268956436904
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351180247236965010}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.4285713, y: 1.4285713, z: 1.4285713}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1923162872978781783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351180247236965010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42c53118cd3922d48a82cffca40e9e60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemSO: {fileID: 11400000, guid: bbc94c3e5a8a2914cbadc6714d130281, type: 2}
+  prefab: {fileID: 351180247236965010}
+  id: 1
+  name: Sword
+  type: 0
+  rarity: 0
+  sprite: {fileID: 21300000, guid: a8d6feb60fe8d014c8ff53fcc8640bee, type: 3}
+  maxStack: 1
+  amount: 1
+  hasDurability: 1
+  maxDurability: 50
+  remainingDurability: 35
+  primaryUseCooldown: 1.5
+  currentPrimaryUseCooldown: 0
+  secondaryUseCooldown: 0
+  currentSecondaryUseCooldown: 0
+  weaponDamage: 15
+  attackDuration: 1
+  projectiles:
+  - {fileID: 7325871426456636024, guid: ca23c91abcab07743a7143521b76753c, type: 3}
+  swingAngle: 90
+  distanceFromPlayer: 0.3

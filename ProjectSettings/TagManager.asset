@@ -11,11 +11,11 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - player
+  - collision
+  - projectile
+  - enemy
+  - droppedItem
   - 
   - 
   - 
@@ -40,4 +40,28 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: playerProjectile
+    uniqueID: 1104603085
+    locked: 0
+  - name: enemyProjectile
+    uniqueID: 2967585323
+    locked: 0
+  - name: playerMelee
+    uniqueID: 4163344999
+    locked: 0
+  - name: enemyMelee
+    uniqueID: 3778786239
+    locked: 0
+  - name: UI
+    uniqueID: 2764380617
+    locked: 0
+  - name: 
+    uniqueID: 3429335865
+    locked: 0
+  - name: 
+    uniqueID: 1637546473
+    locked: 0
+  - name: 
+    uniqueID: 1555187463
     locked: 0
