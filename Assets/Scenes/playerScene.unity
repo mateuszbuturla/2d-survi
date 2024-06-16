@@ -740,6 +740,7 @@ GameObject:
   m_Component:
   - component: {fileID: 759720347}
   - component: {fileID: 759720346}
+  - component: {fileID: 759720348}
   m_Layer: 0
   m_Name: Singleton
   m_TagString: Untagged
@@ -761,6 +762,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   players:
   - {fileID: 2099848744}
+  allItems: {fileID: 759720348}
   droppedItemPrefab: {fileID: 607740814146049949, guid: 515b68cd039308642bf4d962dbf29190, type: 3}
 --- !u!4 &759720347
 Transform:
@@ -777,6 +779,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &759720348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759720345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728793c8eb0fe7c48aa9fc6c38d1a548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allItemsList:
+  - {fileID: 1225814375383370343, guid: 9aee517b5cee75344b1f635026903dd7, type: 3}
+  - {fileID: 351180247236965010, guid: 86d687942c1add54c9d95439ed24a88b, type: 3}
 --- !u!1 &760359220
 GameObject:
   m_ObjectHideFlags: 0
@@ -2554,6 +2571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdcd84ab6d0c2384688e2787ff3a43fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemSO: {fileID: 0}
   prefab: {fileID: 0}
   id: 0
   name: Bow
@@ -2625,6 +2643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42c53118cd3922d48a82cffca40e9e60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemSO: {fileID: 0}
   prefab: {fileID: 0}
   id: 1
   name: Sword

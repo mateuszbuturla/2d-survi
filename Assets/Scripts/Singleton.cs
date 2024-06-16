@@ -7,5 +7,6 @@ public class Singleton : MonoBehaviour
     void Awake() { if (instance == null) { instance = this; } }
 
     public List<GameObject> players;
+    public AllItems allItems;
     public GameObject droppedItemPrefab;
 }
