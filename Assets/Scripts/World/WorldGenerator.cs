@@ -48,6 +48,15 @@ public class WorldGenerator : MonoBehaviour
 
         if (playerChunkPos != lastPlayerChunkPosition)
         {
+            List<Vector2Int> chunksToRemove = WorldGeneratorHelper.GetChunksToRemove(worldGenerationData, chunks, playerChunkPos);
+
+            Debug.Log(chunksToRemove.Count);
+
+            foreach (var chunkToRemove in chunksToRemove)
+            {
+                RemoveChunk(chunks[chunkToRemove]);
+            }
+
             List<Vector2Int> chunksToGenerate = WorldGeneratorHelper.GetChunksAround(playerChunkPos, worldGenerationData.renderDistance);
 
             foreach (var chunkToGenerate in chunksToGenerate)
@@ -56,6 +65,7 @@ public class WorldGenerator : MonoBehaviour
                 {
                     Chunk newChunk = GenerateChunk(chunkToGenerate);
 
+                    chunks[chunkToGenerate] = newChunk;
                     RenderChunk(newChunk);
                 }
             }
@@ -102,6 +112,21 @@ public class WorldGenerator : MonoBehaviour
             TileBase tile = GetTile(vkp.Value);
             tilemap.SetTile((Vector3Int)tilePos, tile);
         }
+    }
+
+    private void RemoveChunk(Chunk chunk)
+    {
+        Vector2Int chunkPos = chunk.pos;
+        int chunkSize = worldGenerationData.chunkSize;
+
+        for (int x = 0; x < chunkSize; x++)
+        {
+            for (int y = 0; y < chunkSize; y++)
+            {
+                tilemap.SetTile(new Vector3Int((chunkPos.x * chunkSize) + x, (chunkPos.y * chunkSize) + y, 0), null);
+            }
+        }
+        chunks.Remove(chunkPos);
     }
 
     private TileBase GetTile(Biomes biome)

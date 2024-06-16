@@ -35,4 +35,22 @@ public static class WorldGeneratorHelper
 
         return new Vector2Int(chunkPos.x * chunkSize, chunkPos.y * chunkSize) + pointPos;
     }
+
+    public static List<Vector2Int> GetChunksToRemove(WorldGenerationData worldGenerationData, Dictionary<Vector2Int, Chunk> chunks, Vector2Int newPlayerPos)
+    {
+        int renderDistance = worldGenerationData.renderDistance;
+        List<Vector2Int> chunksToRemove = new List<Vector2Int>();
+
+        foreach (var chunk in chunks.Keys)
+        {
+            int distanceX = Mathf.Abs(chunk.x - newPlayerPos.x);
+            int distanceY = Mathf.Abs(chunk.y - newPlayerPos.y);
+            if (distanceX > renderDistance || distanceY > renderDistance)
+            {
+                chunksToRemove.Add(chunk);
+            }
+        }
+
+        return chunksToRemove;
+    }
 }
