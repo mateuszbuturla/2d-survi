@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tileSize: 0.16
   chunkSize: 16
-  renderDistance: 20
+  renderDistance: 30
   worldSizeInChunk: 100
   terrainThreshold: 0.423

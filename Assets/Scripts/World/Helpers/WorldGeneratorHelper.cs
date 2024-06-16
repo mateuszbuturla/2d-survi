@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public static class WorldGeneratorHelper
 {
@@ -60,16 +61,29 @@ public static class WorldGeneratorHelper
         return new Vector2Int(worldGenerationData.chunkSize / 2, worldGenerationData.chunkSize / 2);
     }
 
-    public static Biomes FindClosestBiome(WorldGenerationData worldGenerationData, Dictionary<Vector2Int, Biomes> biomes, Vector2Int position)
+    public static Biomes FindClosestBiome(WorldGenerationData worldGenerationData, Dictionary<Vector2Int, ChunkData> chunksData, Vector2Int position)
     {
-        Vector2Int chunkCenterPoint = GetChunkCenterPoint(worldGenerationData);
         Vector2Int closestPosition = Vector2Int.zero;
         float closestDistanceSqr = Mathf.Infinity;
 
+        Vector2Int chunk = PosToChunk(worldGenerationData, position);
 
-        foreach (KeyValuePair<Vector2Int, Biomes> biome in biomes)
+        Dictionary<Vector2Int, Biomes> filtredChunks = new Dictionary<Vector2Int, Biomes>();
+
+        for (int x = -1; x <= 1; x++)
         {
-            // Vector2Int biomeCenterFullPos = ChunkTilePositionToTilemap(worldGenerationData, biome.Key, chunkCenterPoint);
+            for (int y = -1; y <= 1; y++)
+            {
+                if (chunksData.ContainsKey(chunk + new Vector2Int(x, y)))
+                {
+                    Vector2Int p = chunk + new Vector2Int(x, y);
+                    filtredChunks[chunksData[p].biomePoint] = chunksData[p].biome;
+                }
+            }
+        }
+
+        foreach (KeyValuePair<Vector2Int, Biomes> biome in filtredChunks)
+        {
             Vector2Int diff = biome.Key - position;
             float distanceSqr = diff.sqrMagnitude;
 
@@ -80,6 +94,25 @@ public static class WorldGeneratorHelper
             }
         }
 
-        return biomes[closestPosition];
+        return filtredChunks[closestPosition];
+    }
+
+    public static TileBase GetTile(List<BiomeGenerator> biomeGenerators, TileBase waterTile, Biomes biome)
+    {
+        BiomeGenerator biomeGenerator = biomeGenerators.Find(b => b.biome == biome);
+
+        if (biomeGenerator != null)
+        {
+            return biomeGenerator.baseTile;
+        }
+
+        return waterTile;
+    }
+
+    public static BiomeGenerator GetSpawnBiome(List<BiomeGenerator> biomeGenerators)
+    {
+        BiomeGenerator biomeGenerator = biomeGenerators.Find(b => b.biomeType == BiomeType.SPAWN);
+
+        return biomeGenerator;
     }
 }

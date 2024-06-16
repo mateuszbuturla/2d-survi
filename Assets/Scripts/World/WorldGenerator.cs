@@ -11,6 +11,7 @@ public class WorldGenerator : MonoBehaviour
     public Tilemap tilemap;
 
     private Dictionary<Vector2Int, Biomes> biomes;
+    private Dictionary<Vector2Int, ChunkData> chunksData;
 
     private Dictionary<Vector2Int, Chunk> chunks = new Dictionary<Vector2Int, Chunk>();
 
@@ -19,7 +20,6 @@ public class WorldGenerator : MonoBehaviour
     private int seed = 123;
 
     public TileBase waterTile;
-
 
     System.Random random;
     void Start()
@@ -36,16 +36,17 @@ public class WorldGenerator : MonoBehaviour
 
         random = new System.Random(seed);
         biomes = GetBiomesCenterPoints();
+        chunksData = GenerateChunksData();
 
-        int half = worldGenerationData.worldSizeInChunk / 2;
-        for (int i = -half; i < half; i++)
-        {
-            biomes[new Vector2Int(i * worldGenerationData.chunkSize, half * worldGenerationData.chunkSize)] = Biomes.WATER;
-            biomes[new Vector2Int(i * worldGenerationData.chunkSize, -half * worldGenerationData.chunkSize)] = Biomes.WATER;
+        // int half = worldGenerationData.worldSizeInChunk / 2;
+        // for (int i = -half; i < half; i++)
+        // {
+        //     biomes[new Vector2Int(i * worldGenerationData.chunkSize, half * worldGenerationData.chunkSize)] = Biomes.WATER;
+        //     biomes[new Vector2Int(i * worldGenerationData.chunkSize, -half * worldGenerationData.chunkSize)] = Biomes.WATER;
 
-            biomes[new Vector2Int(half * worldGenerationData.chunkSize, i * worldGenerationData.chunkSize)] = Biomes.WATER;
-            biomes[new Vector2Int(-half * worldGenerationData.chunkSize, i * worldGenerationData.chunkSize)] = Biomes.WATER;
-        }
+        //     biomes[new Vector2Int(half * worldGenerationData.chunkSize, i * worldGenerationData.chunkSize)] = Biomes.WATER;
+        //     biomes[new Vector2Int(-half * worldGenerationData.chunkSize, i * worldGenerationData.chunkSize)] = Biomes.WATER;
+        // }
 
         UpdateChunksAroundPlayer();
     }
@@ -56,11 +57,53 @@ public class WorldGenerator : MonoBehaviour
         UpdateChunksAroundPlayer();
     }
 
+    private Dictionary<Vector2Int, ChunkData> GenerateChunksData()
+    {
+        int chunkSize = worldGenerationData.chunkSize;
+        int halfSize = worldGenerationData.worldSizeInChunk / 2;
+
+        Dictionary<Vector2Int, ChunkData> newChunkData = new Dictionary<Vector2Int, ChunkData>();
+
+        for (int x = -halfSize; x < halfSize; x++)
+        {
+            for (int y = -halfSize; y < halfSize; y++)
+            {
+                Biomes closestBiome = Biomes.WATER;
+                float closestDistanceSqr = Mathf.Infinity;
+
+                foreach (KeyValuePair<Vector2Int, Biomes> biomeCenter in biomes)
+                {
+                    Vector2Int diff = biomeCenter.Key - new Vector2Int(x * chunkSize, y * chunkSize);
+                    float distanceSqr = diff.sqrMagnitude;
+
+                    if (distanceSqr < closestDistanceSqr)
+                    {
+                        closestDistanceSqr = distanceSqr;
+                        closestBiome = biomeCenter.Value;
+                    }
+                }
+                Vector2Int randomPosInChunk = new Vector2Int(random.Next(0, chunkSize), random.Next(0, chunkSize));
+                newChunkData[new Vector2Int(x, y)] = new ChunkData(closestBiome, new Vector2Int(x * chunkSize, y * chunkSize) + randomPosInChunk);
+            }
+        }
+
+        for (int i = -halfSize; i < halfSize; i++)
+        {
+            newChunkData[new Vector2Int(i * worldGenerationData.chunkSize, halfSize * worldGenerationData.chunkSize)] = new ChunkData(Biomes.WATER, new Vector2Int(0, 0));
+            newChunkData[new Vector2Int(i * worldGenerationData.chunkSize, -halfSize * worldGenerationData.chunkSize)] = new ChunkData(Biomes.WATER, new Vector2Int(0, 0));
+
+            newChunkData[new Vector2Int(halfSize * worldGenerationData.chunkSize, i * worldGenerationData.chunkSize)] = new ChunkData(Biomes.WATER, new Vector2Int(0, 0));
+            newChunkData[new Vector2Int(-halfSize * worldGenerationData.chunkSize, i * worldGenerationData.chunkSize)] = new ChunkData(Biomes.WATER, new Vector2Int(0, 0));
+        }
+
+        return newChunkData;
+    }
+
     private Dictionary<Vector2Int, Biomes> GetBiomesCenterPoints()
     {
         Dictionary<Vector2Int, Biomes> generatedPoints = new Dictionary<Vector2Int, Biomes>();
 
-        BiomeGenerator defaultBiome = GetSpawnBiome();
+        BiomeGenerator defaultBiome = WorldGeneratorHelper.GetSpawnBiome(biomeGenerators);
 
         if (defaultBiome == null)
         {
@@ -91,18 +134,10 @@ public class WorldGenerator : MonoBehaviour
             int y = (int)(distance * Mathf.Sin(angle));
 
             Vector2Int randomPoint = new Vector2Int(x, y);
-
             generatedPoints[randomPoint] = biomeGenerator.biome;
         }
 
         return generatedPoints;
-    }
-
-    private BiomeGenerator GetSpawnBiome()
-    {
-        BiomeGenerator biomeGenerator = biomeGenerators.Find(b => b.biomeType == BiomeType.SPAWN);
-
-        return biomeGenerator;
     }
 
     public void UpdateChunksAroundPlayer()
@@ -161,7 +196,7 @@ public class WorldGenerator : MonoBehaviour
 
                 if (noiseValue > worldGenerationData.terrainThreshold || (fullTilePos.x > -50 && fullTilePos.x < 50 && fullTilePos.y > -50 && fullTilePos.y < 50))
                 {
-                    biome = WorldGeneratorHelper.FindClosestBiome(worldGenerationData, biomes, fullTilePos);
+                    biome = WorldGeneratorHelper.FindClosestBiome(worldGenerationData, chunksData, fullTilePos);
                 }
 
                 chunk.tiles[tilePosInChunk] = biome;
@@ -179,7 +214,7 @@ public class WorldGenerator : MonoBehaviour
         foreach (var vkp in tiles)
         {
             Vector2Int tilePos = WorldGeneratorHelper.ChunkTilePositionToTilemap(worldGenerationData, chunkPos, vkp.Key);
-            TileBase tile = GetTile(vkp.Value);
+            TileBase tile = WorldGeneratorHelper.GetTile(biomeGenerators, waterTile, vkp.Value);
             tilemap.SetTile((Vector3Int)tilePos, tile);
         }
     }
@@ -199,15 +234,5 @@ public class WorldGenerator : MonoBehaviour
         chunks.Remove(chunkPos);
     }
 
-    private TileBase GetTile(Biomes biome)
-    {
-        BiomeGenerator biomeGenerator = biomeGenerators.Find(b => b.biome == biome);
 
-        if (biomeGenerator != null)
-        {
-            return biomeGenerator.baseTile;
-        }
-
-        return waterTile;
-    }
 }
