@@ -9,6 +9,7 @@ public class WorldGenerator : MonoBehaviour
     public List<BiomeGenerator> biomeGenerators = new List<BiomeGenerator>();
 
     public Tilemap tilemap;
+    public Tilemap tilemapDecoration;
 
     private Dictionary<Vector2Int, Biomes> biomes;
     private Dictionary<Vector2Int, ChunkData> chunksData;
@@ -188,6 +189,7 @@ public class WorldGenerator : MonoBehaviour
                 Vector2Int fullTilePos = new Vector2Int(chunkPos.x * chunkSize, chunkPos.y * chunkSize) + tilePosInChunk;
                 float noiseValue = MyNoise.OctavePerlin(fullTilePos.x, fullTilePos.y, noiseSettings);
                 TileBase tile = waterTile;
+                TileBase decorationTile = null;
 
                 if (noiseValue > worldGenerationData.terrainThreshold || (fullTilePos.x > -50 && fullTilePos.x < 50 && fullTilePos.y > -50 && fullTilePos.y < 50))
                 {
@@ -196,11 +198,14 @@ public class WorldGenerator : MonoBehaviour
 
                     if (biomeGenerator)
                     {
-                        tile = biomeGenerator.GetTile(fullTilePos, ref chunkRandom);
+                        var tileData = biomeGenerator.GetTile(fullTilePos, ref chunkRandom);
+                        tile = tileData.Item1;
+                        decorationTile = tileData.Item2;
                     }
                 }
 
                 chunk.tiles[tilePosInChunk] = tile;
+                chunk.decorationTiles[tilePosInChunk] = decorationTile;
             }
         }
 
@@ -210,12 +215,14 @@ public class WorldGenerator : MonoBehaviour
     private void RenderChunk(Chunk chunk)
     {
         Dictionary<Vector2Int, TileBase> tiles = chunk.tiles;
+        Dictionary<Vector2Int, TileBase> decorationTiles = chunk.decorationTiles;
         Vector2Int chunkPos = chunk.pos;
 
         foreach (var vkp in tiles)
         {
             Vector2Int tilePos = WorldGeneratorHelper.ChunkTilePositionToTilemap(worldGenerationData, chunkPos, vkp.Key);
             tilemap.SetTile((Vector3Int)tilePos, vkp.Value);
+            tilemapDecoration.SetTile((Vector3Int)tilePos, decorationTiles[vkp.Key]);
         }
     }
 
@@ -230,6 +237,7 @@ public class WorldGenerator : MonoBehaviour
             for (int y = 0; y < chunkSize; y++)
             {
                 tilemap.SetTile(new Vector3Int((chunkPos.x * chunkSize) + x, (chunkPos.y * chunkSize) + y, 0), null);
+                tilemapDecoration.SetTile(new Vector3Int((chunkPos.x * chunkSize) + x, (chunkPos.y * chunkSize) + y, 0), null);
             }
         }
         chunks.Remove(chunkPos);
