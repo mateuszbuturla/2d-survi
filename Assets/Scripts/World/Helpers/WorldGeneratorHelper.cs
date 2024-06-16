@@ -115,4 +115,11 @@ public static class WorldGeneratorHelper
 
         return biomeGenerator;
     }
+
+    public static BiomeGenerator GetBiomeGeneratorByBiome(List<BiomeGenerator> biomeGenerators, Biomes biome)
+    {
+        BiomeGenerator biomeGenerator = biomeGenerators.Find(b => b.biome == biome);
+
+        return biomeGenerator;
+    }
 }

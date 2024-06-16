@@ -17,7 +17,7 @@ public class WorldGenerator : MonoBehaviour
 
     public Transform player;
     public Vector2Int lastPlayerChunkPosition = new Vector2Int(int.MinValue, int.MinValue);
-    private int seed = 123;
+    private int seed = 123123;
     public TileBase waterTile;
 
     System.Random random;
@@ -63,14 +63,15 @@ public class WorldGenerator : MonoBehaviour
                     float distanceSqr = Vector2.Distance(new Vector2Int(x * chunkSize, y * chunkSize), biomeCenter.Key);
 
 
-                    if (distanceSqr < closestDistanceSqr && distanceSqr < 20 * chunkSize)
+                    if (distanceSqr < closestDistanceSqr && distanceSqr < 15 * chunkSize)
                     {
                         closestDistanceSqr = distanceSqr;
                         closestBiome = biomeCenter.Value;
                     }
                 }
                 Vector2Int randomPosInChunk = new Vector2Int(random.Next(0, chunkSize), random.Next(0, chunkSize));
-                newChunkData[new Vector2Int(x, y)] = new ChunkData(closestBiome, new Vector2Int(x * chunkSize, y * chunkSize) + randomPosInChunk);
+                int randomSeed = random.Next(0, int.MaxValue);
+                newChunkData[new Vector2Int(x, y)] = new ChunkData(closestBiome, new Vector2Int(x * chunkSize, y * chunkSize) + randomPosInChunk, randomSeed);
             }
         }
 
@@ -91,9 +92,10 @@ public class WorldGenerator : MonoBehaviour
 
         generatedPoints[new Vector2Int(0, 0)] = defaultBiome.biome;
 
-        for (int i = 0; i < biomeGenerators.Count; i++)
+        for (int i = 0; i < biomeGenerators.Count * 2; i++) // @TEMP 2, because we want to generate each biom twice
         {
-            BiomeGenerator biomeGenerator = biomeGenerators[i];
+            int index = i % biomeGenerators.Count;
+            BiomeGenerator biomeGenerator = biomeGenerators[index];
 
             if (biomeGenerator == defaultBiome)
             {
@@ -172,6 +174,10 @@ public class WorldGenerator : MonoBehaviour
     {
         int chunkSize = worldGenerationData.chunkSize;
 
+        ChunkData chunkData = chunksData[chunkPos];
+
+        System.Random chunkRandom = new System.Random(chunkData.randomSeed);
+
         Chunk chunk = new Chunk(chunkPos);
 
         for (int x = 0; x < chunkSize; x++)
@@ -181,14 +187,20 @@ public class WorldGenerator : MonoBehaviour
                 Vector2Int tilePosInChunk = new Vector2Int(x, y);
                 Vector2Int fullTilePos = new Vector2Int(chunkPos.x * chunkSize, chunkPos.y * chunkSize) + tilePosInChunk;
                 float noiseValue = MyNoise.OctavePerlin(fullTilePos.x, fullTilePos.y, noiseSettings);
-                Biomes biome = Biomes.WATER;
+                TileBase tile = waterTile;
 
                 if (noiseValue > worldGenerationData.terrainThreshold || (fullTilePos.x > -50 && fullTilePos.x < 50 && fullTilePos.y > -50 && fullTilePos.y < 50))
                 {
-                    biome = WorldGeneratorHelper.FindClosestBiome(worldGenerationData, chunksData, fullTilePos);
+                    Biomes biome = WorldGeneratorHelper.FindClosestBiome(worldGenerationData, chunksData, fullTilePos);
+                    BiomeGenerator biomeGenerator = WorldGeneratorHelper.GetBiomeGeneratorByBiome(biomeGenerators, biome);
+
+                    if (biomeGenerator)
+                    {
+                        tile = biomeGenerator.GetTile(fullTilePos, ref chunkRandom);
+                    }
                 }
 
-                chunk.tiles[tilePosInChunk] = biome;
+                chunk.tiles[tilePosInChunk] = tile;
             }
         }
 
@@ -197,16 +209,16 @@ public class WorldGenerator : MonoBehaviour
 
     private void RenderChunk(Chunk chunk)
     {
-        Dictionary<Vector2Int, Biomes> tiles = chunk.tiles;
+        Dictionary<Vector2Int, TileBase> tiles = chunk.tiles;
         Vector2Int chunkPos = chunk.pos;
 
         foreach (var vkp in tiles)
         {
             Vector2Int tilePos = WorldGeneratorHelper.ChunkTilePositionToTilemap(worldGenerationData, chunkPos, vkp.Key);
-            TileBase tile = WorldGeneratorHelper.GetTile(biomeGenerators, waterTile, vkp.Value);
-            tilemap.SetTile((Vector3Int)tilePos, tile);
+            tilemap.SetTile((Vector3Int)tilePos, vkp.Value);
         }
     }
+
 
     private void RemoveChunk(Chunk chunk)
     {
