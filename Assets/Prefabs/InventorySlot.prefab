@@ -52,11 +52,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  draggable: 1
+  hotbar: 0
+  inventoryMirror: {fileID: 0}
   item: {fileID: 0}
   itemIcon: {fileID: 7454107917060517363}
-  spriteImage: {fileID: 705826394855961295}
+  itemIconSprite: {fileID: 705826394855961295}
   transparentSprite: {fileID: 21300000, guid: 6eebee912e2752340b5e99736c57062b, type: 3}
+  itemSlotSprite: {fileID: 7834176876080185585}
+  itemSlotDefaultSprite: {fileID: 21300000, guid: 8819f87ade1485e49b5de7be82f86fa7, type: 3}
+  itemSlotSelectedSprite: {fileID: 21300000, guid: d2adec72940ef6f47999ba5389348372, type: 3}
 --- !u!114 &7834176876080185585
 MonoBehaviour:
   m_ObjectHideFlags: 0

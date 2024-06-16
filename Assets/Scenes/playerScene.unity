@@ -2495,7 +2495,7 @@ MonoBehaviour:
   bluntResistance: 0
   stabResistance: 0
   sliceResistance: 0
-  currentHeld: {fileID: 3497221769040949785}
+  currentHeld: {fileID: 0}
   playerCamera: {fileID: 45952799}
   playerPivot: {fileID: 998495461}
   playerController: {fileID: 2099848748}
