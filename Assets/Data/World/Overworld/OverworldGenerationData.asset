@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: OverworldGenerationData
   m_EditorClassIdentifier: 
   worldSize: 250
-  terrainThreshold: 0.502
+  terrainThreshold: 0.445

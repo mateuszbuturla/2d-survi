@@ -643,7 +643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 696422714931e2945a681bd0b884c5ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 2
 --- !u!4 &747517783
 Transform:
   m_ObjectHideFlags: 0
@@ -906,6 +906,60 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1248256710
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1248256712}
+  - component: {fileID: 1248256711}
+  m_Layer: 0
+  m_Name: test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1248256711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248256710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b5fd0734de828d48b4808b4d403ea0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderDistance: 4
+  chunkSize: 16
+  noiseScale: 0.1
+  tilemap: {fileID: 490758447}
+  tiles:
+  - {fileID: 11400000, guid: d8591dc12b8b3f74295afecb0f450fe0, type: 2}
+  - {fileID: 11400000, guid: 54bbff13dd81d4a43a002602bd28ac7a, type: 2}
+  - {fileID: 11400000, guid: cda6630299155ec4e87e65945b11d45b, type: 2}
+  player: {fileID: 747517783}
+  lastPlayerChunkPos: {x: -2147483648, y: -2147483648}
+--- !u!4 &1248256712
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248256710}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 25.07573, y: 16.775013, z: 0.70949334}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1317371430
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,7 +1008,7 @@ MonoBehaviour:
   noiseSettings: {fileID: 11400000, guid: 39dc71d50a99fe24c9451093621d724b, type: 2}
   temperatureNoiseSettings: {fileID: 11400000, guid: d8929d7f995bd134e94ef65032649f04, type: 2}
   humidityNoiseSettings: {fileID: 11400000, guid: 8a5eb0a5d9bc5554ab8720be44c586cd, type: 2}
-  distortionNoiseSettings: {fileID: 11400000, guid: 76105e7d353f43f4bb8e4cb5289bd869, type: 2}
+  distortionNoiseSettings: {fileID: 11400000, guid: 834ce87525627084f800c9798a8ddb15, type: 2}
   tilemap: {fileID: 490758447}
   waterTile: {fileID: 11400000, guid: d8591dc12b8b3f74295afecb0f450fe0, type: 2}
   forestTile: {fileID: 11400000, guid: cda6630299155ec4e87e65945b11d45b, type: 2}
@@ -1265,3 +1319,4 @@ SceneRoots:
   - {fileID: 747517783}
   - {fileID: 121136458}
   - {fileID: 1317371431}
+  - {fileID: 1248256712}
