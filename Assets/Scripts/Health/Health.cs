@@ -5,6 +5,11 @@ public class Health : MonoBehaviour
     public int maxHealth;
     public int currentHealth;
 
+    private void Start()
+    {
+        OnStart();
+    }
+
     public void ApplyDamage(Damage damage)
     {
         if (damage.damageType == DamageType.HEALING)
@@ -22,6 +27,12 @@ public class Health : MonoBehaviour
 
         currentHealth -= damageAmount;
 
+        if (currentHealth < 0)
+        {
+            currentHealth = 0;
+            HandleDeath();
+        }
+
         HandleHealthChange();
     }
 
@@ -38,5 +49,7 @@ public class Health : MonoBehaviour
         HandleHealthChange();
     }
 
+    public virtual void OnStart() { }
+    public virtual void HandleDeath() { }
     public virtual void HandleHealthChange() { }
 }
