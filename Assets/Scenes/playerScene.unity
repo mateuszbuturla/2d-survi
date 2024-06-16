@@ -275,6 +275,53 @@ MonoBehaviour:
   target: {fileID: 2099848746}
   smoothing: 25
   offset: {x: 0, y: 0, z: -1}
+--- !u!1 &51559398
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 51559399}
+  - component: {fileID: 51559400}
+  m_Layer: 0
+  m_Name: Mecha
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &51559399
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51559398}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1135087982}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &51559400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51559398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e726daf5a0f985e49ac127235dff28d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  biomeType: 2
+  biome: 8
+  baseTile: {fileID: 11400000, guid: c2b99c3b17fb7464c81457272c49e50e, type: 2}
 --- !u!1 &142657548
 GameObject:
   m_ObjectHideFlags: 0
@@ -982,6 +1029,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 458397935}
   m_CullTransparentMesh: 1
+--- !u!1 &579087230
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 579087231}
+  - component: {fileID: 579087232}
+  m_Layer: 0
+  m_Name: Forest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &579087231
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579087230}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1135087982}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &579087232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 579087230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e726daf5a0f985e49ac127235dff28d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  biomeType: 1
+  biome: 4
+  baseTile: {fileID: 11400000, guid: cda6630299155ec4e87e65945b11d45b, type: 2}
 --- !u!1 &665414280
 GameObject:
   m_ObjectHideFlags: 0
@@ -1050,6 +1144,100 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &746864717
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 746864718}
+  - component: {fileID: 746864719}
+  m_Layer: 0
+  m_Name: Desert
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &746864718
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746864717}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1135087982}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &746864719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746864717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e726daf5a0f985e49ac127235dff28d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  biomeType: 1
+  biome: 2
+  baseTile: {fileID: 11400000, guid: 54bbff13dd81d4a43a002602bd28ac7a, type: 2}
+--- !u!1 &756145851
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 756145852}
+  - component: {fileID: 756145853}
+  m_Layer: 0
+  m_Name: Grassland
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &756145852
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756145851}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1135087982}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &756145853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756145851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e726daf5a0f985e49ac127235dff28d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  biomeType: 0
+  biome: 1
+  baseTile: {fileID: 11400000, guid: 96ab14fbbf2ed61409fbeca0228c3a40, type: 2}
 --- !u!1 &756262286
 GameObject:
   m_ObjectHideFlags: 0
@@ -1348,6 +1536,53 @@ MonoBehaviour:
   bluntResistance: 0
   stabResistance: 0
   sliceResistance: 0
+--- !u!1 &792352830
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 792352831}
+  - component: {fileID: 792352832}
+  m_Layer: 0
+  m_Name: Wasteland
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &792352831
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792352830}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1135087982}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &792352832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 792352830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e726daf5a0f985e49ac127235dff28d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  biomeType: 2
+  biome: 9
+  baseTile: {fileID: 11400000, guid: d46759d2b76d88a42ac699e44643bbd3, type: 2}
 --- !u!1 &822533995
 GameObject:
   m_ObjectHideFlags: 0
@@ -1451,6 +1686,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 822533997}
   label: {fileID: 1327506849}
+--- !u!1 &846944202
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 846944203}
+  - component: {fileID: 846944204}
+  m_Layer: 0
+  m_Name: Corrupted
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &846944203
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846944202}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1135087982}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &846944204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846944202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e726daf5a0f985e49ac127235dff28d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  biomeType: 2
+  biome: 6
+  baseTile: {fileID: 11400000, guid: eba5aa35c9968604588055ab1bc201f8, type: 2}
 --- !u!1 &998040665
 GameObject:
   m_ObjectHideFlags: 0
@@ -1623,6 +1905,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1105048419
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1105048420}
+  - component: {fileID: 1105048421}
+  m_Layer: 0
+  m_Name: Holy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1105048420
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105048419}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1135087982}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1105048421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105048419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e726daf5a0f985e49ac127235dff28d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  biomeType: 2
+  biome: 7
+  baseTile: {fileID: 11400000, guid: 26258fa4821bafb48afe711719bca54c, type: 2}
 --- !u!1 &1135087980
 GameObject:
   m_ObjectHideFlags: 0
@@ -1654,19 +1983,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldGenerationData: {fileID: 11400000, guid: 59d17b5d9259c0d42b244ca0be0b1b5d, type: 2}
   noiseSettings: {fileID: 11400000, guid: 39dc71d50a99fe24c9451093621d724b, type: 2}
+  biomeGenerators: []
   tilemap: {fileID: 1787153484}
-  waterTile: {fileID: 11400000, guid: d8591dc12b8b3f74295afecb0f450fe0, type: 2}
-  forestTile: {fileID: 11400000, guid: cda6630299155ec4e87e65945b11d45b, type: 2}
-  grasslandTile: {fileID: 11400000, guid: 96ab14fbbf2ed61409fbeca0228c3a40, type: 2}
-  snowTile: {fileID: 11400000, guid: fca8b937e81bc3d479543241bf30cbd7, type: 2}
-  desertTile: {fileID: 11400000, guid: 54bbff13dd81d4a43a002602bd28ac7a, type: 2}
-  jungleTile: {fileID: 11400000, guid: db5ee36b203ab7d4d8818394ff97e47d, type: 2}
-  corruptedTile: {fileID: 11400000, guid: eba5aa35c9968604588055ab1bc201f8, type: 2}
-  wastelandTile: {fileID: 11400000, guid: d46759d2b76d88a42ac699e44643bbd3, type: 2}
-  holyTile: {fileID: 11400000, guid: 26258fa4821bafb48afe711719bca54c, type: 2}
-  mechaTile: {fileID: 11400000, guid: c2b99c3b17fb7464c81457272c49e50e, type: 2}
   player: {fileID: 2099848746}
   lastPlayerChunkPosition: {x: -2147483648, y: -2147483648}
+  waterTile: {fileID: 11400000, guid: d8591dc12b8b3f74295afecb0f450fe0, type: 2}
 --- !u!4 &1135087982
 Transform:
   m_ObjectHideFlags: 0
@@ -1679,7 +2000,16 @@ Transform:
   m_LocalPosition: {x: 0.27587605, y: 1.227319, z: -0.032538425}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 756145852}
+  - {fileID: 579087231}
+  - {fileID: 746864718}
+  - {fileID: 1426839699}
+  - {fileID: 1341981204}
+  - {fileID: 846944203}
+  - {fileID: 1105048420}
+  - {fileID: 51559399}
+  - {fileID: 792352831}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1218133232
@@ -2026,6 +2356,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1332074844}
   m_CullTransparentMesh: 1
+--- !u!1 &1341981203
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1341981204}
+  - component: {fileID: 1341981205}
+  m_Layer: 0
+  m_Name: Jungle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1341981204
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341981203}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1135087982}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1341981205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341981203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e726daf5a0f985e49ac127235dff28d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  biomeType: 2
+  biome: 5
+  baseTile: {fileID: 11400000, guid: db5ee36b203ab7d4d8818394ff97e47d, type: 2}
 --- !u!1 &1394422371
 GameObject:
   m_ObjectHideFlags: 0
@@ -2129,6 +2506,53 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1426839698
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1426839699}
+  - component: {fileID: 1426839700}
+  m_Layer: 0
+  m_Name: Snow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1426839699
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426839698}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1135087982}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1426839700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426839698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e726daf5a0f985e49ac127235dff28d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  biomeType: 1
+  biome: 3
+  baseTile: {fileID: 11400000, guid: fca8b937e81bc3d479543241bf30cbd7, type: 2}
 --- !u!1 &1631914968
 GameObject:
   m_ObjectHideFlags: 0
@@ -3469,5 +3893,5 @@ SceneRoots:
   - {fileID: 665414283}
   - {fileID: 759720347}
   - {fileID: 1897179747}
-  - {fileID: 1135087982}
   - {fileID: 1747791170}
+  - {fileID: 1135087982}

@@ -6,20 +6,9 @@ public class WorldGenerator : MonoBehaviour
 {
     public WorldGenerationData worldGenerationData;
     public NoiseSettings noiseSettings;
+    public List<BiomeGenerator> biomeGenerators = new List<BiomeGenerator>();
 
     public Tilemap tilemap;
-
-    public TileBase waterTile;
-    public TileBase forestTile;
-    public TileBase grasslandTile;
-    public TileBase snowTile;
-    public TileBase desertTile;
-    public TileBase jungleTile;
-
-    public TileBase corruptedTile;
-    public TileBase wastelandTile;
-    public TileBase holyTile;
-    public TileBase mechaTile;
 
     private Dictionary<Vector2Int, Biomes> biomes;
 
@@ -29,15 +18,38 @@ public class WorldGenerator : MonoBehaviour
     public Vector2Int lastPlayerChunkPosition = new Vector2Int(int.MinValue, int.MinValue);
     private int seed = 123;
 
+    public TileBase waterTile;
+
 
     System.Random random;
     void Start()
     {
+        int childCount = transform.childCount;
+        for (int i = 0; i < childCount; i++)
+        {
+            Transform child = transform.GetChild(i);
+            BiomeGenerator biomeGenerator = child.GetComponent<BiomeGenerator>();
+            biomeGenerators.Add(biomeGenerator);
+        }
+
+
+
         random = new System.Random(seed);
         biomes = GetBiomesCenterPoints();
 
+        int half = worldGenerationData.worldSizeInChunk / 2;
+        for (int i = -half; i < half; i++)
+        {
+            biomes[new Vector2Int(i * worldGenerationData.chunkSize, half * worldGenerationData.chunkSize)] = Biomes.WATER;
+            biomes[new Vector2Int(i * worldGenerationData.chunkSize, -half * worldGenerationData.chunkSize)] = Biomes.WATER;
+
+            biomes[new Vector2Int(half * worldGenerationData.chunkSize, i * worldGenerationData.chunkSize)] = Biomes.WATER;
+            biomes[new Vector2Int(-half * worldGenerationData.chunkSize, i * worldGenerationData.chunkSize)] = Biomes.WATER;
+        }
+
         UpdateChunksAroundPlayer();
     }
+
 
     void Update()
     {
@@ -48,78 +60,49 @@ public class WorldGenerator : MonoBehaviour
     {
         Dictionary<Vector2Int, Biomes> generatedPoints = new Dictionary<Vector2Int, Biomes>();
 
-        generatedPoints[new Vector2Int(0, 0)] = Biomes.GRASSLAND;
+        BiomeGenerator defaultBiome = GetSpawnBiome();
 
-        while (generatedPoints.Count < 9)
+        if (defaultBiome == null)
         {
-            float angle = (float)(360 / 4 * generatedPoints.Count);
-            int distance = 150;
+            Debug.LogError("Spawn biome couldn't be found");
+            return new Dictionary<Vector2Int, Biomes>();
+        }
 
-            if (generatedPoints.Count > 4)
+        generatedPoints[new Vector2Int(0, 0)] = defaultBiome.biome;
+
+        for (int i = 0; i < biomeGenerators.Count; i++)
+        {
+            BiomeGenerator biomeGenerator = biomeGenerators[i];
+
+            if (biomeGenerator == defaultBiome)
             {
-                distance = 300;
+                continue;
+            }
+
+            int distance = 300;
+            float angle = random.Next(0, 360);
+
+            if (biomeGenerator.biomeType == BiomeType.OUTER)
+            {
+                distance = 600;
             }
 
             int x = (int)(distance * Mathf.Cos(angle));
             int y = (int)(distance * Mathf.Sin(angle));
+
             Vector2Int randomPoint = new Vector2Int(x, y);
 
-            bool isFarEnough = true;
-
-            if (isFarEnough)
-            {
-                Biomes biome = GetBiome(generatedPoints.Count);
-                generatedPoints[randomPoint] = biome;
-            }
+            generatedPoints[randomPoint] = biomeGenerator.biome;
         }
-
-
-
-        Debug.Log(generatedPoints.Count);
 
         return generatedPoints;
     }
 
-    public Biomes GetBiome(int index)
+    private BiomeGenerator GetSpawnBiome()
     {
-        if (index == 0)
-        {
-            return Biomes.GRASSLAND;
-        }
-        if (index == 1)
-        {
-            return Biomes.FOREST;
-        }
-        if (index == 2)
-        {
-            return Biomes.JUNGLE;
-        }
-        if (index == 3)
-        {
-            return Biomes.DESERT;
-        }
-        if (index == 4)
-        {
-            return Biomes.SNOW;
-        }
-        if (index == 5)
-        {
-            return Biomes.CORRUPTED;
-        }
-        if (index == 6)
-        {
-            return Biomes.HOLY;
-        }
-        if (index == 7)
-        {
-            return Biomes.MECHA;
-        }
-        if (index == 8)
-        {
-            return Biomes.WASTELAND;
-        }
+        BiomeGenerator biomeGenerator = biomeGenerators.Find(b => b.biomeType == BiomeType.SPAWN);
 
-        return Biomes.WATER;
+        return biomeGenerator;
     }
 
     public void UpdateChunksAroundPlayer()
@@ -218,41 +201,11 @@ public class WorldGenerator : MonoBehaviour
 
     private TileBase GetTile(Biomes biome)
     {
-        if (biome == Biomes.GRASSLAND)
+        BiomeGenerator biomeGenerator = biomeGenerators.Find(b => b.biome == biome);
+
+        if (biomeGenerator != null)
         {
-            return grasslandTile;
-        }
-        if (biome == Biomes.DESERT)
-        {
-            return desertTile;
-        }
-        if (biome == Biomes.SNOW)
-        {
-            return snowTile;
-        }
-        if (biome == Biomes.FOREST)
-        {
-            return forestTile;
-        }
-        if (biome == Biomes.JUNGLE)
-        {
-            return jungleTile;
-        }
-        if (biome == Biomes.CORRUPTED)
-        {
-            return corruptedTile;
-        }
-        if (biome == Biomes.HOLY)
-        {
-            return holyTile;
-        }
-        if (biome == Biomes.WASTELAND)
-        {
-            return wastelandTile;
-        }
-        if (biome == Biomes.MECHA)
-        {
-            return mechaTile;
+            return biomeGenerator.baseTile;
         }
 
         return waterTile;
