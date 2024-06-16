@@ -5,11 +5,11 @@ public class PlayerHealth : Health
 {
     public Slider healthBar;
 
-    public override void OnStart()
+    public override void Start()
     {
+        base.Start();
         healthBar.minValue = 0;
         healthBar.maxValue = maxHealth;
-        currentHealth = maxHealth;
         UpdateHealthBar();
     }
 
