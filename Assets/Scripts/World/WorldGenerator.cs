@@ -18,7 +18,6 @@ public class WorldGenerator : MonoBehaviour
     public Transform player;
     public Vector2Int lastPlayerChunkPosition = new Vector2Int(int.MinValue, int.MinValue);
     private int seed = 123;
-
     public TileBase waterTile;
 
     System.Random random;
@@ -32,21 +31,9 @@ public class WorldGenerator : MonoBehaviour
             biomeGenerators.Add(biomeGenerator);
         }
 
-
-
         random = new System.Random(seed);
         biomes = GetBiomesCenterPoints();
         chunksData = GenerateChunksData();
-
-        // int half = worldGenerationData.worldSizeInChunk / 2;
-        // for (int i = -half; i < half; i++)
-        // {
-        //     biomes[new Vector2Int(i * worldGenerationData.chunkSize, half * worldGenerationData.chunkSize)] = Biomes.WATER;
-        //     biomes[new Vector2Int(i * worldGenerationData.chunkSize, -half * worldGenerationData.chunkSize)] = Biomes.WATER;
-
-        //     biomes[new Vector2Int(half * worldGenerationData.chunkSize, i * worldGenerationData.chunkSize)] = Biomes.WATER;
-        //     biomes[new Vector2Int(-half * worldGenerationData.chunkSize, i * worldGenerationData.chunkSize)] = Biomes.WATER;
-        // }
 
         UpdateChunksAroundPlayer();
     }
@@ -73,10 +60,10 @@ public class WorldGenerator : MonoBehaviour
 
                 foreach (KeyValuePair<Vector2Int, Biomes> biomeCenter in biomes)
                 {
-                    Vector2Int diff = biomeCenter.Key - new Vector2Int(x * chunkSize, y * chunkSize);
-                    float distanceSqr = diff.sqrMagnitude;
+                    float distanceSqr = Vector2.Distance(new Vector2Int(x * chunkSize, y * chunkSize), biomeCenter.Key);
 
-                    if (distanceSqr < closestDistanceSqr)
+
+                    if (distanceSqr < closestDistanceSqr && distanceSqr < 20 * chunkSize)
                     {
                         closestDistanceSqr = distanceSqr;
                         closestBiome = biomeCenter.Value;
@@ -85,15 +72,6 @@ public class WorldGenerator : MonoBehaviour
                 Vector2Int randomPosInChunk = new Vector2Int(random.Next(0, chunkSize), random.Next(0, chunkSize));
                 newChunkData[new Vector2Int(x, y)] = new ChunkData(closestBiome, new Vector2Int(x * chunkSize, y * chunkSize) + randomPosInChunk);
             }
-        }
-
-        for (int i = -halfSize; i < halfSize; i++)
-        {
-            newChunkData[new Vector2Int(i * worldGenerationData.chunkSize, halfSize * worldGenerationData.chunkSize)] = new ChunkData(Biomes.WATER, new Vector2Int(0, 0));
-            newChunkData[new Vector2Int(i * worldGenerationData.chunkSize, -halfSize * worldGenerationData.chunkSize)] = new ChunkData(Biomes.WATER, new Vector2Int(0, 0));
-
-            newChunkData[new Vector2Int(halfSize * worldGenerationData.chunkSize, i * worldGenerationData.chunkSize)] = new ChunkData(Biomes.WATER, new Vector2Int(0, 0));
-            newChunkData[new Vector2Int(-halfSize * worldGenerationData.chunkSize, i * worldGenerationData.chunkSize)] = new ChunkData(Biomes.WATER, new Vector2Int(0, 0));
         }
 
         return newChunkData;
@@ -135,6 +113,17 @@ public class WorldGenerator : MonoBehaviour
 
             Vector2Int randomPoint = new Vector2Int(x, y);
             generatedPoints[randomPoint] = biomeGenerator.biome;
+        }
+
+        // Add water around world
+        int half = worldGenerationData.worldSizeInChunk / 2;
+        for (int i = -half; i < half; i++)
+        {
+            generatedPoints[new Vector2Int(i * worldGenerationData.chunkSize, half * worldGenerationData.chunkSize)] = Biomes.WATER;
+            generatedPoints[new Vector2Int(i * worldGenerationData.chunkSize, -half * worldGenerationData.chunkSize)] = Biomes.WATER;
+
+            generatedPoints[new Vector2Int(half * worldGenerationData.chunkSize, i * worldGenerationData.chunkSize)] = Biomes.WATER;
+            generatedPoints[new Vector2Int(-half * worldGenerationData.chunkSize, i * worldGenerationData.chunkSize)] = Biomes.WATER;
         }
 
         return generatedPoints;
