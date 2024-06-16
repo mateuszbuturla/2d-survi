@@ -1,14 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Chunk
+public class TestChunk
 {
     public Vector2Int pos;
 
-    public Chunk(Vector2Int pos)
+    public TestChunk(Vector2Int pos)
     {
         this.pos = pos;
     }
@@ -23,8 +21,8 @@ public class TestGenerator : MonoBehaviour
     public TileBase[] tiles;
 
     public Transform player;
-    private Dictionary<Vector2Int, Chunk> chunks = new Dictionary<Vector2Int, Chunk>();
-    public Vector2Int lastPlayerChunkPos = new Vector2Int(int.MinValue, int.MinValue); // Initialize to ensure first update runs
+    private Dictionary<Vector2Int, TestChunk> chunks = new Dictionary<Vector2Int, TestChunk>();
+    public Vector2Int lastPlayerChunkPos = new Vector2Int(int.MinValue, int.MinValue);
 
     void Start()
     {
@@ -70,7 +68,7 @@ public class TestGenerator : MonoBehaviour
 
         for (int x = newPlayerPos.x - renderDistance; x <= newPlayerPos.x + renderDistance; x++)
         {
-            for (int y = newPlayerPos.y - renderDistance; y <= newPlayerPos.y + renderDistance; y++) // Corrected from newPlayerPos.x to newPlayerPos.y
+            for (int y = newPlayerPos.y - renderDistance; y <= newPlayerPos.y + renderDistance; y++)
             {
                 Vector2Int chunkPos = new Vector2Int(x, y);
                 if (!chunks.ContainsKey(chunkPos))
@@ -111,10 +109,10 @@ public class TestGenerator : MonoBehaviour
                 tilemap.SetTile(new Vector3Int((chunkPos.x * chunkSize) + x, (chunkPos.y * chunkSize) + y, 0), tile);
             }
         }
-        chunks[chunkPos] = new Chunk(chunkPos);
+        chunks[chunkPos] = new TestChunk(chunkPos);
     }
 
-    void RemoveChunk(Chunk chunk)
+    void RemoveChunk(TestChunk chunk)
     {
         Vector2Int chunkPos = chunk.pos;
         for (int x = 0; x < chunkSize; x++)
