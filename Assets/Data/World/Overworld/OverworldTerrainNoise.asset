@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noiseZoom: 0.01
   octaves: 5
-  offest: {x: 0, y: 0}
+  offest: {x: 5543, y: 63123}
   persistance: 0.7

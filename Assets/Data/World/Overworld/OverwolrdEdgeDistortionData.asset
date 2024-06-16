@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a476a912ffe9bd4c9e77bc967df429d, type: 3}
-  m_Name: OverworldTemperatureNoiseSettings
-  m_EditorClassIdentifier: 
-  noiseZoom: 0.02
-  octaves: 2
-  offest: {x: 0, y: 0}
-  persistance: 1
+  m_Script: {fileID: 0}
+  m_Name: OverwolrdEdgeDistortionData
+  m_EditorClassIdentifier: Assembly-CSharp::VoronoiDistortionData
+  baseScale: 10
+  octaveCount: 4
+  amplitude: 1
+  lacunarity: 1
+  persistence: 1
+  seed: {x: 312313, y: 12311}

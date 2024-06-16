@@ -1,16 +1,17 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public static class WorldGeneratorHelper
 {
-    public static Vector2Int GetPlayerChunkPos(WorldGenerationData worldGenerationData, Vector2Int playerCellPos)
+    public static Vector2Int PosToChunk(WorldGenerationData worldGenerationData, Vector2Int pos)
     {
         int chunkSize = worldGenerationData.chunkSize;
 
-        int playerChunkX = Mathf.FloorToInt(playerCellPos.x / (float)chunkSize);
-        int playerChunkY = Mathf.FloorToInt(playerCellPos.y / (float)chunkSize);
+        int posChunkX = Mathf.FloorToInt(pos.x / (float)chunkSize);
+        int posChunkY = Mathf.FloorToInt(pos.y / (float)chunkSize);
 
-        return new Vector2Int(playerChunkX, playerChunkY);
+        return new Vector2Int(posChunkX, posChunkY);
     }
 
     public static List<Vector2Int> GetChunksAround(Vector2Int newPlayerPos, int range)
@@ -65,10 +66,11 @@ public static class WorldGeneratorHelper
         Vector2Int closestPosition = Vector2Int.zero;
         float closestDistanceSqr = Mathf.Infinity;
 
+
         foreach (KeyValuePair<Vector2Int, Biomes> biome in biomes)
         {
-            Vector2Int biomeCenterFullPos = ChunkTilePositionToTilemap(worldGenerationData, biome.Key, chunkCenterPoint);
-            Vector2Int diff = biomeCenterFullPos - position;
+            // Vector2Int biomeCenterFullPos = ChunkTilePositionToTilemap(worldGenerationData, biome.Key, chunkCenterPoint);
+            Vector2Int diff = biome.Key - position;
             float distanceSqr = diff.sqrMagnitude;
 
             if (distanceSqr < closestDistanceSqr)

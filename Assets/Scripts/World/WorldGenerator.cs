@@ -8,6 +8,7 @@ public class WorldGenerator : MonoBehaviour
     public NoiseSettings noiseSettings;
 
     public Tilemap tilemap;
+    public Tilemap tilemap2;
 
     public TileBase waterTile;
     public TileBase forestTile;
@@ -15,6 +16,11 @@ public class WorldGenerator : MonoBehaviour
     public TileBase snowTile;
     public TileBase desertTile;
     public TileBase jungleTile;
+
+    public TileBase corruptedTile;
+    public TileBase wastelandTile;
+    public TileBase holyTile;
+    public TileBase mechaTile;
 
     private Dictionary<Vector2Int, Biomes> biomes;
 
@@ -24,9 +30,13 @@ public class WorldGenerator : MonoBehaviour
     public Vector2Int lastPlayerChunkPosition = new Vector2Int(int.MinValue, int.MinValue);
     private int seed = 123;
 
+
+    System.Random random;
     void Start()
     {
+        random = new System.Random(seed);
         biomes = GetBiomesCenterPoints();
+
         UpdateChunksAroundPlayer();
     }
 
@@ -37,28 +47,25 @@ public class WorldGenerator : MonoBehaviour
 
     private Dictionary<Vector2Int, Biomes> GetBiomesCenterPoints()
     {
-        int minDistance = 40;
         Dictionary<Vector2Int, Biomes> generatedPoints = new Dictionary<Vector2Int, Biomes>();
 
         generatedPoints[new Vector2Int(0, 0)] = Biomes.GRASSLAND;
 
-        System.Random random = new System.Random(seed);
-
-        while (generatedPoints.Count < 5)
+        while (generatedPoints.Count < 9)
         {
-            int randomX = random.Next(0, worldGenerationData.worldSizeInChunk);
-            int randomY = random.Next(0, worldGenerationData.worldSizeInChunk);
-            Vector2Int randomPoint = new Vector2Int(randomX, randomY);
+            float angle = (float)(360 / 4 * generatedPoints.Count);
+            int distance = 150;
+
+            if (generatedPoints.Count > 4)
+            {
+                distance = 300;
+            }
+
+            int x = (int)(distance * Mathf.Cos(angle));
+            int y = (int)(distance * Mathf.Sin(angle));
+            Vector2Int randomPoint = new Vector2Int(x, y);
 
             bool isFarEnough = true;
-            foreach (Vector2Int point in generatedPoints.Keys)
-            {
-                if (Vector2.Distance(randomPoint, point) < minDistance)
-                {
-                    isFarEnough = false;
-                    break;
-                }
-            }
 
             if (isFarEnough)
             {
@@ -66,6 +73,10 @@ public class WorldGenerator : MonoBehaviour
                 generatedPoints[randomPoint] = biome;
             }
         }
+
+
+
+        Debug.Log(generatedPoints.Count);
 
         return generatedPoints;
     }
@@ -92,15 +103,32 @@ public class WorldGenerator : MonoBehaviour
         {
             return Biomes.SNOW;
         }
+        if (index == 5)
+        {
+            return Biomes.CORRUPTED;
+        }
+        if (index == 6)
+        {
+            return Biomes.HOLY;
+        }
+        if (index == 7)
+        {
+            return Biomes.MECHA;
+        }
+        if (index == 8)
+        {
+            return Biomes.WASTELAND;
+        }
 
         return Biomes.WATER;
     }
 
     public void UpdateChunksAroundPlayer()
     {
+        int chunkCount = worldGenerationData.worldSizeInChunk;
         Vector3 playerPos = player.position;
         Vector2Int playerCellPos = (Vector2Int)tilemap.WorldToCell(playerPos);
-        Vector2Int playerChunkPos = WorldGeneratorHelper.GetPlayerChunkPos(worldGenerationData, playerCellPos);
+        Vector2Int playerChunkPos = WorldGeneratorHelper.PosToChunk(worldGenerationData, playerCellPos);
 
         if (playerChunkPos != lastPlayerChunkPosition)
         {
@@ -113,9 +141,15 @@ public class WorldGenerator : MonoBehaviour
 
             List<Vector2Int> chunksToGenerate = WorldGeneratorHelper.GetChunksAround(playerChunkPos, worldGenerationData.renderDistance);
 
+            int halfSize = chunkCount / 2;
+
             foreach (var chunkToGenerate in chunksToGenerate)
             {
-                if (!chunks.ContainsKey(chunkToGenerate))
+                if (chunkToGenerate.x >= -halfSize &&
+                chunkToGenerate.x <= halfSize &&
+                chunkToGenerate.y >= -halfSize &&
+                chunkToGenerate.y <= halfSize &&
+                !chunks.ContainsKey(chunkToGenerate))
                 {
                     Chunk newChunk = GenerateChunk(chunkToGenerate);
 
@@ -143,7 +177,7 @@ public class WorldGenerator : MonoBehaviour
                 float noiseValue = MyNoise.OctavePerlin(fullTilePos.x, fullTilePos.y, noiseSettings);
                 Biomes biome = Biomes.WATER;
 
-                if (noiseValue > worldGenerationData.terrainThreshold)
+                if (noiseValue > worldGenerationData.terrainThreshold || (fullTilePos.x > -50 && fullTilePos.x < 50 && fullTilePos.y > -50 && fullTilePos.y < 50))
                 {
                     biome = WorldGeneratorHelper.FindClosestBiome(worldGenerationData, biomes, fullTilePos);
                 }
@@ -204,6 +238,22 @@ public class WorldGenerator : MonoBehaviour
         if (biome == Biomes.JUNGLE)
         {
             return jungleTile;
+        }
+        if (biome == Biomes.CORRUPTED)
+        {
+            return corruptedTile;
+        }
+        if (biome == Biomes.HOLY)
+        {
+            return holyTile;
+        }
+        if (biome == Biomes.WASTELAND)
+        {
+            return wastelandTile;
+        }
+        if (biome == Biomes.MECHA)
+        {
+            return mechaTile;
         }
 
         return waterTile;

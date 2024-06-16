@@ -5,5 +5,9 @@ public enum Biomes
     DESERT,
     SNOW,
     FOREST,
-    JUNGLE
+    JUNGLE,
+    CORRUPTED,
+    HOLY,
+    MECHA,
+    WASTELAND
 }
