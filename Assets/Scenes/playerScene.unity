@@ -323,7 +323,7 @@ MonoBehaviour:
   biomeType: 2
   biome: 8
   baseTile: {fileID: 11400000, guid: c2b99c3b17fb7464c81457272c49e50e, type: 2}
-  startTileHandler: {fileID: 0}
+  startSubBiomeHandler: {fileID: 0}
   startDecorationHandler: {fileID: 0}
   startObjectHandler: {fileID: 0}
 --- !u!1 &51739804
@@ -376,7 +376,7 @@ MonoBehaviour:
   biomeType: 0
   biome: 1
   baseTile: {fileID: 11400000, guid: 96ab14fbbf2ed61409fbeca0228c3a40, type: 2}
-  startTileHandler: {fileID: 1268516132}
+  startSubBiomeHandler: {fileID: 0}
   startDecorationHandler: {fileID: 1206320400}
   startObjectHandler: {fileID: 461018488}
 --- !u!1 &142657548
@@ -1011,6 +1011,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputField: {fileID: 3925922639931194}
   developerConsoleMessagePrefab: {fileID: 3703623238657877909, guid: 9d00a2e61687bea4e9615096ac6acd63, type: 3}
+--- !u!1 &427423742
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 427423743}
+  - component: {fileID: 427423744}
+  m_Layer: 0
+  m_Name: Tree
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &427423743
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427423742}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 885035073}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &427423744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427423742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23a3439060db1dd4188e15d56a442111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Next: {fileID: 0}
+  threshold: 0.5
+  prefab: {fileID: 4390386229862251587, guid: e1525ee4d8a98a140aec1fd636496efe, type: 3}
 --- !u!1 &452284429
 GameObject:
   m_ObjectHideFlags: 0
@@ -1296,7 +1343,7 @@ MonoBehaviour:
   biomeType: 1
   biome: 4
   baseTile: {fileID: 11400000, guid: cda6630299155ec4e87e65945b11d45b, type: 2}
-  startTileHandler: {fileID: 0}
+  startSubBiomeHandler: {fileID: 0}
   startDecorationHandler: {fileID: 0}
   startObjectHandler: {fileID: 0}
 --- !u!1 &665414280
@@ -1415,7 +1462,7 @@ MonoBehaviour:
   biomeType: 1
   biome: 2
   baseTile: {fileID: 11400000, guid: 54bbff13dd81d4a43a002602bd28ac7a, type: 2}
-  startTileHandler: {fileID: 1788021261}
+  startSubBiomeHandler: {fileID: 0}
   startDecorationHandler: {fileID: 0}
   startObjectHandler: {fileID: 0}
 --- !u!1 &756262286
@@ -1763,7 +1810,7 @@ MonoBehaviour:
   biomeType: 2
   biome: 9
   baseTile: {fileID: 11400000, guid: d46759d2b76d88a42ac699e44643bbd3, type: 2}
-  startTileHandler: {fileID: 0}
+  startSubBiomeHandler: {fileID: 0}
   startDecorationHandler: {fileID: 0}
   startObjectHandler: {fileID: 0}
 --- !u!1 &822533995
@@ -1948,9 +1995,41 @@ MonoBehaviour:
   biomeType: 2
   biome: 6
   baseTile: {fileID: 11400000, guid: eba5aa35c9968604588055ab1bc201f8, type: 2}
-  startTileHandler: {fileID: 0}
+  startSubBiomeHandler: {fileID: 0}
   startDecorationHandler: {fileID: 0}
   startObjectHandler: {fileID: 0}
+--- !u!1 &885035072
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 885035073}
+  m_Layer: 0
+  m_Name: Objects
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &885035073
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885035072}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 427423743}
+  m_Father: {fileID: 996957519}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &930658540
 GameObject:
   m_ObjectHideFlags: 0
@@ -1992,6 +2071,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 996957519}
+  - component: {fileID: 996957521}
   - component: {fileID: 996957520}
   m_Layer: 0
   m_Name: IceSpikes
@@ -2012,7 +2092,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 885035073}
   m_Father: {fileID: 466922339}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &996957520
@@ -2031,6 +2112,22 @@ MonoBehaviour:
   settings: {fileID: 11400000, guid: c34d8a3765006f641bac80cf49bf05d7, type: 2}
   threshold: 0.55
   tile: {fileID: 11400000, guid: 33c8a85139af44843871210eb01db0ee, type: 2}
+--- !u!114 &996957521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 996957518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41875adb7f832ac488fa96d3e8fd7113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Next: {fileID: 0}
+  startTileHandler: {fileID: 996957520}
+  startDecorationHandler: {fileID: 0}
+  startObjectHandler: {fileID: 427423744}
 --- !u!1 &998040665
 GameObject:
   m_ObjectHideFlags: 0
@@ -2250,7 +2347,7 @@ MonoBehaviour:
   biomeType: 2
   biome: 7
   baseTile: {fileID: 11400000, guid: 26258fa4821bafb48afe711719bca54c, type: 2}
-  startTileHandler: {fileID: 0}
+  startSubBiomeHandler: {fileID: 0}
   startDecorationHandler: {fileID: 0}
   startObjectHandler: {fileID: 0}
 --- !u!1 &1135087980
@@ -2603,7 +2700,7 @@ MonoBehaviour:
   biomeType: 1
   biome: 3
   baseTile: {fileID: 11400000, guid: fca8b937e81bc3d479543241bf30cbd7, type: 2}
-  startTileHandler: {fileID: 996957520}
+  startSubBiomeHandler: {fileID: 996957521}
   startDecorationHandler: {fileID: 0}
   startObjectHandler: {fileID: 0}
 --- !u!1 &1327506847
@@ -3488,7 +3585,7 @@ MonoBehaviour:
   biomeType: 2
   biome: 5
   baseTile: {fileID: 11400000, guid: db5ee36b203ab7d4d8818394ff97e47d, type: 2}
-  startTileHandler: {fileID: 0}
+  startSubBiomeHandler: {fileID: 0}
   startDecorationHandler: {fileID: 0}
   startObjectHandler: {fileID: 0}
 --- !u!1 &1994237027
