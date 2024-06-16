@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFollow3D : MonoBehaviour
+public class CameraFollow : MonoBehaviour
 {
     public Transform target;
     public float smoothing = 5f;

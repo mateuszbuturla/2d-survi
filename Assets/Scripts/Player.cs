@@ -4,7 +4,6 @@ public class Player : Entity, IDamagable
 {
     public Holdable currentHeld;
 
-    public Camera playerCamera;
     public GameObject playerPivot;
     public PlayerController playerController;
     public Rigidbody2D playerRigidbody;
@@ -16,8 +15,6 @@ public class Player : Entity, IDamagable
 
     private void Update()
     {
-        playerCamera.transform.position = new Vector3(transform.position.x,transform.position.y,playerCamera.transform.position.z);
-
         // TEMPORARY
         currentHeld.transform.position = transform.position;
     }

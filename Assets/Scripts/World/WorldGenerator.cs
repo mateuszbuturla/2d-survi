@@ -8,7 +8,6 @@ public class WorldGenerator : MonoBehaviour
     public NoiseSettings noiseSettings;
 
     public Tilemap tilemap;
-    public Tilemap tilemap2;
 
     public TileBase waterTile;
     public TileBase forestTile;
