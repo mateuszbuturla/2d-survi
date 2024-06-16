@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bb8eef09c87c524b9a4e1470788de38, type: 3}
-  m_Name: OverworldGenerationData
+  m_Script: {fileID: 11500000, guid: 5a476a912ffe9bd4c9e77bc967df429d, type: 3}
+  m_Name: noiseSettings
   m_EditorClassIdentifier: 
-  tileSize: 0.16
-  chunkSize: 16
-  renderDistance: 3
-  worldSizeInChunk: 100
-  terrainThreshold: 0.445
+  noiseZoom: 0.07
+  octaves: 2
+  offest: {x: 1000, y: 1000}
+  persistance: 16

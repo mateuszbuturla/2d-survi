@@ -14,6 +14,9 @@ public class TestChunk
 
 public class TestGenerator : MonoBehaviour
 {
+
+    public NoiseSettings noiseSettings;
+    public NoiseSettings noiseSettings2;
     public int renderDistance = 2;
     public int chunkSize = 16;
     public float noiseScale = 0.1f;
@@ -104,8 +107,14 @@ public class TestGenerator : MonoBehaviour
         {
             for (int y = 0; y < chunkSize; y++)
             {
-                float perlinValue = Mathf.PerlinNoise(((chunkPos.x * chunkSize) + x) * noiseScale, ((chunkPos.y * chunkSize) + y) * noiseScale);
-                TileBase tile = GetTileForValue(perlinValue);
+                float perlinValue = MyNoise.OctavePerlin((chunkPos.x * chunkSize) + x, (chunkPos.y * chunkSize) + y, noiseSettings);
+                TileBase tile = tiles[0];
+
+                if (perlinValue > 0.5f)
+                {
+                    tile = tiles[1];
+                }
+
                 tilemap.SetTile(new Vector3Int((chunkPos.x * chunkSize) + x, (chunkPos.y * chunkSize) + y, 0), tile);
             }
         }
@@ -127,11 +136,9 @@ public class TestGenerator : MonoBehaviour
 
     TileBase GetTileForValue(float value)
     {
-        if (value < 0.4f)
+        if (value < 0.5f)
             return tiles[0];
-        else if (value < 0.6f)
-            return tiles[1];
         else
-            return tiles[2];
+            return tiles[1];
     }
 }

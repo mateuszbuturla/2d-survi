@@ -922,7 +922,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1248256711
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -935,14 +935,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b5fd0734de828d48b4808b4d403ea0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  noiseSettings: {fileID: 11400000, guid: 4137a98c7bc433b4ca6b786be5ffd0b4, type: 2}
+  noiseSettings2: {fileID: 11400000, guid: 911e833b2cf7b034d942b3d21fab74e4, type: 2}
   renderDistance: 4
   chunkSize: 16
-  noiseScale: 0.1
+  noiseScale: 1.3
   tilemap: {fileID: 490758447}
   tiles:
   - {fileID: 11400000, guid: d8591dc12b8b3f74295afecb0f450fe0, type: 2}
   - {fileID: 11400000, guid: 54bbff13dd81d4a43a002602bd28ac7a, type: 2}
-  - {fileID: 11400000, guid: cda6630299155ec4e87e65945b11d45b, type: 2}
   player: {fileID: 747517783}
   lastPlayerChunkPos: {x: -2147483648, y: -2147483648}
 --- !u!4 &1248256712
@@ -1042,6 +1043,8 @@ MonoBehaviour:
     temperatureMax: 1
     humidityMax: 0.4
     biome: 2
+  player: {fileID: 747517783}
+  lastPlayerChunkPosition: {x: -2147483648, y: -2147483648}
 --- !u!1 &1539466824
 GameObject:
   m_ObjectHideFlags: 0
