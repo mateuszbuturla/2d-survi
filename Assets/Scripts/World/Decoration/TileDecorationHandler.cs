@@ -4,7 +4,7 @@ using UnityEngine.Tilemaps;
 public abstract class TileDecorationHandler : MonoBehaviour
 {
     [SerializeField]
-    private TileHandler Next;
+    private TileDecorationHandler Next;
 
     public TileBase Handle(Vector2Int pos, ref System.Random random)
     {

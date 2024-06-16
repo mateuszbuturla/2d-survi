@@ -190,6 +190,7 @@ public class WorldGenerator : MonoBehaviour
                 float noiseValue = MyNoise.OctavePerlin(fullTilePos.x, fullTilePos.y, noiseSettings);
                 TileBase tile = waterTile;
                 TileBase decorationTile = null;
+                GameObject worldObject = null;
 
                 if (noiseValue > worldGenerationData.terrainThreshold || (fullTilePos.x > -50 && fullTilePos.x < 50 && fullTilePos.y > -50 && fullTilePos.y < 50))
                 {
@@ -201,11 +202,16 @@ public class WorldGenerator : MonoBehaviour
                         var tileData = biomeGenerator.GetTile(fullTilePos, ref chunkRandom);
                         tile = tileData.Item1;
                         decorationTile = tileData.Item2;
+                        worldObject = tileData.Item3;
                     }
                 }
 
                 chunk.tiles[tilePosInChunk] = tile;
                 chunk.decorationTiles[tilePosInChunk] = decorationTile;
+                if (worldObject != null)
+                {
+                    chunk.objects[tilePosInChunk] = worldObject;
+                }
             }
         }
 
@@ -216,6 +222,7 @@ public class WorldGenerator : MonoBehaviour
     {
         Dictionary<Vector2Int, TileBase> tiles = chunk.tiles;
         Dictionary<Vector2Int, TileBase> decorationTiles = chunk.decorationTiles;
+        Dictionary<Vector2Int, GameObject> objects = chunk.objects;
         Vector2Int chunkPos = chunk.pos;
 
         foreach (var vkp in tiles)
@@ -223,6 +230,10 @@ public class WorldGenerator : MonoBehaviour
             Vector2Int tilePos = WorldGeneratorHelper.ChunkTilePositionToTilemap(worldGenerationData, chunkPos, vkp.Key);
             tilemap.SetTile((Vector3Int)tilePos, vkp.Value);
             tilemapDecoration.SetTile((Vector3Int)tilePos, decorationTiles[vkp.Key]);
+            if (objects.ContainsKey(vkp.Key))
+            {
+                Instantiate(objects[vkp.Key], (Vector3Int)tilePos, Quaternion.identity);
+            }
         }
     }
 

@@ -8,18 +8,21 @@ public class BiomeGenerator : MonoBehaviour
     public TileBase baseTile;
     public TileHandler startTileHandler;
     public TileDecorationHandler startDecorationHandler;
+    public ObjectHandler startObjectHandler;
 
-    public (TileBase, TileBase) GetTile(Vector2Int pos, ref System.Random random)
+    public (TileBase, TileBase, GameObject) GetTile(Vector2Int pos, ref System.Random random)
     {
         TileBase tile = GetBaseTile(pos, ref random);
         TileBase decorationTile = null;
+        GameObject worldObject = null;
 
         if (tile == baseTile)
         {
             decorationTile = GetDecorationTile(pos, ref random);
+            worldObject = GetObject(pos, ref random);
         }
 
-        return (tile, decorationTile);
+        return (tile, decorationTile, worldObject);
     }
 
     private TileBase GetBaseTile(Vector2Int pos, ref System.Random random)
@@ -46,6 +49,18 @@ public class BiomeGenerator : MonoBehaviour
         if (startDecorationHandler)
         {
             result = startDecorationHandler.Handle(pos, ref random);
+        }
+
+        return result;
+    }
+
+    private GameObject GetObject(Vector2Int pos, ref System.Random random)
+    {
+        GameObject result = null;
+
+        if (startObjectHandler)
+        {
+            result = startObjectHandler.Handle(pos, ref random);
         }
 
         return result;
