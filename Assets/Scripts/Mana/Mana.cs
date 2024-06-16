@@ -2,35 +2,28 @@ using UnityEngine;
 
 public class Mana : MonoBehaviour
 {
+    public float maxMana;
     public float currentMana;
-    public int maxMana;
     public int pasiveManaResoreValue;
 
-    void Start()
+    public virtual void Start()
     {
+        currentMana = maxMana;
         OnStart();
     }
 
-    void Update()
+    public virtual void Update()
     {
         if (currentMana < maxMana)
         {
             RestoreMana(pasiveManaResoreValue * Time.deltaTime);
         }
-        OnUpdate();
     }
 
-    public bool ReduceMana(int amount)
+    public void ReduceMana(int amount)
     {
-        if (currentMana < amount)
-        {
-            return false;
-        }
-
         currentMana -= amount;
         HandleManaChange();
-
-        return true;
     }
 
     public void RestoreMana(float amount)
@@ -45,8 +38,11 @@ public class Mana : MonoBehaviour
         HandleManaChange();
     }
 
-    public virtual void OnStart() { }
-    public virtual void OnUpdate() { }
+    public bool CheckIfHasEnoughMana(int amount)
+    {
+        return amount <= currentMana;
+    }
 
+    public virtual void OnStart() { }
     public virtual void HandleManaChange() { }
 }

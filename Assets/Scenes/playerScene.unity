@@ -2879,6 +2879,8 @@ GameObject:
   - component: {fileID: 2099848745}
   - component: {fileID: 2099848750}
   - component: {fileID: 2099848747}
+  - component: {fileID: 2099848751}
+  - component: {fileID: 2099848752}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -2991,7 +2993,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2099848744}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2992f871ae8a66e4180c41080b4d43d0, type: 3}
   m_Name: 
@@ -3014,7 +3016,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2099848744}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4f55e6589d8872042b6f9482fbd0b2bf, type: 3}
   m_Name: 
@@ -3079,6 +3081,37 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &2099848751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099848744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13c4729b0c1dfc841a1e4eac73d66d52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentMana: 0
+  maxMana: 150
+  pasiveManaResoreValue: 2
+  manaBar: {fileID: 756262288}
+--- !u!114 &2099848752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099848744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2535354562b5df74a972166e3e914220, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
+  healthBar: {fileID: 277055302}
 --- !u!1 &3925922639931194
 GameObject:
   m_ObjectHideFlags: 0

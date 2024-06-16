@@ -5,9 +5,9 @@ public class Health : MonoBehaviour
     public int maxHealth;
     public int currentHealth;
 
-    private void Start()
+    public virtual void Start()
     {
-        OnStart();
+        currentHealth = maxHealth;
     }
 
     public void ApplyDamage(Damage damage)
@@ -48,8 +48,6 @@ public class Health : MonoBehaviour
 
         HandleHealthChange();
     }
-
-    public virtual void OnStart() { }
     public virtual void HandleDeath() { }
     public virtual void HandleHealthChange() { }
 }
