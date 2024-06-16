@@ -5,11 +5,10 @@ using UnityEngine.UI;
 
 public class PlayerMana : Mana
 {
-    public Slider manaBar;
+    public UIBar manaBar;
     public override void OnStart()
     {
-        manaBar.minValue = 0;
-        manaBar.maxValue = maxMana;
+        manaBar.SetupBar(0, maxMana, currentMana);
         UpdateManaBar();
     }
 
@@ -20,7 +19,7 @@ public class PlayerMana : Mana
 
     private void UpdateManaBar()
     {
-        manaBar.value = currentMana;
+        manaBar.UpdateValue(currentMana);
     }
 
     public override void Update()

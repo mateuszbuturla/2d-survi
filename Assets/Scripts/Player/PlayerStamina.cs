@@ -3,11 +3,10 @@ using UnityEngine.UI;
 
 public class PlayerStamina : Stamina
 {
-    public Slider staminaBar;
+    public UIBar staminaBar;
     public override void OnStart()
     {
-        staminaBar.minValue = 0;
-        staminaBar.maxValue = maxStamina;
+        staminaBar.SetupBar(0, maxStamina, currentStamina);
         UpdateStaminaBar();
     }
 
@@ -18,7 +17,7 @@ public class PlayerStamina : Stamina
 
     private void UpdateStaminaBar()
     {
-        staminaBar.value = currentStamina;
+        staminaBar.UpdateValue(currentStamina);
     }
 
     public override void Update()

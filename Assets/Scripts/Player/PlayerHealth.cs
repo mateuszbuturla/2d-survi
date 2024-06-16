@@ -3,13 +3,12 @@ using UnityEngine.UI;
 
 public class PlayerHealth : Health
 {
-    public Slider healthBar;
+    public UIBar healthBar;
 
     public override void Start()
     {
         base.Start();
-        healthBar.minValue = 0;
-        healthBar.maxValue = maxHealth;
+        healthBar.SetupBar(0, maxHealth, currentHealth);
         UpdateHealthBar();
     }
 
@@ -25,7 +24,7 @@ public class PlayerHealth : Health
 
     private void UpdateHealthBar()
     {
-        healthBar.value = currentHealth;
+        healthBar.UpdateValue(currentHealth);
     }
 
     void Update()
