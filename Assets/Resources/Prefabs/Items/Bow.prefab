@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdcd84ab6d0c2384688e2787ff3a43fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemSO: {fileID: 11400000, guid: e9e135fc07a5f704690f50dc5bdcfdd9, type: 2}
   prefab: {fileID: 1225814375383370343}
   id: 0
   name: Bow

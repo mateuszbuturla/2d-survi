@@ -75,12 +75,22 @@ public class PlayerController : MonoBehaviour
             // -- Active hotbar only when inventoryWindow inactive
             player.inventoryItemHotbar.SetActive(!player.inventoryWindow.activeSelf);
         }
+        if (Input.GetKeyDown(KeyCode.BackQuote))
+        {
+            player.developerConsole.SetActive(!player.developerConsole.activeSelf);
+            TMP_InputField inputField = player.developerConsole.GetComponent<DeveloperConsole>().inputField.GetComponent<TMP_InputField>();
+            inputField.text = "";
+            inputField.Select();
+            inputField.ActivateInputField();
+            allowMovement = !allowMovement;
+        }
 
         MovePlayer();
     }
 
     public void MovePlayer()
     {
+        if (!allowMovement) { return; }
         player.playerRigidbody.AddForce(GetPlayerAcceleration() * Time.deltaTime * movementDirection.normalized);
     }
 

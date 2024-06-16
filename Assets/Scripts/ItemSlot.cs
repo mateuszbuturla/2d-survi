@@ -9,7 +9,7 @@ public class ItemSlot : MonoBehaviour, IAcceptItem, IPointerClickHandler
     public static ItemSlot selectedItemSlot;
     public int id;
     public bool hotbar;
-    public Inventory inventory;   //optional, only needed for hotbar since it mirrors inventory
+    public Inventory inventoryMirror;   //optional, only needed for hotbar since it mirrors inventory
     public Item item;
     public GameObject itemIcon;
     public Image spriteImage;
@@ -19,7 +19,7 @@ public class ItemSlot : MonoBehaviour, IAcceptItem, IPointerClickHandler
     {
         if (hotbar)
         {
-            this.item = inventory.itemSlots[id].GetComponent<ItemSlot>().item;
+            this.item = inventoryMirror.itemSlots[id].GetComponent<ItemSlot>().item;
         }
     }
 

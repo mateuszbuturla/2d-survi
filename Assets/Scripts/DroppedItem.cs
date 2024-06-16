@@ -9,8 +9,12 @@ public class DroppedItem : MonoBehaviour, IInteractable
 
     private void Start()
     {
-        spriteRenderer.sprite = item.GetComponent<Item>().sprite;
         StartCoroutine(DespawnTimeout());
+    }
+
+    public void RefreshSprite()
+    {
+        spriteRenderer.sprite = item.GetComponent<Item>().sprite;
     }
 
     IEnumerator DespawnTimeout()

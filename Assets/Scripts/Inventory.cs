@@ -14,7 +14,7 @@ public class Inventory : MonoBehaviour
     public int rows;
     public int columns;
 
-    void Awake()
+    void Start()
     {
         itemSlots = new();
         for (int i = 0; i < slots; i++)
@@ -26,7 +26,7 @@ public class Inventory : MonoBehaviour
             if (hotbar) 
             {
                 itemSlotComponent.hotbar = true;
-                itemSlotComponent.inventory = Singleton.instance.players[0].GetComponent<Player>().inventoryItemGrid.GetComponent<Inventory>();
+                itemSlotComponent.inventoryMirror = Singleton.instance.players[0].GetComponent<Player>().inventoryItemGrid.GetComponent<Inventory>();
             }
 
             itemSlots.Add(itemSlot);

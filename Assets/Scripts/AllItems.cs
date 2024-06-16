@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AllItems : MonoBehaviour
+public static class AllItems
 {
     public static Dictionary<string, Action<GameObject>> items = new Dictionary<string, Action<GameObject>>()
     {

@@ -44,6 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42c53118cd3922d48a82cffca40e9e60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemSO: {fileID: 11400000, guid: bbc94c3e5a8a2914cbadc6714d130281, type: 2}
+  prefab: {fileID: 351180247236965010}
   id: 1
   name: Sword
   type: 0
