@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using System.Reflection;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class DeveloperConsole : MonoBehaviour
@@ -10,13 +8,29 @@ public class DeveloperConsole : MonoBehaviour
     public static DeveloperConsole instance;
     void Awake() { if (instance == null) { instance = this; } }
 
-    public GameObject inputField;
+    private bool isActive = false;
+    public GameObject developerConsoleObject;
+    public TMP_InputField inputField;
     public GameObject developerConsoleMessagePrefab;
+    public GameObject developerConsoleLogsContainer;
 
+    private void Start()
+    {
+        developerConsoleObject.SetActive(isActive);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.BackQuote))
+        {
+            isActive = !isActive;
+            developerConsoleObject.SetActive(isActive);
+        }
+    }
 
     public void ParseConsoleInput()
     {
-        string input = inputField.GetComponent<TMP_InputField>().text;
+        string input = inputField.text;
 
         Type type = typeof(DeveloperConsole);
 
@@ -25,8 +39,8 @@ public class DeveloperConsole : MonoBehaviour
             string[] inputs = input.Split(" ");
 
             MethodInfo methodInfo = type.GetMethod(inputs[0]);
-            if (methodInfo == null) { CreateConsoleMessage("Incorrect console message.");}
-            
+            if (methodInfo == null) { CreateConsoleMessage(new DeveloperConsoleLog("Command not found", DeveloperConsoleLogType.ERROR)); }
+
             ParameterInfo[] parameters = methodInfo.GetParameters();
             object classInstance = this;
 
@@ -39,24 +53,25 @@ public class DeveloperConsole : MonoBehaviour
                 object[] parametersArray = inputs[1..];
                 methodInfo.Invoke(classInstance, parametersArray);
             }
-            
+
+            inputField.text = "";
+
         }
         catch (Exception e)
         {
-            
+
         }
     }
 
     public void CreateDroppedItem(string item)
     {
+        CreateConsoleMessage(new DeveloperConsoleLog("Item created"));
         GameObject droppedItem = Instantiate(Singleton.instance.droppedItemPrefab);
         GameObject itemObject = Instantiate(AllItems.GetItem(item));
         itemObject.transform.SetParent(droppedItem.transform);
 
         droppedItem.GetComponent<DroppedItem>().item = itemObject;
         droppedItem.GetComponent<DroppedItem>().RefreshSprite();
-
-        CreateConsoleMessage("Item created.");
     }
 
     // -- Needs casts in reflection to int
@@ -72,12 +87,16 @@ public class DeveloperConsole : MonoBehaviour
     //    CreateConsoleMessage("Item created.");
     //}
 
-    private void CreateConsoleMessage(string messageText)
+    private void CreateConsoleMessage(DeveloperConsoleLog log)
     {
-        if (!this.gameObject.activeSelf) { return; }
         GameObject consoleMessage = Instantiate(developerConsoleMessagePrefab);
-        consoleMessage.GetComponent<TextMeshProUGUI>().text = messageText;
-        consoleMessage.transform.SetParent(this.gameObject.transform);
-        consoleMessage.transform.SetSiblingIndex(2);
+        consoleMessage.GetComponent<TextMeshProUGUI>().text = log.message;
+        consoleMessage.GetComponent<TextMeshProUGUI>().color = log.color;
+        consoleMessage.transform.SetParent(developerConsoleLogsContainer.transform);
+    }
+
+    public void Test()
+    {
+        CreateConsoleMessage(new DeveloperConsoleLog("Test"));
     }
 }
