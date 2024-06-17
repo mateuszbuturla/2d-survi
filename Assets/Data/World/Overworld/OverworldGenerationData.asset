@@ -16,4 +16,4 @@ MonoBehaviour:
   chunkSize: 16
   renderDistance: 4
   worldSizeInChunk: 100
-  terrainThreshold: 0.423
+  terrainThreshold: 0.389
