@@ -24,7 +24,6 @@ public class TreeHandler : ObjectHandler
 
     private int MapFloatToTileIndex(float value, float threshold, int tileCount)
     {
-
         float normalizedValue = value / threshold;
 
         int tileIndex = Mathf.FloorToInt(normalizedValue * tileCount);

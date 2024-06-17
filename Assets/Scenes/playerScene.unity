@@ -1376,15 +1376,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 461018486}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23a3439060db1dd4188e15d56a442111, type: 3}
+  m_Script: {fileID: 11500000, guid: a55146a2621bda24db40d006bf50ffd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Next: {fileID: 1891433092}
+  type: 1
+  noiseSettings: {fileID: 11400000, guid: 1d3d26f2e8181ae4aa7aa7dbeeb827bd, type: 2}
   threshold: 0.4
   prefabs:
   - {fileID: 4390386229862251587, guid: e1525ee4d8a98a140aec1fd636496efe, type: 3}
-  - {fileID: 4390386229862251587, guid: d6998f32d780b2b4da180d1a4305555a, type: 3}
-  - {fileID: 4390386229862251587, guid: 5625a3830276ed647ac0353eba00cc2b, type: 3}
 --- !u!1 &461980606
 GameObject:
   m_ObjectHideFlags: 0
