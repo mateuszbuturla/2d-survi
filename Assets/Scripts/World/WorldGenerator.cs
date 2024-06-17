@@ -6,7 +6,7 @@ public class WorldGenerator : MonoBehaviour
 {
     public WorldGenerationData worldGenerationData;
     public NoiseSettings noiseSettings;
-    public List<BiomeGenerator> biomeGenerators = new List<BiomeGenerator>();
+    private List<BiomeGenerator> biomeGenerators = new List<BiomeGenerator>();
 
     public Tilemap tilemap;
     public Tilemap tilemapDecoration;
@@ -17,7 +17,7 @@ public class WorldGenerator : MonoBehaviour
     private Dictionary<Vector2Int, Chunk> chunks = new Dictionary<Vector2Int, Chunk>();
 
     public Transform player;
-    public Vector2Int lastPlayerChunkPosition = new Vector2Int(int.MinValue, int.MinValue);
+    private Vector2Int lastPlayerChunkPosition = new Vector2Int(int.MinValue, int.MinValue);
     private int seed = 123123;
     public TileBase waterTile;
 
@@ -232,7 +232,8 @@ public class WorldGenerator : MonoBehaviour
             tilemapDecoration.SetTile((Vector3Int)tilePos, decorationTiles[vkp.Key]);
             if (objects.ContainsKey(vkp.Key))
             {
-                Instantiate(objects[vkp.Key], (Vector3Int)tilePos, Quaternion.identity);
+                GameObject newObject = Instantiate(objects[vkp.Key], (Vector3Int)tilePos, Quaternion.identity);
+                chunk.objects[vkp.Key] = newObject;
             }
         }
     }
@@ -249,6 +250,14 @@ public class WorldGenerator : MonoBehaviour
             {
                 tilemap.SetTile(new Vector3Int((chunkPos.x * chunkSize) + x, (chunkPos.y * chunkSize) + y, 0), null);
                 tilemapDecoration.SetTile(new Vector3Int((chunkPos.x * chunkSize) + x, (chunkPos.y * chunkSize) + y, 0), null);
+            }
+        }
+        foreach (var obj in chunk.objects)
+        {
+            if (obj.Value != null)
+            {
+                Destroy(obj.Value);
+                chunk.objects[obj.Key] = null;
             }
         }
         chunks.Remove(chunkPos);

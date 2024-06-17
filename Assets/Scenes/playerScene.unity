@@ -1380,9 +1380,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Next: {fileID: 1891433092}
-  type: 1
+  type: 0
   noiseSettings: {fileID: 11400000, guid: 1d3d26f2e8181ae4aa7aa7dbeeb827bd, type: 2}
-  threshold: 0.4
+  threshold: 0.5
   prefabs:
   - {fileID: 4390386229862251587, guid: e1525ee4d8a98a140aec1fd636496efe, type: 3}
 --- !u!1 &461980606
@@ -2786,11 +2786,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldGenerationData: {fileID: 11400000, guid: 59d17b5d9259c0d42b244ca0be0b1b5d, type: 2}
   noiseSettings: {fileID: 11400000, guid: 39dc71d50a99fe24c9451093621d724b, type: 2}
-  biomeGenerators: []
   tilemap: {fileID: 1787153484}
   tilemapDecoration: {fileID: 1607637158}
   player: {fileID: 2099848746}
-  lastPlayerChunkPosition: {x: -2147483648, y: -2147483648}
   waterTile: {fileID: 11400000, guid: d8591dc12b8b3f74295afecb0f450fe0, type: 2}
 --- !u!4 &1135087982
 Transform:
