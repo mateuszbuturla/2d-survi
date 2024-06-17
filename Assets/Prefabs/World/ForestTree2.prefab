@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1597567334239332258}
   - component: {fileID: 3434150088631504651}
   m_Layer: 0
-  m_Name: Tree
+  m_Name: ForestTree2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 4390386229862251587}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.9209132, y: 11.894231, z: 0}
+  m_LocalPosition: {x: -1.9209132, y: 10.79, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -72,8 +72,8 @@ Transform:
   m_GameObject: {fileID: 7236446442751523801}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
-  m_LocalScale: {x: 12, y: 12, z: 12}
+  m_LocalPosition: {x: 0, y: 3.74, z: 0}
+  m_LocalScale: {x: 6, y: 6, z: 6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1597567334239332258}
@@ -119,7 +119,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 2c3683f02a2569340be099e75512b88a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fbbc83577da343d4c87423b6bcb333d1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
