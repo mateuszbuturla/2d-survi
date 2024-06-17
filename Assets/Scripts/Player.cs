@@ -11,7 +11,6 @@ public class Player : Entity, IDamagable
     public GameObject inventoryItemGrid;
     public GameObject inventoryItemHotbar;
     public GameObject interactableText;
-    public GameObject developerConsole;
 
     private void Update()
     {
