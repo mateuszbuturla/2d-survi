@@ -868,7 +868,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 360805088}
+  - component: {fileID: 759720347}
+  - component: {fileID: 759720346}
+  - component: {fileID: 759720348}
   m_Layer: 0
   m_Name: Decorations
   m_TagString: Untagged
@@ -876,6 +878,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759720345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 895f04f6f6df9de4bb3514b3d4a69ddb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  players:
+  - {fileID: 2099848744}
+  allItems: {fileID: 759720348}
+  droppedItemPrefab: {fileID: 607740814146049949, guid: 515b68cd039308642bf4d962dbf29190, type: 3}
 --- !u!4 &360805088
 Transform:
   m_ObjectHideFlags: 0
@@ -892,6 +909,20 @@ Transform:
   - {fileID: 496427492}
   m_Father: {fileID: 1294533367}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759720345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728793c8eb0fe7c48aa9fc6c38d1a548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allItemsList:
+  - {fileID: 1225814375383370343, guid: 9aee517b5cee75344b1f635026903dd7, type: 3}
+  - {fileID: 351180247236965010, guid: 86d687942c1add54c9d95439ed24a88b, type: 3}
 --- !u!1 &389410812
 GameObject:
   m_ObjectHideFlags: 0

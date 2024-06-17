@@ -3,21 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class AllItems
+public class AllItems : MonoBehaviour
 {
-    public static Dictionary<string, Action<GameObject>> items = new Dictionary<string, Action<GameObject>>()
+    public List<GameObject> allItemsList;
+    public Dictionary<string, GameObject> items = new();
+
+    public void Start()
     {
-        { "Bow", (GameObject obj) => { obj.AddComponent<Bow>(); } },
-        { "Sword", (GameObject obj) => { obj.AddComponent<Sword>(); } }
-    };
+        foreach (GameObject item in allItemsList)
+        {
+            items.Add(item.name, item);
+        }
+    }
 
     /// <summary>
     /// Get an item to attach to a GameObject of your choice.
     /// </summary>
     /// <param name="Name">Name of the item to get.</param>
     /// <param name="gameObject">Object to attach it to.</param>
-    public static void GetItem(string itemName, ref GameObject gameObject)
+    public static GameObject GetItem(string itemName)
     {
-        items.GetValueOrDefault(itemName)(gameObject);
+        return Singleton.instance.allItems.items.GetValueOrDefault(itemName);
     }
 }

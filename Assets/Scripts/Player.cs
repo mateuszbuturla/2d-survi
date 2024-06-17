@@ -15,7 +15,6 @@ public class Player : Entity, IDamagable
 
     private void Update()
     {
-        // TEMPORARY
         currentHeld.transform.position = transform.position;
     }
 

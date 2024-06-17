@@ -43,20 +43,34 @@ public class DeveloperConsole : MonoBehaviour
         }
         catch (Exception e)
         {
-            //e.Describe();
-            print(e.StackTrace);
-            print(e.Message);
+            
         }
     }
 
     public void CreateDroppedItem(string item)
     {
         GameObject droppedItem = Instantiate(Singleton.instance.droppedItemPrefab);
-        AllItems.GetItem(item, ref droppedItem.GetComponent<DroppedItem>().item);
+        GameObject itemObject = Instantiate(AllItems.GetItem(item));
+        itemObject.transform.SetParent(droppedItem.transform);
+
+        droppedItem.GetComponent<DroppedItem>().item = itemObject;
         droppedItem.GetComponent<DroppedItem>().RefreshSprite();
 
         CreateConsoleMessage("Item created.");
     }
+
+    // -- Needs casts in reflection to int
+    //public void CreateDroppedItemAt(string item, int X, int Y)
+    //{
+    //    GameObject droppedItem = Instantiate(Singleton.instance.droppedItemPrefab);
+    //    GameObject itemObject = Instantiate(AllItems.GetItem(item));
+    //    itemObject.transform.SetParent(droppedItem.transform);
+
+    //    droppedItem.GetComponent<DroppedItem>().item = itemObject;
+    //    droppedItem.GetComponent<DroppedItem>().RefreshSprite();
+
+    //    CreateConsoleMessage("Item created.");
+    //}
 
     private void CreateConsoleMessage(string messageText)
     {

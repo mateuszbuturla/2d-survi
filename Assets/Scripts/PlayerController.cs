@@ -67,10 +67,6 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if (ItemSlot.selectedItemSlot != null) 
-            { 
-                ItemSlot.selectedItemSlot.StickyItemCleanup();
-            }
             player.inventoryWindow.SetActive(!player.inventoryWindow.activeSelf);
             // -- Active hotbar only when inventoryWindow inactive
             player.inventoryItemHotbar.SetActive(!player.inventoryWindow.activeSelf);

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -32,7 +33,12 @@ public class Inventory : MonoBehaviour
             itemSlots.Add(itemSlot);
         }
 
-        if (hotbar) return;
+        if (hotbar) 
+        {
+            ItemSlot.selectedHotbarSlot = itemSlots[0].GetComponent<ItemSlot>();
+            ItemSlot.selectedHotbarSlot.itemSlotSprite.sprite = ItemSlot.selectedHotbarSlot.itemSlotSelectedSprite;
+            return;
+        }
 
         // -- DEBUG --
         itemSlots[0].GetComponent<ItemSlot>().AcceptItem(GameObject.Find("Bow").GetComponent<Bow>(), null);
@@ -40,6 +46,14 @@ public class Inventory : MonoBehaviour
         // -- DEBUG --
 
         AutoResizeItemGrid();
+    }
+
+    void OnDisable()
+    {
+        if (!hotbar && ItemSlot.selectedItemSlot != null) 
+        { 
+            ItemSlot.selectedItemSlot.StickyItemCleanup();
+        }
     }
 
     public bool AddItem(Item item)
