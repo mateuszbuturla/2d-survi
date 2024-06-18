@@ -11,7 +11,6 @@ public class FishingController : MonoBehaviour
     public float bobberSinkTime = 2.0f;
     public float flySpeed = 2.0f;
     public AnimationCurve flyCurve;
-
     public GameObject bobber;
     public bool isFishing = false;
     public bool fishOnHook = false;
@@ -29,16 +28,19 @@ public class FishingController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F) && !isFishing)
         {
             fishingPoint = Utils.GetMousePoisionInt();
+            StopAllCoroutines();
             StartCoroutine(MoveBobber());
         }
 
         if (fishOnHook && Input.GetKeyDown(KeyCode.Space))
         {
+            StopAllCoroutines();
             CatchFish();
         }
 
         if (!fishOnHook && Input.GetKeyDown(KeyCode.Space))
         {
+            StopAllCoroutines();
             EndFishing();
         }
     }
@@ -64,6 +66,7 @@ public class FishingController : MonoBehaviour
     private IEnumerator MoveBobber()
     {
         startPoint = transform.position;
+        bobber.GetComponent<FishingBobber>().PrepareBobber(fishingPoint);
         bobber.transform.position = new Vector3(startPoint.x, startPoint.y, 1);
         bobber.SetActive(true);
         Vector3 targetPoint = new Vector3(fishingPoint.x, fishingPoint.y, startPoint.z);
@@ -91,7 +94,7 @@ public class FishingController : MonoBehaviour
     private IEnumerator BobberSink()
     {
         fishOnHook = true;
-        bobber.SetActive(false);
+        bobber.GetComponent<FishingBobber>().FishOnHook();
 
         yield return new WaitForSeconds(bobberSinkTime);
 
@@ -135,5 +138,6 @@ public class FishingController : MonoBehaviour
         isFishing = false;
         fishOnHook = false;
         bobber.SetActive(false);
+        bobber.GetComponent<FishingBobber>().ResetBobber();
     }
 }
