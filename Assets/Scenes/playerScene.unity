@@ -6200,8 +6200,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1da777b3b87b1b548b5b228aad7fe8e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fishes:
+  - {fileID: 11400000, guid: 6dd7e6c1619e49a46b1603fa5e4920e8, type: 2}
+  - {fileID: 11400000, guid: ea5ad34ff9fad294381ecdaae3884fe8, type: 2}
+  - {fileID: 11400000, guid: a3992700265d7d24fbbe7c7bb6a11b54, type: 2}
+  - {fileID: 11400000, guid: cca098f0ca65ac54fba6cf1be44b7515, type: 2}
+  - {fileID: 11400000, guid: 257fee1f078d871489ea722851859b45, type: 2}
+  - {fileID: 11400000, guid: d2cd7b6b1676e1c4fb1dbabea162e6d4, type: 2}
+  - {fileID: 11400000, guid: 6d651bfdf8fc0cd41b60113e647feb9f, type: 2}
+  - {fileID: 11400000, guid: 60c2591d3b313ff468dd4387db000e6b, type: 2}
+  - {fileID: 11400000, guid: fa3c63059d67ba74cb6aac0e902de75c, type: 2}
+  - {fileID: 11400000, guid: 182e47e41b575f5439677547da5af958, type: 2}
+  - {fileID: 11400000, guid: 90d9e358da448c34185e4b0ae5770139, type: 2}
+  - {fileID: 11400000, guid: 6a46e778896d66241a4678c43bd95682, type: 2}
+  - {fileID: 11400000, guid: d54ce6862f4c81e45a0dc5ed22a54a43, type: 2}
+  - {fileID: 11400000, guid: fdf45080ec4c4de4cb799e4c6b8d82b0, type: 2}
+  - {fileID: 11400000, guid: 061767f49190fd945b3497804b60bb76, type: 2}
   fishingPoint: {x: 0, y: 0}
-  fishingDuration: 5
+  fishingDuration: 2
   catchProbability: 0.5
   bobberSinkTime: 2
   flySpeed: 20

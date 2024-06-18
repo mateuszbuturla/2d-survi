@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FishingController : MonoBehaviour
 {
+    public Fish[] fishes;
     public Vector2Int fishingPoint;
     public float fishingDuration = 5.0f;
     public float catchProbability = 0.5f;
@@ -105,7 +106,9 @@ public class FishingController : MonoBehaviour
 
     private void CatchFish()
     {
-        Debug.Log("Fish caught!");
+        int random = Random.Range(0, fishes.Length);
+        Fish fish = fishes[random];
+        Debug.Log($"Cought: {fish.name}");
         EndFishing();
     }
 
