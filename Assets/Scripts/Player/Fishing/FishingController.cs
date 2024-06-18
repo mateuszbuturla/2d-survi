@@ -17,6 +17,7 @@ public class FishingController : MonoBehaviour
     public bool fishOnHook = false;
 
     private Vector3 startPoint;
+    public PlayerStatusInfoManager playerStatusInfoManager;
 
     void Start()
     {
@@ -46,7 +47,6 @@ public class FishingController : MonoBehaviour
     {
         bobber.SetActive(true);
         isFishing = true;
-        Debug.Log("Fishing started...");
 
         yield return new WaitForSeconds(fishingDuration);
 
@@ -90,7 +90,6 @@ public class FishingController : MonoBehaviour
 
     private IEnumerator BobberSink()
     {
-        Debug.Log("Fish on the hook!");
         fishOnHook = true;
         bobber.SetActive(false);
 
@@ -98,9 +97,25 @@ public class FishingController : MonoBehaviour
 
         if (fishOnHook)
         {
-            Debug.Log("Fish got away!");
             EndFishing();
             StartCoroutine(Fish());
+        }
+    }
+
+    private Color GetColor(FishRarity fishRarity)
+    {
+        switch (fishRarity)
+        {
+            case FishRarity.COMMON:
+                return Color.gray;
+            case FishRarity.RARE:
+                return Color.cyan;
+            case FishRarity.EPIC:
+                return Color.magenta;
+            case FishRarity.LEGENDARY:
+                return Color.yellow;
+            default:
+                return Color.gray;
         }
     }
 
@@ -108,7 +123,10 @@ public class FishingController : MonoBehaviour
     {
         int random = Random.Range(0, fishes.Length);
         Fish fish = fishes[random];
-        Debug.Log($"Cought: {fish.name}");
+        Color color = GetColor(fish.fishRarity);
+
+        playerStatusInfoManager.ShowStatusInfo(fish.name, color);
+
         EndFishing();
     }
 

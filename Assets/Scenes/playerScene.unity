@@ -5930,6 +5930,7 @@ GameObject:
   - component: {fileID: 2099848753}
   - component: {fileID: 2099848754}
   - component: {fileID: 2099848755}
+  - component: {fileID: 2099848756}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -6218,7 +6219,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 061767f49190fd945b3497804b60bb76, type: 2}
   fishingPoint: {x: 0, y: 0}
   fishingDuration: 2
-  catchProbability: 0.5
+  catchProbability: 1
   bobberSinkTime: 2
   flySpeed: 20
   flyCurve:
@@ -6248,6 +6249,22 @@ MonoBehaviour:
   bobber: {fileID: 1851176036}
   isFishing: 0
   fishOnHook: 0
+  playerStatusInfoManager: {fileID: 2099848756}
+--- !u!114 &2099848756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099848744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54151e758f02e0847b864f211868911f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPrefab: {fileID: 3708863207832344837, guid: 16352cfa80c09494b9f5009d380a31f3, type: 3}
+  canvasTransform: {fileID: 998040667}
+  offset: {x: 0, y: 25, z: 0}
 --- !u!1 &2119763891
 GameObject:
   m_ObjectHideFlags: 0
