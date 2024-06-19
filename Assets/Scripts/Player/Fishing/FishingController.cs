@@ -18,6 +18,7 @@ public class FishingController : MonoBehaviour
 
     private Vector3 startPoint;
     public PlayerStatusInfoManager playerStatusInfoManager;
+    public GameObject fishingRod;
 
     void Start()
     {
@@ -31,6 +32,7 @@ public class FishingController : MonoBehaviour
         {
             fishingPoint = Utils.GetMousePoisionInt();
             StopAllCoroutines();
+            fishingRod.GetComponent<Animator>().SetTrigger("Start");
             StartCoroutine(MoveBobber());
         }
 
