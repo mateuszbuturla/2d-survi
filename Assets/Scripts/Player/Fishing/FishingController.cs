@@ -51,6 +51,7 @@ public class FishingController : MonoBehaviour
     {
         bobber.SetActive(true);
         fishingString.SetActive(true);
+        fishingString.GetComponent<FishingString>().isBobberInWater = true;
         isFishing = true;
 
         yield return new WaitForSeconds(fishingDuration);
@@ -73,6 +74,7 @@ public class FishingController : MonoBehaviour
         bobber.transform.position = new Vector3(startPoint.x, startPoint.y, 1);
         bobber.SetActive(true);
         fishingString.SetActive(true);
+        fishingString.GetComponent<FishingString>().isBobberInWater = false;
         Vector3 targetPoint = new Vector3(fishingPoint.x, fishingPoint.y, startPoint.z);
         float distance = Vector3.Distance(startPoint, targetPoint);
         float bobberFlyDuration = distance / flySpeed;
@@ -139,6 +141,7 @@ public class FishingController : MonoBehaviour
 
     private void EndFishing()
     {
+        fishingString.GetComponent<FishingString>().isBobberInWater = false;
         fishingString.SetActive(false);
         isFishing = false;
         fishOnHook = false;
