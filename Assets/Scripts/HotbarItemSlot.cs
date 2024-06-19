@@ -9,6 +9,11 @@ public class HotbarItemSlot : ItemSlot, IPointerClickHandler
     public static ItemSlot selectedHotbarSlot;
     public Inventory inventoryMirror;
 
+    void Start()
+    {
+        if (selectedHotbarSlot == null) { selectedHotbarSlot = this; }
+    }
+
     public void Update()
     {
         this.item = inventoryMirror.itemSlots[id].GetComponent<ItemSlot>().item;

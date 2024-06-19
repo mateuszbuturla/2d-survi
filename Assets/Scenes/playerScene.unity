@@ -998,7 +998,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 201293623}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2}
+  m_LocalPosition: {x: 0, y: 0, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1010,11 +1010,11 @@ RectTransform:
   - {fileID: 859570606}
   - {fileID: 1871741278}
   - {fileID: 512773367}
-  m_Father: {fileID: 1332074845}
+  m_Father: {fileID: 998040667}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -180}
+  m_AnchoredPosition: {x: 0, y: 60}
   m_SizeDelta: {x: 540, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &201293625
@@ -2603,7 +2603,7 @@ PrefabInstance:
     - target: {fileID: 7058754442744309115, guid: 608365e36faae554990e4c9f19b4ed90, type: 3}
       propertyPath: inventoryMirror
       value: 
-      objectReference: {fileID: 201293628}
+      objectReference: {fileID: 1631914971}
     - target: {fileID: 8097749776592899767, guid: 608365e36faae554990e4c9f19b4ed90, type: 3}
       propertyPath: m_Name
       value: HotbarSlot (7)
@@ -6092,6 +6092,7 @@ RectTransform:
   - {fileID: 1830659135}
   - {fileID: 389410813}
   - {fileID: 1332074845}
+  - {fileID: 201293624}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -7599,7 +7600,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1631914969}
-  - {fileID: 201293624}
   - {fileID: 1747931328}
   - {fileID: 770624304}
   m_Father: {fileID: 998040667}

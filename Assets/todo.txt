@@ -1,0 +1,3 @@
+hotbar items trigger onclick, inventory dont
+
+dropped items text fadeout
