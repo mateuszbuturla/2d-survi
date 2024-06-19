@@ -7,10 +7,7 @@ using UnityEngine.UI;
 public class ItemSlot : MonoBehaviour, IAcceptItem, IPointerClickHandler
 {
     public static ItemSlot selectedItemSlot;
-    public static ItemSlot selectedHotbarSlot;
     public int id;
-    public bool hotbar;
-    public Inventory inventoryMirror;   //optional, only needed for hotbar since it mirrors inventory
     public Item item;
     public GameObject itemIcon;
     public Image itemIconSprite;
@@ -18,15 +15,6 @@ public class ItemSlot : MonoBehaviour, IAcceptItem, IPointerClickHandler
     public Image itemSlotSprite;
     public Sprite itemSlotDefaultSprite;
     public Sprite itemSlotSelectedSprite;
-
-    public void Update()
-    {
-        if (hotbar)
-        { 
-            this.item = inventoryMirror.itemSlots[id].GetComponent<ItemSlot>().item;
-            this.itemIconSprite.sprite = inventoryMirror.itemSlots[id].GetComponent<ItemSlot>().itemIconSprite.sprite;
-        }
-    }
 
     public Item AcceptItem(Item item, ItemSlot itemSlot)
     {
@@ -46,33 +34,23 @@ public class ItemSlot : MonoBehaviour, IAcceptItem, IPointerClickHandler
     // -- Sticky item cleanup moved to the coroutine
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (hotbar)
+        // -- Pick up item
+        if (selectedItemSlot == null)
         {
-            selectedHotbarSlot.itemSlotSprite.sprite = selectedHotbarSlot.itemSlotDefaultSprite;
-            itemSlotSprite.sprite = itemSlotSelectedSprite;
+            if (item == null) return;
 
-            selectedHotbarSlot = this;
+            selectedItemSlot = this;
+
+            // -- Hotbar has no dragging
+            StartCoroutine(StickItemIconToCursor(itemIcon));
+
+            // -- Up the sort order by one, so it renders over other items you hover over
+            itemIcon.GetComponent<Canvas>().sortingOrder++;
         }
+        // -- If clicked on another item slot, transfer items. (This method only triggers on item slots, bcs of IPointerClickHandler)
         else
         {
-            // -- Pick up item
-            if (selectedItemSlot == null)
-            {
-                if (item == null) return;
-
-                selectedItemSlot = this;
-
-                // -- Hotbar has no dragging
-                StartCoroutine(StickItemIconToCursor(itemIcon));
-
-                // -- Up the sort order by one, so it renders over other items you hover over
-                itemIcon.GetComponent<Canvas>().sortingOrder++;
-            }
-            // -- If clicked on another item slot, transfer items. (This method only triggers on item slots, bcs of IPointerClickHandler)
-            else
-            {
-                StickyItemCleanup();
-            }
+            StickyItemCleanup();
         }
     }
 
@@ -88,7 +66,10 @@ public class ItemSlot : MonoBehaviour, IAcceptItem, IPointerClickHandler
         selectedItemSlot.itemIcon.transform.localPosition = Vector3.zero;
 
         // -- Lower the sort order by one, since you upped it on click (this time on the selectedItemSlot, since "perspective" changed)
-        if (!hotbar) selectedItemSlot.itemIcon.GetComponent<Canvas>().sortingOrder--;
+        selectedItemSlot.itemIcon.GetComponent<Canvas>().sortingOrder--;
+
+        // -- Reset selected sprite to default
+        selectedItemSlot.itemSlotSprite.sprite = selectedItemSlot.itemSlotDefaultSprite;
 
         selectedItemSlot = null;
     }
@@ -99,6 +80,7 @@ public class ItemSlot : MonoBehaviour, IAcceptItem, IPointerClickHandler
 
         while (selectedItemSlot != null)
         {
+            selectedItemSlot.itemSlotSprite.sprite = selectedItemSlot.itemSlotSelectedSprite;
             itemIcon.transform.position = Input.mousePosition;
             yield return null;
         }

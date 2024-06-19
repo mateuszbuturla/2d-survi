@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     {
         movementDirection = Vector2.zero;
 
-        if (Input.GetKey(KeyCode.W))
+        if(Input.GetKey(KeyCode.W))
         {
             movementDirection.y += 1;
         }
@@ -71,6 +71,11 @@ public class PlayerController : MonoBehaviour
             // -- Active hotbar only when inventoryWindow inactive
             player.inventoryItemHotbar.SetActive(!player.inventoryWindow.activeSelf);
         }
+        if (Input.GetKeyDown(KeyCode.BackQuote))
+        {
+            DeveloperConsole.instance.gameObject.SetActive(!DeveloperConsole.instance.gameObject.activeSelf);
+            allowMovement = !allowMovement;
+        }
 
         MovePlayer();
     }
@@ -83,7 +88,7 @@ public class PlayerController : MonoBehaviour
 
     public float GetPlayerAcceleration()
     {
-        if (Mathf.Abs(player.playerRigidbody.velocity.x) < startingAccelerationBonusThreshold &&
+        if (Mathf.Abs(player.playerRigidbody.velocity.x) < startingAccelerationBonusThreshold && 
             Mathf.Abs(player.playerRigidbody.velocity.y) < startingAccelerationBonusThreshold)
         {
             return player.acceleration * startingAccelerationBonusMultiplier;
@@ -96,22 +101,22 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator DetectInteractables()
     {
-        while (true)
-        {
+        while (true) 
+        { 
             Collider2D collider = Physics2D.OverlapCircle(detectionPoint.position, detectionRadius, detectionLayer);
 
             if (collider != null && collider.gameObject.GetComponent<IInteractable>() != null)
             {
                 detectedObject = collider.gameObject;
-                player.interactableText.GetComponent<TextMeshProUGUI>().text = collider.gameObject.GetComponent<IInteractable>().InteractionText();
+                IInteractable interactable = collider.gameObject.GetComponent<IInteractable>();
+                interactable.ShowInteractionText();
             }
             else
             {
                 detectedObject = null;
-                player.interactableText.GetComponent<TextMeshProUGUI>().text = "";
             }
 
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(.25f);
         }
     }
 }

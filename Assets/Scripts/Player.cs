@@ -2,34 +2,30 @@ using UnityEngine;
 
 public class Player : Entity, IDamagable
 {
-    public Holdable currentHeld;
-
     public GameObject playerPivot;
     public PlayerController playerController;
     public Rigidbody2D playerRigidbody;
     public GameObject inventoryWindow;
-    public GameObject inventoryItemGrid;
+    public Inventory playerInventory;
+    public Inventory playerArmor;
+    public Inventory playerTrinkets;
     public GameObject inventoryItemHotbar;
-    public GameObject interactableText;
-
-    private void Update()
-    {
-        currentHeld.transform.position = transform.position;
-    }
 
     public void UseHeldPrimary()
     {
-        if (currentHeld is Holdable)
+        if (HotbarItemSlot.selectedHotbarSlot == null) { return; }
+        if (HotbarItemSlot.selectedHotbarSlot.item is Holdable)
         {
-            currentHeld.UsePrimary(this);
+            (HotbarItemSlot.selectedHotbarSlot.item as Holdable).UsePrimary(this);
         }
     }
 
     public void UseHeldSecondary()
     {
-        if (currentHeld is Holdable)
+        if (HotbarItemSlot.selectedHotbarSlot == null) { return; }
+        if (HotbarItemSlot.selectedHotbarSlot.item is Holdable)
         {
-            currentHeld.UseSecondary(this);
+            (HotbarItemSlot.selectedHotbarSlot.item as Holdable).UseSecondary(this);
         }
     }
 

@@ -19,7 +19,7 @@ public abstract class Holdable : Item
 
     public void UsePrimary(Player player)
     {
-        if (player.currentHeld == this && currentPrimaryUseCooldown <= 0 && CanUsePrimary(player)) 
+        if (currentPrimaryUseCooldown <= 0 && CanUsePrimary(player)) 
         {
             PrimaryUseEffect(player);
         }
@@ -27,7 +27,7 @@ public abstract class Holdable : Item
 
     public void UseSecondary(Player player)
     {
-        if (player.currentHeld == this && currentSecondaryUseCooldown <= 0 && CanUseSecondary(player)) 
+        if (currentSecondaryUseCooldown <= 0 && CanUseSecondary(player)) 
         {
             SecondaryUseEffect(player);
         }
@@ -63,6 +63,5 @@ public abstract class Holdable : Item
         {
             currentSecondaryUseCooldown -= Time.deltaTime;
         }
-
     }
 }

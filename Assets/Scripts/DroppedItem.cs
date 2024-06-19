@@ -1,11 +1,14 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class DroppedItem : MonoBehaviour, IInteractable
 {
     public GameObject item;
     public static int despawnTimeout = 300;
+    public static float textFadeoutTime = 0.5f; //unused for now
     public SpriteRenderer spriteRenderer;
+    public TextMeshPro interactableText;
 
     private void Start()
     {
@@ -23,22 +26,32 @@ public class DroppedItem : MonoBehaviour, IInteractable
         Destroy(this.gameObject);
     }
 
-    public string InteractionText()
+    IEnumerator AlphaDecay()
     {
-        return $"Pick up {item.name} [{item.GetComponent<Item>().amount}] ('E')";
+        interactableText.color = new Color(interactableText.color.r,interactableText.color.g,interactableText.color.b,1);
+        if (Singleton.instance.players[0].GetComponent<PlayerController>().detectedObject == this.gameObject) { yield break; }
+        while (interactableText.color.a > 0)
+        {
+            interactableText.color = new Color(
+                interactableText.color.r, 
+                interactableText.color.g, 
+                interactableText.color.b, 
+                interactableText.color.a - 0.01f);
+            yield return 0;
+        }
+    }
+
+    public void ShowInteractionText()
+    {
+        StartCoroutine(AlphaDecay());
+        interactableText.text = $"Pick up {item.name} [{item.GetComponent<Item>().amount}] ('E')";
     }
 
     public void Interact(Player player)
     {
-        if (player.inventoryItemGrid.GetComponent<Inventory>().AddItem(item.GetComponent<Item>()))
+        if (player.playerInventory.AddItem(item.GetComponent<Item>()))
         {
             Destroy(this.gameObject);
         }
     }
-
-    // -- Idk how to do this yet, leave this for later when it becomes a problem
-    //static void GroupDropped()
-    //{
-
-    //}
 }

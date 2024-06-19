@@ -1,7 +1,8 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 
 public interface IInteractable
 {
-    public string InteractionText();
+    public void ShowInteractionText();
     public void Interact(Player player);
 }
