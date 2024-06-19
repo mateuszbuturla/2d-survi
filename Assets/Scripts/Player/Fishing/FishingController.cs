@@ -12,6 +12,7 @@ public class FishingController : MonoBehaviour
     public float flySpeed = 2.0f;
     public AnimationCurve flyCurve;
     public GameObject bobber;
+    public GameObject fishingString;
     public bool isFishing = false;
     public bool fishOnHook = false;
 
@@ -21,6 +22,7 @@ public class FishingController : MonoBehaviour
     void Start()
     {
         bobber.SetActive(false);
+        fishingString.SetActive(false);
     }
 
     void Update()
@@ -48,6 +50,7 @@ public class FishingController : MonoBehaviour
     private IEnumerator Fish()
     {
         bobber.SetActive(true);
+        fishingString.SetActive(true);
         isFishing = true;
 
         yield return new WaitForSeconds(fishingDuration);
@@ -69,6 +72,7 @@ public class FishingController : MonoBehaviour
         bobber.GetComponent<FishingBobber>().PrepareBobber(fishingPoint);
         bobber.transform.position = new Vector3(startPoint.x, startPoint.y, 1);
         bobber.SetActive(true);
+        fishingString.SetActive(true);
         Vector3 targetPoint = new Vector3(fishingPoint.x, fishingPoint.y, startPoint.z);
         float distance = Vector3.Distance(startPoint, targetPoint);
         float bobberFlyDuration = distance / flySpeed;
@@ -135,6 +139,7 @@ public class FishingController : MonoBehaviour
 
     private void EndFishing()
     {
+        fishingString.SetActive(false);
         isFishing = false;
         fishOnHook = false;
         bobber.SetActive(false);
