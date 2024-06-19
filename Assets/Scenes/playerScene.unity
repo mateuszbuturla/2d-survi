@@ -4010,6 +4010,54 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b0456ec5a17d47e40974f370e3d7c84c, type: 2}
   - {fileID: 11400000, guid: 6c809dd00b58fab4796c79b6cfa7c359, type: 2}
   threshold: 10
+--- !u!1 &1215616539
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1215616541}
+  - component: {fileID: 1215616540}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1215616540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215616539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7055e93a119a4154bb813bc3a43d1382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultCursor: {fileID: 2800000, guid: 4dd233d974ba0a741a3224550fd1cf3f, type: 3}
+  fishingCursor: {fileID: 2800000, guid: 09edd1d1d28b4174a9fdf4116a32db81, type: 3}
+  tilemap: {fileID: 1787153484}
+  waterTile: {fileID: 11400000, guid: d8591dc12b8b3f74295afecb0f450fe0, type: 2}
+--- !u!4 &1215616541
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215616539}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 80.226166, y: 121.81058, z: -0.023953576}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1218133232
 GameObject:
   m_ObjectHideFlags: 0
@@ -6796,3 +6844,4 @@ SceneRoots:
   - {fileID: 238553842}
   - {fileID: 1851176038}
   - {fileID: 462137809}
+  - {fileID: 1215616541}
