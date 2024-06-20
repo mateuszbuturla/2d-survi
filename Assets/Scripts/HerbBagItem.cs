@@ -12,7 +12,7 @@ public class HerbBagItem : Openable
         for (int i = 0; i < itemRolls; i++)
         {
             // can replace index '0' with a weighted random, or use a weighted random for item rolls with multilpe rarity pools
-            targetInventory.AddItem(itemPool[0]);
+            targetInventory.AddItem(Instantiate(itemPool[0]));
         }
 
         // -- not on my branch yet, but uncomment on yours
