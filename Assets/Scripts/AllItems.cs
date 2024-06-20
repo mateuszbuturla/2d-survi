@@ -12,7 +12,7 @@ public class AllItems : MonoBehaviour
     {
         foreach (GameObject item in allItemsList)
         {
-            items.Add(item.name, item);
+            items.Add(item.GetComponent<Item>().name, item);
         }
     }
 
@@ -23,7 +23,7 @@ public class AllItems : MonoBehaviour
     /// <param name="gameObject">Object to attach it to.</param>
     public static GameObject GetItem(string itemName)
     {
-        return Singleton.instance.allItems.items.GetValueOrDefault(itemName);
+        return Instantiate(Singleton.instance.allItems.items.GetValueOrDefault(itemName));
     }
 
     public static Item GetItemComponent(string itemName)

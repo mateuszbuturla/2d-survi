@@ -21,7 +21,6 @@ public class Inventory : MonoBehaviour
 
     public bool AddItem(Item item)
     {
-        Debug.Log(item.id);
         foreach (GameObject slot in itemSlots)
         {
             ItemSlot itemSlot = slot.GetComponent<ItemSlot>();
