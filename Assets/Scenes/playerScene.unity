@@ -11033,6 +11033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1da777b3b87b1b548b5b228aad7fe8e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  crate: {fileID: 5501643011694006989, guid: fb4c4551dfecfe8439cb8034e2453277, type: 3}
   fishes:
   - {fileID: 11400000, guid: 6dd7e6c1619e49a46b1603fa5e4920e8, type: 2}
   - {fileID: 11400000, guid: ea5ad34ff9fad294381ecdaae3884fe8, type: 2}
@@ -11051,8 +11052,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 061767f49190fd945b3497804b60bb76, type: 2}
   - {fileID: 11400000, guid: 244438e409c27854d8fab8d1f737c326, type: 2}
   fishingPoint: {x: 0, y: 0}
-  fishingDuration: 3
-  catchProbability: 0.5
+  fishingDuration: 1
+  catchProbability: 1
   bobberSinkTime: 2
   flySpeed: 30
   fishTravelSpeed: 30
