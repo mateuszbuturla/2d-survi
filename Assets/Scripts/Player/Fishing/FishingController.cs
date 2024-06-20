@@ -1,9 +1,10 @@
 using System.Collections;
-using System.Linq;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class FishingController : MonoBehaviour
 {
+    [Header("Fishing Settings")]
     public Fish[] fishes;
     public Vector2Int fishingPoint;
     public float fishingDuration = 5.0f;
@@ -12,52 +13,76 @@ public class FishingController : MonoBehaviour
     public float flySpeed = 2.0f;
     public float fishTravelSpeed = 2.0f;
     public AnimationCurve flyCurve;
+
+    [Header("Fishing Objects")]
     public GameObject bobber;
     public GameObject fishingString;
-    public bool isFishing = false;
-    public bool fishOnHook = false;
+    public GameObject fishingRod;
+    public GameObject fishingReward;
+    public Tilemap tilemap;
+    public TileBase waterTile;
+
+    [Header("Player Settings")]
+    public PlayerStatusInfoManager playerStatusInfoManager;
+    public Transform player;
 
     private Vector3 startPoint;
-    public PlayerStatusInfoManager playerStatusInfoManager;
-    public GameObject fishingRod;
-    public Transform player;
-    public GameObject fishSprite;
+    private bool isFishing = false;
+    private bool fishOnHook = false;
 
     void Start()
     {
-        bobber.SetActive(false);
-        fishingString.SetActive(false);
+        SetFishingActive(false);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && !isFishing)
+        if (Input.GetMouseButtonDown(0))
         {
-            fishingPoint = Utils.GetMousePoisionInt();
-            StopAllCoroutines();
-            fishingRod.GetComponent<Animator>().SetTrigger("Start");
-            StartCoroutine(MoveBobber());
+            HandleFishingInput();
         }
+    }
 
-        if (fishOnHook && Input.GetKeyDown(KeyCode.Space))
+    private void StartFishing()
+    {
+        fishingPoint = Utils.GetMousePoisionInt();
+        fishingRod.GetComponent<Animator>().SetTrigger("Start");
+        StopAllCoroutines();
+        StartCoroutine(MoveBobber());
+    }
+
+    private void HandleFishingInput()
+    {
+        if (!isFishing)
         {
-            StopAllCoroutines();
-            StartCoroutine(MoveFishToPlayer());
+            Vector2Int mousePos = Utils.GetMousePoisionInt();
+
+            TileBase tile = tilemap.GetTile((Vector3Int)mousePos);
+
+            if (tile == waterTile)
+            {
+                StartFishing();
+            }
         }
-
-        if (!fishOnHook && Input.GetKeyDown(KeyCode.Space))
+        else
         {
             StopAllCoroutines();
-            EndFishing();
+
+            if (fishOnHook)
+            {
+                StartCoroutine(MoveFishToPlayer());
+            }
+            else
+            {
+                EndFishing();
+            }
         }
     }
 
     private IEnumerator Fish()
     {
-        bobber.SetActive(true);
-        fishingString.SetActive(true);
         fishingString.GetComponent<FishingString>().isBobberInWater = true;
-        isFishing = true;
+        SetFishingActive(true);
 
         yield return new WaitForSeconds(fishingDuration);
 
@@ -67,23 +92,32 @@ public class FishingController : MonoBehaviour
         }
         else
         {
-            EndFishing();
-            StartCoroutine(Fish());
+            RetryFishing();
         }
     }
 
     private IEnumerator MoveBobber()
     {
+        PrepareBobberForFlight();
+        yield return FlyBobberToTarget();
+
+        StartCoroutine(Fish());
+    }
+
+    private void PrepareBobberForFlight()
+    {
         startPoint = transform.position;
         bobber.GetComponent<FishingBobber>().PrepareBobber(fishingPoint);
         bobber.transform.position = new Vector3(startPoint.x, startPoint.y, 1);
-        bobber.SetActive(true);
-        fishingString.SetActive(true);
+        SetFishingActive(true);
         fishingString.GetComponent<FishingString>().isBobberInWater = false;
+    }
+
+    private IEnumerator FlyBobberToTarget()
+    {
         Vector3 targetPoint = new Vector3(fishingPoint.x, fishingPoint.y, startPoint.z);
         float distance = Vector3.Distance(startPoint, targetPoint);
         float bobberFlyDuration = distance / flySpeed;
-
         float elapsedTime = 0f;
 
         while (elapsedTime < bobberFlyDuration)
@@ -97,9 +131,7 @@ public class FishingController : MonoBehaviour
             yield return null;
         }
 
-        bobber.transform.position = new Vector3(fishingPoint.x, fishingPoint.y, startPoint.z);
-
-        StartCoroutine(Fish());
+        bobber.transform.position = targetPoint;
     }
 
     private IEnumerator BobberSink()
@@ -111,24 +143,22 @@ public class FishingController : MonoBehaviour
 
         if (fishOnHook)
         {
-            EndFishing();
-            StartCoroutine(Fish());
+            RetryFishing();
         }
     }
 
     private IEnumerator MoveFishToPlayer()
     {
-        int random = Random.Range(0, fishes.Length);
-        Fish fish = fishes[random];
+        Fish fish = GetRandomFish();
+        PrepareFishSprite(fish);
 
+        fishingReward.SetActive(true);
+        fishingReward.GetComponent<FishingReward>().ShowReward(fish.sprite);
         fishingString.GetComponent<FishingString>().isBobberInWater = false;
-        fishSprite.SetActive(true);
-        fishSprite.GetComponent<SpriteRenderer>().sprite = fish.sprite;
         Vector3 bobberPosition = bobber.transform.position;
         Vector3 playerPosition = player.position;
         float distance = Vector3.Distance(bobberPosition, playerPosition);
         float fishTravelDuration = distance / fishTravelSpeed;
-
         float elapsedTime = 0f;
 
         while (elapsedTime < fishTravelDuration)
@@ -137,7 +167,7 @@ public class FishingController : MonoBehaviour
             float t = elapsedTime / fishTravelDuration;
 
             bobber.transform.position = Vector3.Lerp(bobberPosition, playerPosition, t);
-            fishSprite.transform.position = Vector3.Lerp(bobberPosition, playerPosition, t);
+            fishingReward.transform.position = Vector3.Lerp(bobberPosition, playerPosition, t);
 
             yield return null;
         }
@@ -145,40 +175,56 @@ public class FishingController : MonoBehaviour
         CatchFish(fish);
     }
 
-    private Color GetColor(FishRarity fishRarity)
+    private Fish GetRandomFish()
     {
-        switch (fishRarity)
-        {
-            case FishRarity.COMMON:
-                return Color.gray;
-            case FishRarity.RARE:
-                return Color.cyan;
-            case FishRarity.EPIC:
-                return Color.magenta;
-            case FishRarity.LEGENDARY:
-                return Color.yellow;
-            default:
-                return Color.gray;
-        }
+        int randomIndex = Random.Range(0, fishes.Length);
+        return fishes[randomIndex];
+    }
+
+    private void PrepareFishSprite(Fish fish)
+    {
+        fishingString.GetComponent<FishingString>().isBobberInWater = false;
+        fishingReward.SetActive(true);
+        fishingReward.GetComponent<SpriteRenderer>().sprite = fish.sprite;
     }
 
     private void CatchFish(Fish fish)
     {
         Color color = GetColor(fish.fishRarity);
-
         playerStatusInfoManager.ShowStatusInfo(fish.name, color);
-
         EndFishing();
+    }
+
+    private Color GetColor(FishRarity fishRarity)
+    {
+        switch (fishRarity)
+        {
+            case FishRarity.COMMON: return Color.gray;
+            case FishRarity.RARE: return Color.cyan;
+            case FishRarity.EPIC: return Color.magenta;
+            case FishRarity.LEGENDARY: return Color.yellow;
+            default: return Color.gray;
+        }
+    }
+
+    private void RetryFishing()
+    {
+        EndFishing();
+        StartCoroutine(Fish());
     }
 
     private void EndFishing()
     {
-        fishSprite.SetActive(false);
-        fishingString.GetComponent<FishingString>().isBobberInWater = false;
-        fishingString.SetActive(false);
-        isFishing = false;
+        fishingReward.SetActive(false);
+        SetFishingActive(false);
         fishOnHook = false;
-        bobber.SetActive(false);
         bobber.GetComponent<FishingBobber>().ResetBobber();
+    }
+
+    private void SetFishingActive(bool isActive)
+    {
+        bobber.SetActive(isActive);
+        fishingString.SetActive(isActive);
+        isFishing = isActive;
     }
 }

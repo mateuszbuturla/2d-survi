@@ -4817,8 +4817,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1556700885}
   - component: {fileID: 1556700884}
+  - component: {fileID: 1556700886}
   m_Layer: 0
-  m_Name: Fish
+  m_Name: FishingReward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4891,6 +4892,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1556700886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556700883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4170fbb9aa89da409ea852850c3707d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1566095377
 GameObject:
   m_ObjectHideFlags: 0
@@ -6732,12 +6745,12 @@ MonoBehaviour:
     m_RotationOrder: 4
   bobber: {fileID: 1851176036}
   fishingString: {fileID: 462137806}
-  isFishing: 0
-  fishOnHook: 0
-  playerStatusInfoManager: {fileID: 2099848756}
   fishingRod: {fileID: 104549218}
+  fishingReward: {fileID: 1556700883}
+  tilemap: {fileID: 1787153484}
+  waterTile: {fileID: 11400000, guid: d8591dc12b8b3f74295afecb0f450fe0, type: 2}
+  playerStatusInfoManager: {fileID: 2099848756}
   player: {fileID: 212003690}
-  fishSprite: {fileID: 1556700883}
 --- !u!114 &2099848756
 MonoBehaviour:
   m_ObjectHideFlags: 0

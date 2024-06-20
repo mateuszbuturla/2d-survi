@@ -56,4 +56,11 @@ public class FishingString : MonoBehaviour
             lineRenderer.SetPosition(i, point);
         }
     }
+
+    public void SetIsBobberInWater(bool val)
+    {
+        isBobberInWater = val;
+    }
 }
+
+
