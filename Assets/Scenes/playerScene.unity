@@ -1365,7 +1365,7 @@ MonoBehaviour:
   developerConsoleObject: {fileID: 369185001}
   inputField: {fileID: 931835517}
   developerConsoleMessagePrefab: {fileID: 5148363856192126342, guid: 50040ea8efb6c1246b755c4565ac297a, type: 3}
-  developerConsoleLogsContainer: {fileID: 507608118}
+  developerConsoleLogsContainer: {fileID: 994568547}
 --- !u!1001 &281043270
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4207,6 +4207,7 @@ GameObject:
   m_Component:
   - component: {fileID: 759720347}
   - component: {fileID: 759720346}
+  - component: {fileID: 759720348}
   m_Layer: 0
   m_Name: Singleton
   m_TagString: Untagged
@@ -4245,6 +4246,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &759720348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759720345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728793c8eb0fe7c48aa9fc6c38d1a548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allItemsList:
+  - {fileID: 351180247236965010, guid: 86d687942c1add54c9d95439ed24a88b, type: 3}
+  - {fileID: 1225814375383370343, guid: 9aee517b5cee75344b1f635026903dd7, type: 3}
+  - {fileID: 912944699296328978, guid: c24ef84fcd01f3746a8ab1e0bd0df559, type: 3}
 --- !u!1 &760359220
 GameObject:
   m_ObjectHideFlags: 0
@@ -5574,7 +5591,7 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 238553843}
         m_TargetAssemblyTypeName: DeveloperConsole, Assembly-CSharp
         m_MethodName: ParseConsoleInput
         m_Mode: 1
@@ -10874,6 +10891,7 @@ MonoBehaviour:
   playerArmor: {fileID: 1747931332}
   playerTrinkets: {fileID: 770624308}
   inventoryItemHotbar: {fileID: 201293623}
+  fishingController: {fileID: 0}
 --- !u!58 &2099848750
 CircleCollider2D:
   m_ObjectHideFlags: 0

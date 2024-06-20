@@ -10,6 +10,7 @@ public class Player : Entity, IDamagable
     public Inventory playerArmor;
     public Inventory playerTrinkets;
     public GameObject inventoryItemHotbar;
+    public FishingController fishingController;
 
     public void UseHeldPrimary()
     {

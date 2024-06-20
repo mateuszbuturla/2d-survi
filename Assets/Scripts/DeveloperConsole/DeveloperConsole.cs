@@ -34,6 +34,8 @@ public class DeveloperConsole : MonoBehaviour
 
         Type type = typeof(DeveloperConsole);
 
+        Debug.Log("input");
+
         try
         {
             string[] inputs = input.Split(" ");
@@ -98,5 +100,11 @@ public class DeveloperConsole : MonoBehaviour
     public void Test()
     {
         CreateConsoleMessage(new DeveloperConsoleLog("Test"));
+    }
+
+    public void AddFishingRod()
+    {
+        CreateConsoleMessage(new DeveloperConsoleLog("Fishing rod has been added"));
+        Singleton.instance.players[0].GetComponent<Player>().playerInventory.AddItem(AllItems.GetItemComponent("Wooden Fishing Rod"));
     }
 }

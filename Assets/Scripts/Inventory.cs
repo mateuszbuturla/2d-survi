@@ -13,14 +13,15 @@ public class Inventory : MonoBehaviour
 
     void OnDisable()
     {
-        if (ItemSlot.selectedItemSlot != null) 
-        { 
+        if (ItemSlot.selectedItemSlot != null)
+        {
             ItemSlot.selectedItemSlot.StickyItemCleanup();
         }
     }
 
     public bool AddItem(Item item)
     {
+        Debug.Log(item.id);
         foreach (GameObject slot in itemSlots)
         {
             ItemSlot itemSlot = slot.GetComponent<ItemSlot>();

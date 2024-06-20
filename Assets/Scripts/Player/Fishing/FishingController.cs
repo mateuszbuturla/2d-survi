@@ -35,14 +35,6 @@ public class FishingController : MonoBehaviour
         SetFishingActive(false);
     }
 
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            HandleFishingInput();
-        }
-    }
-
     private void StartFishing()
     {
         fishingPoint = Utils.GetMousePoisionInt();
@@ -51,7 +43,7 @@ public class FishingController : MonoBehaviour
         StartCoroutine(MoveBobber());
     }
 
-    private void HandleFishingInput()
+    public void HandleFishingInput()
     {
         if (!isFishing)
         {

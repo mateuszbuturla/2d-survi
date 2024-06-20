@@ -25,4 +25,9 @@ public class AllItems : MonoBehaviour
     {
         return Singleton.instance.allItems.items.GetValueOrDefault(itemName);
     }
+
+    public static Item GetItemComponent(string itemName)
+    {
+        return GetItem(itemName).GetComponent<Item>();
+    }
 }
