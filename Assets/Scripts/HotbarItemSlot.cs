@@ -23,9 +23,14 @@ public class HotbarItemSlot : ItemSlot, IPointerClickHandler
     // -- Sticky item cleanup moved to the coroutine
     public new void OnPointerClick(PointerEventData eventData)
     {
-        selectedHotbarSlot.itemSlotSprite.sprite = selectedHotbarSlot.itemSlotDefaultSprite;
-        itemSlotSprite.sprite = itemSlotSelectedSprite;
+        SetSelected(this);
+    }
 
-        selectedHotbarSlot = this;
+    public static void SetSelected(HotbarItemSlot itemSlot)
+    {
+        selectedHotbarSlot.itemSlotSprite.sprite = selectedHotbarSlot.itemSlotDefaultSprite;
+
+        itemSlot.itemSlotSprite.sprite = itemSlot.itemSlotSelectedSprite;
+        selectedHotbarSlot = itemSlot;
     }
 }

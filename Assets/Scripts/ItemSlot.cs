@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour, IAcceptItem, IPointerClickHandler
@@ -36,13 +37,21 @@ public class ItemSlot : MonoBehaviour, IAcceptItem, IPointerClickHandler
     {
         Item returned = this.item;
 
-        this.item = item;
-        if (item != null)
+        if (this.item.name == item.name)
         {
-            this.itemIconSprite.sprite = item.sprite;
-            this.item.gameObject.transform.SetParent(this.transform);
+            returned = StackItem(item);
         }
-        else this.itemIconSprite.sprite = transparentSprite;
+        else
+        {
+            this.item = item;
+
+            if (item != null)
+            {
+                this.itemIconSprite.sprite = item.sprite;
+                this.item.gameObject.transform.SetParent(this.transform);
+            }
+            else this.itemIconSprite.sprite = transparentSprite;
+        }
 
         return returned;
     }
@@ -52,13 +61,22 @@ public class ItemSlot : MonoBehaviour, IAcceptItem, IPointerClickHandler
         Item returned = this.item;
 
         Item incomingItem = item.GetComponent<Item>();
-        this.item = incomingItem;
-        if (incomingItem != null)
+
+        if (this.item.name == item.name)
         {
-            this.itemIconSprite.sprite = incomingItem.sprite;
-            this.item.gameObject.transform.SetParent(this.transform);
+            returned = StackItem(incomingItem);
         }
-        else this.itemIconSprite.sprite = transparentSprite;
+        else
+        {
+            this.item = incomingItem;
+
+            if (item != null)
+            {
+                this.itemIconSprite.sprite = incomingItem.sprite;
+                this.item.gameObject.transform.SetParent(this.transform);
+            }
+            else this.itemIconSprite.sprite = transparentSprite;
+        }
 
         return returned;
     }
@@ -130,6 +148,24 @@ public class ItemSlot : MonoBehaviour, IAcceptItem, IPointerClickHandler
             selectedItemSlot.itemSlotSprite.sprite = selectedItemSlot.itemSlotSelectedSprite;
             itemIcon.transform.position = Input.mousePosition;
             yield return null;
+        }
+    }
+
+    private Item StackItem(Item incomingItem)
+    {
+        int capacity = this.item.maxStack - this.item.amount;
+
+        if (incomingItem.amount > capacity)
+        {
+            incomingItem.amount -= capacity;
+            this.item.amount += capacity;
+
+            return incomingItem;
+        }
+        else
+        {
+            this.item.amount =+ incomingItem.amount;
+            return null;
         }
     }
 }
