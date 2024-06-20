@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -252,12 +253,13 @@ public class WorldGenerator : MonoBehaviour
                 tilemapDecoration.SetTile(new Vector3Int((chunkPos.x * chunkSize) + x, (chunkPos.y * chunkSize) + y, 0), null);
             }
         }
-        foreach (var obj in chunk.objects)
+
+        foreach (Vector2Int key in chunk.objects.Keys.ToList())
         {
-            if (obj.Value != null)
+            if (chunk.objects[key] != null)
             {
-                Destroy(obj.Value);
-                chunk.objects[obj.Key] = null;
+                Destroy(chunk.objects[key]);
+                chunk.objects[key] = null;
             }
         }
         chunks.Remove(chunkPos);
