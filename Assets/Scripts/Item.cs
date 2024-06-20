@@ -5,21 +5,6 @@ using UnityEngine.EventSystems;
 
 public class Item : MonoBehaviour
 {
-    public ItemSO itemSO;
-
-    public void LoadBaseStats()
-    {
-        this.id = itemSO.id;
-        this.name = itemSO.name;
-        this.type = itemSO.type;
-        this.rarity = itemSO.rarity;
-        this.sprite = itemSO.sprite;
-        this.maxStack = itemSO.maxStack;
-        this.hasDurability = itemSO.hasDurability;
-        this.maxDurability = itemSO.maxDurability;
-        this.remainingDurability = itemSO.maxDurability;
-    }
-
     public GameObject prefab;
     public int id;
     public new string name;
