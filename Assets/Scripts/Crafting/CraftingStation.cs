@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class CraftingStation : MonoBehaviour, IInteractable
@@ -9,6 +10,7 @@ public class CraftingStation : MonoBehaviour, IInteractable
     public GameObject craftingWindow;
     public float maxDistance;
     private Player player;
+    private bool isActive;
 
     private void Start()
     {
@@ -21,7 +23,9 @@ public class CraftingStation : MonoBehaviour, IInteractable
 
         if (!isPlayerInRange)
         {
+            craftingWindow.GetComponent<CraftingWindow>().RemoveAllCraftingRecipes();
             craftingWindow.SetActive(false);
+            isActive = false;
             yield break;
         }
 
@@ -37,6 +41,12 @@ public class CraftingStation : MonoBehaviour, IInteractable
 
     public void Interact(Player player)
     {
+        if (isActive)
+        {
+            return;
+        }
+
+        isActive = true;
         this.player = player;
         StartCoroutine(CheckIfPlayerIsOutOfRange());
 
@@ -58,6 +68,11 @@ public class CraftingStation : MonoBehaviour, IInteractable
 
             return true;
         }).ToList();
+
+        foreach (CraftingRecipe craftingRecipe in avaiableToCraftRecipes)
+        {
+            craftingWindow.GetComponent<CraftingWindow>().AddCraftingRecipe(craftingRecipe);
+        }
 
         craftingWindow.SetActive(true);
     }
