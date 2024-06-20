@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Sword : MeleeWeapon
+public class SwordItem : MeleeWeapon
 {
     public int swingAngle = 120;
     public float distanceFromPlayer = 1;

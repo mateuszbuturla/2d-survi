@@ -16,7 +16,7 @@ public class ItemSlot : MonoBehaviour, IAcceptItem, IPointerClickHandler
     public Sprite itemSlotDefaultSprite;
     public Sprite itemSlotSelectedSprite;
 
-    public Item AcceptItem(Item item, ItemSlot itemSlot)
+    public Item AcceptItem(Item item)
     {
         Item returned = this.item;
 
@@ -31,8 +31,39 @@ public class ItemSlot : MonoBehaviour, IAcceptItem, IPointerClickHandler
         return returned;
     }
 
+    public Item AcceptItem(GameObject item)
+    {
+        Item returned = this.item;
+
+        Item incomingItem = item.GetComponent<Item>();
+        this.item = incomingItem;
+        if (incomingItem != null)
+        {
+            this.itemIconSprite.sprite = incomingItem.sprite;
+            this.item.gameObject.transform.SetParent(this.transform);
+        }
+        else this.itemIconSprite.sprite = transparentSprite;
+
+        return returned;
+    }
+
     // -- Sticky item cleanup moved to the coroutine
     public void OnPointerClick(PointerEventData eventData)
+    {
+        if (eventData.button == PointerEventData.InputButton.Left) 
+        { 
+            PickItem();
+        }
+        else if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            if (item is Openable)
+            {
+                (item as Openable).RightClickEffect();
+            }
+        }
+    }
+
+    private void PickItem()
     {
         // -- Pick up item
         if (selectedItemSlot == null)
@@ -59,7 +90,7 @@ public class ItemSlot : MonoBehaviour, IAcceptItem, IPointerClickHandler
     {
         // -- Transfer items
         Item incomingItem = selectedItemSlot.item;
-        selectedItemSlot.AcceptItem(AcceptItem(incomingItem, selectedItemSlot), this);
+        selectedItemSlot.AcceptItem(AcceptItem(incomingItem));
 
         // -- Put icons back where they belong
         itemIcon.transform.localPosition = Vector3.zero;

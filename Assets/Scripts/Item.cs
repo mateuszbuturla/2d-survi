@@ -28,4 +28,14 @@ public class Item : MonoBehaviour
     {
         NONE
     }
+
+    protected ItemSlot GetContainingItemSlot()
+    {
+        return transform.parent.GetComponent<ItemSlot>();
+    }
+
+    protected Inventory GetContainingInventory()
+    {
+        return transform.parent.GetComponent<ItemSlot>().transform.parent.GetComponent<Inventory>();
+    }
 }
