@@ -11,7 +11,7 @@ public class HotbarItemSlot : ItemSlot, IPointerClickHandler
 
     void Start()
     {
-        if (selectedHotbarSlot == null) { selectedHotbarSlot = this; }
+        if (selectedHotbarSlot == null) { selectedHotbarSlot = this; SetSelected(this); }
     }
 
     public void Update()

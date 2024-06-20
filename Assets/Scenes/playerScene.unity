@@ -1406,12 +1406,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSlots:
   - {fileID: 327215396}
-  - {fileID: 2101298737}
+  - {fileID: 350375354}
   - {fileID: 405107968}
   - {fileID: 644975668}
-  - {fileID: 1482270325}
+  - {fileID: 1024364634}
   - {fileID: 87807730}
-  - {fileID: 942176614}
+  - {fileID: 1456489467}
   - {fileID: 451936093}
   itemSlotPrefab: {fileID: 4858456047514720832, guid: 734578db7433f7144ad5ae5325583731, type: 3}
 --- !u!1 &217946431
@@ -2104,6 +2104,11 @@ MonoBehaviour:
   - {fileID: 4390386229862251587, guid: a092f23fde5d6df44baeae1f6771ad5c, type: 3}
   - {fileID: 4390386229862251587, guid: 13116e395ceeb0e4d9bb8961bf681558, type: 3}
   - {fileID: 4390386229862251587, guid: 3062af18fad5a60409129cc58981b393, type: 3}
+--- !u!1 &350375354 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8097749776592899767, guid: 608365e36faae554990e4c9f19b4ed90, type: 3}
+  m_PrefabInstance: {fileID: 1896654231}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &350724665
 GameObject:
   m_ObjectHideFlags: 0
@@ -8453,6 +8458,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1024124658}
   m_CullTransparentMesh: 1
+--- !u!1 &1024364634 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8097749776592899767, guid: 608365e36faae554990e4c9f19b4ed90, type: 3}
+  m_PrefabInstance: {fileID: 1433666237}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1036852338
 GameObject:
   m_ObjectHideFlags: 0
@@ -11013,6 +11023,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3818631079368515932, guid: 608365e36faae554990e4c9f19b4ed90, type: 3}
   m_PrefabInstance: {fileID: 1433666237}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1456489467 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8097749776592899767, guid: 608365e36faae554990e4c9f19b4ed90, type: 3}
+  m_PrefabInstance: {fileID: 1871741277}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1465913623
 GameObject:
   m_ObjectHideFlags: 0
@@ -12115,8 +12130,8 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 48, y: 48}
-  m_Spacing: {x: 48, y: 48}
+  m_CellSize: {x: 64, y: 64}
+  m_Spacing: {x: 4, y: 4}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!114 &1631914973
@@ -13991,7 +14006,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   craftingStationType: 1
   craftingWindow: {fileID: 1554600248}
-  isPlayerInRange: 0
   maxDistance: 0
 --- !u!1001 &1871741277
 PrefabInstance:

@@ -29,7 +29,11 @@ public class DroppedItem : MonoBehaviour, IInteractable
     IEnumerator AlphaDecay()
     {
         interactableText.color = new Color(interactableText.color.r,interactableText.color.g,interactableText.color.b,1);
-        if (Singleton.instance.players[0].GetComponent<PlayerController>().detectedObject == this.gameObject) { yield break; }
+
+        yield return new WaitForSeconds(0.5f);
+        if (Singleton.instance.players[0].GetComponent<PlayerController>().detectedObject == this.gameObject)
+            yield break;
+
         while (interactableText.color.a > 0)
         {
             interactableText.color = new Color(
