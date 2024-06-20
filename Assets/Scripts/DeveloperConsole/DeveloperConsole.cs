@@ -34,11 +34,9 @@ public class DeveloperConsole : MonoBehaviour
 
         Type type = typeof(DeveloperConsole);
 
-        Debug.Log("input");
-
         try
         {
-            string[] inputs = input.Split(" ");
+            string[] inputs = input.Split(" ", 2);
 
             MethodInfo methodInfo = type.GetMethod(inputs[0]);
             if (methodInfo == null) { CreateConsoleMessage(new DeveloperConsoleLog("Command not found", DeveloperConsoleLogType.ERROR)); }
@@ -69,7 +67,7 @@ public class DeveloperConsole : MonoBehaviour
     {
         CreateConsoleMessage(new DeveloperConsoleLog("Item created"));
         GameObject droppedItem = Instantiate(Singleton.instance.droppedItemPrefab);
-        GameObject itemObject = Instantiate(AllItems.GetItem(item));
+        GameObject itemObject = AllItems.GetItem(item);
         itemObject.transform.SetParent(droppedItem.transform);
 
         droppedItem.GetComponent<DroppedItem>().item = itemObject;

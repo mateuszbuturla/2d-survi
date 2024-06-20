@@ -21,13 +21,26 @@ public class Inventory : MonoBehaviour
 
     public bool AddItem(Item item)
     {
-        Debug.Log(item.id);
         foreach (GameObject slot in itemSlots)
         {
             ItemSlot itemSlot = slot.GetComponent<ItemSlot>();
             if (itemSlot.item == null)
             {
-                itemSlot.AcceptItem(item, null);
+                itemSlot.AcceptItem(item);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool AddItem(GameObject item)
+    {
+        foreach (GameObject slot in itemSlots)
+        {
+            ItemSlot itemSlot = slot.GetComponent<ItemSlot>();
+            if (itemSlot.item == null)
+            {
+                itemSlot.AcceptItem(item);
                 return true;
             }
         }

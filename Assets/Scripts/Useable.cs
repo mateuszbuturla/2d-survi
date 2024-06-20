@@ -12,14 +12,14 @@ public abstract class Useable : Item
     public float secondaryUseCooldown;
     public float currentSecondaryUseCooldown;
 
-    public virtual bool CanUsePrimary(Player player) { return true; }
+    public bool canUsePrimary = true;
+    public bool canUseSecondary = true;
     public abstract void PrimaryUseEffect(Player player);
-    public virtual bool CanUseSecondary(Player player) { return true; }
     public abstract void SecondaryUseEffect(Player player);
 
     public void UsePrimary(Player player)
     {
-        if (currentPrimaryUseCooldown <= 0 && CanUsePrimary(player))
+        if (currentPrimaryUseCooldown <= 0 && canUsePrimary)
         {
             PrimaryUseEffect(player);
         }
@@ -27,7 +27,7 @@ public abstract class Useable : Item
 
     public void UseSecondary(Player player)
     {
-        if (currentSecondaryUseCooldown <= 0 && CanUseSecondary(player))
+        if (currentSecondaryUseCooldown <= 0 && canUseSecondary)
         {
             SecondaryUseEffect(player);
         }

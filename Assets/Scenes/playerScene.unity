@@ -4261,7 +4261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   players:
   - {fileID: 2099848744}
-  allItems: {fileID: 0}
+  allItems: {fileID: 759720348}
   droppedItemPrefab: {fileID: 607740814146049949, guid: 515b68cd039308642bf4d962dbf29190, type: 3}
 --- !u!4 &759720347
 Transform:
@@ -4294,6 +4294,7 @@ MonoBehaviour:
   - {fileID: 351180247236965010, guid: 86d687942c1add54c9d95439ed24a88b, type: 3}
   - {fileID: 1225814375383370343, guid: 9aee517b5cee75344b1f635026903dd7, type: 3}
   - {fileID: 912944699296328978, guid: c24ef84fcd01f3746a8ab1e0bd0df559, type: 3}
+  - {fileID: 1391046784631414095, guid: 1428190a6a93c3f4d92a6f8bd44a8329, type: 3}
 --- !u!1 &760359220
 GameObject:
   m_ObjectHideFlags: 0

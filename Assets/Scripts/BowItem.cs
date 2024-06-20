@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bow : ProjectileWeapon
+public class BowItem : ProjectileWeapon
 {
     public override void PrimaryUseEffect(Player player)
     {
