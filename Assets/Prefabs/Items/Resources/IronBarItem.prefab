@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1118020136057536444}
   - component: {fileID: -7188456755611505045}
   m_Layer: 0
-  m_Name: IronBar
+  m_Name: IronBarItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -17,4 +17,9 @@ public static class Utils
 
         return new Vector2Int((int)mousePosition.x, (int)mousePosition.y);
     }
+
+    public static bool CheckIfInRange(Vector2 pos1, Vector2 pos2, float distance)
+    {
+        return Vector2.Distance(pos1, pos2) <= distance;
+    }
 }
