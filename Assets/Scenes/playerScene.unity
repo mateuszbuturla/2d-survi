@@ -6704,6 +6704,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d54ce6862f4c81e45a0dc5ed22a54a43, type: 2}
   - {fileID: 11400000, guid: fdf45080ec4c4de4cb799e4c6b8d82b0, type: 2}
   - {fileID: 11400000, guid: 061767f49190fd945b3497804b60bb76, type: 2}
+  - {fileID: 11400000, guid: 244438e409c27854d8fab8d1f737c326, type: 2}
   fishingPoint: {x: 0, y: 0}
   fishingDuration: 3
   catchProbability: 0.5
