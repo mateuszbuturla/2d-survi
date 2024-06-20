@@ -52,4 +52,20 @@ public class Inventory : MonoBehaviour
         GameObject slot = itemSlots[slotId];
         slot.GetComponent<ItemSlot>().DecreateItemCount(amount);
     }
+
+    public bool CheckIfContainsItem(Item item, int requiredAmount = 1)
+    {
+        int amountFound = 0;
+
+        foreach (GameObject slot in itemSlots)
+        {
+            ItemSlot itemSlot = slot.GetComponent<ItemSlot>();
+            if (itemSlot.item != null && itemSlot.item.id == item.id)
+            {
+                amountFound += itemSlot.item.amount;
+            }
+        }
+
+        return amountFound >= requiredAmount;
+    }
 }

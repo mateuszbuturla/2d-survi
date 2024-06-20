@@ -103,9 +103,13 @@ public class DeveloperConsole : MonoBehaviour
         CreateConsoleMessage(new DeveloperConsoleLog("Test"));
     }
 
-    public void AddFishingRod()
+    public void AddItem(string item)
     {
-        CreateConsoleMessage(new DeveloperConsoleLog("Fishing rod has been added"));
-        Singleton.instance.players[0].GetComponent<Player>().playerInventory.AddItem(AllItems.GetItemComponent("Wooden Fishing Rod"));
+        bool result = Singleton.instance.players[0].GetComponent<Player>().playerInventory.AddItem(AllItems.GetItemComponent(item));
+
+        if (result)
+        {
+            CreateConsoleMessage(new DeveloperConsoleLog("Item has been added"));
+        }
     }
 }

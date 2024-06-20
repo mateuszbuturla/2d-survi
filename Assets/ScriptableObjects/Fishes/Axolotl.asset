@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 656cff318c3a50044b6376ac3d8c0be0, type: 3}
   m_Name: Axolotl
   m_EditorClassIdentifier: 
-  id: 8
   fishName: Axolotl
   sprite: {fileID: -2077396351, guid: 179e7d4be10b42e4da83677eb9e2b3f0, type: 3}
   fishRarity: 1
+  item: {fileID: 1225814375383370343, guid: 896aa527de58188479b24f78b1357501, type: 3}

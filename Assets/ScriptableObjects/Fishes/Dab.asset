@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 656cff318c3a50044b6376ac3d8c0be0, type: 3}
   m_Name: Dab
   m_EditorClassIdentifier: 
-  id: 3
   fishName: Dab
   sprite: {fileID: -2087716073, guid: 179e7d4be10b42e4da83677eb9e2b3f0, type: 3}
   fishRarity: 0
+  item: {fileID: 1225814375383370343, guid: af304f5125d465d4b96f06a274da1226, type: 3}

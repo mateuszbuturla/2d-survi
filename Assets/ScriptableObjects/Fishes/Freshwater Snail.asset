@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 656cff318c3a50044b6376ac3d8c0be0, type: 3}
   m_Name: Freshwater Snail
   m_EditorClassIdentifier: 
-  id: 7
   fishName: Freshwater Snail
   sprite: {fileID: 266293611, guid: 179e7d4be10b42e4da83677eb9e2b3f0, type: 3}
   fishRarity: 1
+  item: {fileID: 1225814375383370343, guid: 636a3d0130365ff459512f41e7376605, type: 3}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 656cff318c3a50044b6376ac3d8c0be0, type: 3}
   m_Name: Plastic Bag
   m_EditorClassIdentifier: 
-  id: 11
   fishName: 'Plastic Bag '
   sprite: {fileID: -701962733, guid: 179e7d4be10b42e4da83677eb9e2b3f0, type: 3}
   fishRarity: 0
+  item: {fileID: 1225814375383370343, guid: 6af607379a30b2647841c3e7f09e57b2, type: 3}
