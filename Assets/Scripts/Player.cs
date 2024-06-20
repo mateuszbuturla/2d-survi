@@ -14,18 +14,18 @@ public class Player : Entity, IDamagable
     public void UseHeldPrimary()
     {
         if (HotbarItemSlot.selectedHotbarSlot == null) { return; }
-        if (HotbarItemSlot.selectedHotbarSlot.item is Holdable)
+        if (HotbarItemSlot.selectedHotbarSlot.item is Useable)
         {
-            (HotbarItemSlot.selectedHotbarSlot.item as Holdable).UsePrimary(this);
+            (HotbarItemSlot.selectedHotbarSlot.item as Useable).UsePrimary(this);
         }
     }
 
     public void UseHeldSecondary()
     {
         if (HotbarItemSlot.selectedHotbarSlot == null) { return; }
-        if (HotbarItemSlot.selectedHotbarSlot.item is Holdable)
+        if (HotbarItemSlot.selectedHotbarSlot.item is Useable)
         {
-            (HotbarItemSlot.selectedHotbarSlot.item as Holdable).UseSecondary(this);
+            (HotbarItemSlot.selectedHotbarSlot.item as Useable).UseSecondary(this);
         }
     }
 
