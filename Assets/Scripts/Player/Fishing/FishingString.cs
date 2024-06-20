@@ -20,8 +20,8 @@ public class FishingString : MonoBehaviour
         lineRenderer.positionCount = numPoints;
 
 
-        lineRenderer.startWidth = 0.1f;
-        lineRenderer.endWidth = 0.1f;
+        lineRenderer.startWidth = 0.05f;
+        lineRenderer.endWidth = 0.05f;
 
         UpdateLinePositions();
     }

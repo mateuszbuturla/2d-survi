@@ -10,6 +10,7 @@ public class FishingController : MonoBehaviour
     public float catchProbability = 0.5f;
     public float bobberSinkTime = 2.0f;
     public float flySpeed = 2.0f;
+    public float fishTravelSpeed = 2.0f;
     public AnimationCurve flyCurve;
     public GameObject bobber;
     public GameObject fishingString;
@@ -19,6 +20,8 @@ public class FishingController : MonoBehaviour
     private Vector3 startPoint;
     public PlayerStatusInfoManager playerStatusInfoManager;
     public GameObject fishingRod;
+    public Transform player;
+    public GameObject fishSprite;
 
     void Start()
     {
@@ -39,7 +42,7 @@ public class FishingController : MonoBehaviour
         if (fishOnHook && Input.GetKeyDown(KeyCode.Space))
         {
             StopAllCoroutines();
-            CatchFish();
+            StartCoroutine(MoveFishToPlayer());
         }
 
         if (!fishOnHook && Input.GetKeyDown(KeyCode.Space))
@@ -113,6 +116,35 @@ public class FishingController : MonoBehaviour
         }
     }
 
+    private IEnumerator MoveFishToPlayer()
+    {
+        int random = Random.Range(0, fishes.Length);
+        Fish fish = fishes[random];
+
+        fishingString.GetComponent<FishingString>().isBobberInWater = false;
+        fishSprite.SetActive(true);
+        fishSprite.GetComponent<SpriteRenderer>().sprite = fish.sprite;
+        Vector3 bobberPosition = bobber.transform.position;
+        Vector3 playerPosition = player.position;
+        float distance = Vector3.Distance(bobberPosition, playerPosition);
+        float fishTravelDuration = distance / fishTravelSpeed;
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < fishTravelDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / fishTravelDuration;
+
+            bobber.transform.position = Vector3.Lerp(bobberPosition, playerPosition, t);
+            fishSprite.transform.position = Vector3.Lerp(bobberPosition, playerPosition, t);
+
+            yield return null;
+        }
+
+        CatchFish(fish);
+    }
+
     private Color GetColor(FishRarity fishRarity)
     {
         switch (fishRarity)
@@ -130,10 +162,8 @@ public class FishingController : MonoBehaviour
         }
     }
 
-    private void CatchFish()
+    private void CatchFish(Fish fish)
     {
-        int random = Random.Range(0, fishes.Length);
-        Fish fish = fishes[random];
         Color color = GetColor(fish.fishRarity);
 
         playerStatusInfoManager.ShowStatusInfo(fish.name, color);
@@ -143,6 +173,7 @@ public class FishingController : MonoBehaviour
 
     private void EndFishing()
     {
+        fishSprite.SetActive(false);
         fishingString.GetComponent<FishingString>().isBobberInWater = false;
         fishingString.SetActive(false);
         isFishing = false;
