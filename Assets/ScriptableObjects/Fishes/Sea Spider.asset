@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 656cff318c3a50044b6376ac3d8c0be0, type: 3}
   m_Name: Sea Spider
   m_EditorClassIdentifier: 
-  id: 4
   fishName: Sea Spider
   sprite: {fileID: -52115681, guid: 179e7d4be10b42e4da83677eb9e2b3f0, type: 3}
   fishRarity: 2
+  item: {fileID: 1225814375383370343, guid: 4dc08eca79cd4b0448ba6a650ecb1df2, type: 3}

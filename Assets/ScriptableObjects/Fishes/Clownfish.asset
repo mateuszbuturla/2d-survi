@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 656cff318c3a50044b6376ac3d8c0be0, type: 3}
   m_Name: Clownfish
   m_EditorClassIdentifier: 
-  id: 2
   fishName: ClownFish
   sprite: {fileID: -1686103667, guid: 179e7d4be10b42e4da83677eb9e2b3f0, type: 3}
   fishRarity: 0
+  item: {fileID: 1225814375383370343, guid: 4c7a84e4dccc6a24c93959f8558dc340, type: 3}

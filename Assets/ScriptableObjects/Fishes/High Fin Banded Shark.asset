@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 656cff318c3a50044b6376ac3d8c0be0, type: 3}
   m_Name: High Fin Banded Shark
   m_EditorClassIdentifier: 
-  id: 9
   fishName: High Fin Banded Shark
   sprite: {fileID: 1462419924, guid: 179e7d4be10b42e4da83677eb9e2b3f0, type: 3}
   fishRarity: 0
+  item: {fileID: 1225814375383370343, guid: 1390177247ba33a4783394c418fbde55, type: 3}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 656cff318c3a50044b6376ac3d8c0be0, type: 3}
   m_Name: Starfish
   m_EditorClassIdentifier: 
-  id: 0
   fishName: Starfish
   sprite: {fileID: 842438318, guid: 179e7d4be10b42e4da83677eb9e2b3f0, type: 3}
   fishRarity: 3
+  item: {fileID: 1225814375383370343, guid: 436e094add7a6ad4c807a873afb29307, type: 3}

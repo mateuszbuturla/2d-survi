@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 656cff318c3a50044b6376ac3d8c0be0, type: 3}
   m_Name: Junonia
   m_EditorClassIdentifier: 
-  id: 4
   fishName: Junonia
   sprite: {fileID: 1917809848, guid: 179e7d4be10b42e4da83677eb9e2b3f0, type: 3}
   fishRarity: 2
+  item: {fileID: 1225814375383370343, guid: 3a027c24fba626f4381cc4a2b8de318b, type: 3}

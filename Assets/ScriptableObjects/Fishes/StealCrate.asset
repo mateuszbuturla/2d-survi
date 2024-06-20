@@ -15,3 +15,4 @@ MonoBehaviour:
   fishName: Steal Crate
   sprite: {fileID: 21300000, guid: 1d3b793382a9914438b9abd2f3a2b83b, type: 3}
   fishRarity: 3
+  item: {fileID: 5501643011694006989, guid: fb4c4551dfecfe8439cb8034e2453277, type: 3}

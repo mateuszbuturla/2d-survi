@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 656cff318c3a50044b6376ac3d8c0be0, type: 3}
   m_Name: Sand Dollar
   m_EditorClassIdentifier: 
-  id: 0
   fishName: Sand Dollar
   sprite: {fileID: -1929433855, guid: 179e7d4be10b42e4da83677eb9e2b3f0, type: 3}
   fishRarity: 0
+  item: {fileID: 1225814375383370343, guid: c772fb52ebfa59b4b9ec9c98eac570fd, type: 3}
