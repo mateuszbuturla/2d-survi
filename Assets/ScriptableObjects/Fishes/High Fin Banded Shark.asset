@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 656cff318c3a50044b6376ac3d8c0be0, type: 3}
+  m_Name: High Fin Banded Shark
+  m_EditorClassIdentifier: 
+  id: 9
+  fishName: High Fin Banded Shark
+  sprite: {fileID: 1462419924, guid: 179e7d4be10b42e4da83677eb9e2b3f0, type: 3}
+  fishRarity: 0
