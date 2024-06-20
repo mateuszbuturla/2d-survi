@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public abstract class Holdable : Item
+public abstract class Useable : Item
 {
     // Primary use cooldown
     public float primaryUseCooldown;
@@ -19,7 +19,7 @@ public abstract class Holdable : Item
 
     public void UsePrimary(Player player)
     {
-        if (currentPrimaryUseCooldown <= 0 && CanUsePrimary(player)) 
+        if (currentPrimaryUseCooldown <= 0 && CanUsePrimary(player))
         {
             PrimaryUseEffect(player);
         }
@@ -27,7 +27,7 @@ public abstract class Holdable : Item
 
     public void UseSecondary(Player player)
     {
-        if (currentSecondaryUseCooldown <= 0 && CanUseSecondary(player)) 
+        if (currentSecondaryUseCooldown <= 0 && CanUseSecondary(player))
         {
             SecondaryUseEffect(player);
         }
@@ -46,7 +46,7 @@ public abstract class Holdable : Item
     protected void ReduceDurability()
     {
         remainingDurability--;
-        if (remainingDurability <= 0) 
+        if (remainingDurability <= 0)
         {
             Destroy(this.gameObject);
         }

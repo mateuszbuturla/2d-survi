@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Weapon : Holdable
+public abstract class Weapon : Useable
 {
     public int weaponDamage;
 
