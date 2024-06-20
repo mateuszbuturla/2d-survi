@@ -34,6 +34,11 @@ public class CraftingStation : MonoBehaviour, IInteractable
         StartCoroutine(CheckIfPlayerIsOutOfRange());
     }
 
+    public void HandleCraftItem(CraftingRecipe craftingRecipe)
+    {
+        player.playerInventory.AddItem(craftingRecipe.resultItem);
+    }
+
     public void ShowInteractionText()
     {
 
@@ -71,7 +76,7 @@ public class CraftingStation : MonoBehaviour, IInteractable
 
         foreach (CraftingRecipe craftingRecipe in avaiableToCraftRecipes)
         {
-            craftingWindow.GetComponent<CraftingWindow>().AddCraftingRecipe(craftingRecipe);
+            craftingWindow.GetComponent<CraftingWindow>().AddCraftingRecipe(craftingRecipe, this);
         }
 
         craftingWindow.SetActive(true);

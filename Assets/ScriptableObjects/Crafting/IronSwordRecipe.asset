@@ -17,5 +17,3 @@ MonoBehaviour:
   craftingIngredients:
   - item: {fileID: 5501643011694006989, guid: 7188174de67e75d49933c748ad1292f3, type: 3}
     count: 1
-  - item: {fileID: 5501643011694006989, guid: f3053da613a9b3f4a8b261d6e2ddf177, type: 3}
-    count: 1
