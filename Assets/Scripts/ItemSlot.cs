@@ -37,9 +37,12 @@ public class ItemSlot : MonoBehaviour, IAcceptItem, IPointerClickHandler
     {
         Item returned = this.item;
 
-        if (this.item.name == item.name)
+        if (this.item != null)
         {
-            returned = StackItem(item);
+            if (this.item.name == item.name)
+            {
+                returned = StackItem(item);
+            }
         }
         else
         {

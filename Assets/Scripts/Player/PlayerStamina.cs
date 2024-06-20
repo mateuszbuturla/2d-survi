@@ -19,13 +19,4 @@ public class PlayerStamina : Stamina
     {
         staminaBar.UpdateValue(currentStamina);
     }
-
-    public override void Update()
-    {
-        base.Update();
-        if (Input.GetKeyDown(KeyCode.R) && CheckIfHasEnoughStamina(5))
-        {
-            ReduceStamina(5);
-        }
-    }
 }

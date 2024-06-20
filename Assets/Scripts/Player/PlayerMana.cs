@@ -21,13 +21,4 @@ public class PlayerMana : Mana
     {
         manaBar.UpdateValue(currentMana);
     }
-
-    public override void Update()
-    {
-        base.Update();
-        if (Input.GetKeyDown(KeyCode.E) && CheckIfHasEnoughMana(12))
-        {
-            ReduceMana(12);
-        }
-    }
 }

@@ -25,6 +25,8 @@ public class DeveloperConsole : MonoBehaviour
         {
             isActive = !isActive;
             developerConsoleObject.SetActive(isActive);
+            inputField.Select();
+            inputField.text = "";
         }
     }
 

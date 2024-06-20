@@ -26,12 +26,4 @@ public class PlayerHealth : Health
     {
         healthBar.UpdateValue(currentHealth);
     }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            ApplyDamage(new Damage(DamageType.DAMAGING, 10));
-        }
-    }
 }

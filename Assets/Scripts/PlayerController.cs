@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
         }
         if (DeveloperConsole.instance.gameObject.activeSelf)
         {
-            allowMovement = !DeveloperConsole.instance.gameObject.activeSelf;
+            allowMovement = !DeveloperConsole.instance.developerConsoleObject.activeSelf;
         }
 
         MovePlayer();

@@ -44,7 +44,7 @@ public class DroppedItem : MonoBehaviour, IInteractable
     public void ShowInteractionText()
     {
         StartCoroutine(AlphaDecay());
-        interactableText.text = $"Pick up {item.name} [{item.GetComponent<Item>().amount}] ('E')";
+        interactableText.text = $"Pick up {item.GetComponent<Item>().name} [{item.GetComponent<Item>().amount}] ('E')";
     }
 
     public void Interact(Player player)
