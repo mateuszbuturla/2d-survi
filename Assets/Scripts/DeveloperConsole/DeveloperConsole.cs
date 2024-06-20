@@ -71,6 +71,7 @@ public class DeveloperConsole : MonoBehaviour
         itemObject.transform.SetParent(droppedItem.transform);
 
         droppedItem.GetComponent<DroppedItem>().item = itemObject;
+        droppedItem.transform.position = Singleton.instance.players[0].transform.position;
         droppedItem.GetComponent<DroppedItem>().RefreshSprite();
     }
 

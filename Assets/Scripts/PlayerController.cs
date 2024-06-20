@@ -107,10 +107,9 @@ public class PlayerController : MonoBehaviour
             // -- Active hotbar only when inventoryWindow inactive
             player.inventoryItemHotbar.SetActive(!player.inventoryWindow.activeSelf);
         }
-        if (Input.GetKeyDown(KeyCode.BackQuote))
+        if (DeveloperConsole.instance.gameObject.activeSelf)
         {
-            DeveloperConsole.instance.gameObject.SetActive(!DeveloperConsole.instance.gameObject.activeSelf);
-            allowMovement = !allowMovement;
+            allowMovement = !DeveloperConsole.instance.gameObject.activeSelf;
         }
 
         MovePlayer();
