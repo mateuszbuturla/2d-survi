@@ -623,7 +623,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 60}
-  m_SizeDelta: {x: 540, y: 64}
+  m_SizeDelta: {x: 740, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &201293625
 MonoBehaviour:
@@ -682,11 +682,11 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 48, y: 48}
-  m_Spacing: {x: 4, y: 4}
+  m_Spacing: {x: 48, y: 48}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!114 &201293628
@@ -4034,7 +4034,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1215616539}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7055e93a119a4154bb813bc3a43d1382, type: 3}
   m_Name: 
@@ -5267,11 +5267,11 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 6
-  m_StartCorner: 2
+  m_ChildAlignment: 0
+  m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 64, y: 64}
-  m_Spacing: {x: 4, y: 4}
+  m_CellSize: {x: 48, y: 48}
+  m_Spacing: {x: 48, y: 48}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!114 &1631914973
