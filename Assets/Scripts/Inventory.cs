@@ -46,4 +46,10 @@ public class Inventory : MonoBehaviour
         }
         return false;
     }
+
+    public void DecreateItemCount(int slotId, int amount = 1)
+    {
+        GameObject slot = itemSlots[slotId];
+        slot.GetComponent<ItemSlot>().DecreateItemCount(amount);
+    }
 }

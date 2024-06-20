@@ -16,6 +16,22 @@ public class ItemSlot : MonoBehaviour, IAcceptItem, IPointerClickHandler
     public Sprite itemSlotDefaultSprite;
     public Sprite itemSlotSelectedSprite;
 
+    public void DecreateItemCount(int amount)
+    {
+        item.amount -= amount;
+        if (item.amount <= 0)
+        {
+            DestroyItem();
+        }
+    }
+
+    public void DestroyItem()
+    {
+        Destroy(item.gameObject);
+        item = null;
+        itemIconSprite.sprite = null;
+    }
+
     public Item AcceptItem(Item item)
     {
         Item returned = this.item;
@@ -50,8 +66,8 @@ public class ItemSlot : MonoBehaviour, IAcceptItem, IPointerClickHandler
     // -- Sticky item cleanup moved to the coroutine
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (eventData.button == PointerEventData.InputButton.Left) 
-        { 
+        if (eventData.button == PointerEventData.InputButton.Left)
+        {
             PickItem();
         }
         else if (eventData.button == PointerEventData.InputButton.Right)

@@ -8,4 +8,5 @@ public class Fish : ScriptableObject
     public string fishName;
     public Sprite sprite;
     public FishRarity fishRarity;
+    public string itemName;
 }

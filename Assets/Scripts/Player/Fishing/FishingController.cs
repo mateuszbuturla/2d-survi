@@ -4,6 +4,8 @@ using UnityEngine.Tilemaps;
 
 public class FishingController : MonoBehaviour
 {
+    public GameObject crate;
+
     [Header("Fishing Settings")]
     public Fish[] fishes;
     public Vector2Int fishingPoint;
@@ -34,6 +36,15 @@ public class FishingController : MonoBehaviour
     {
         SetFishingActive(false);
     }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            HandleFishingInput();
+        }
+    }
+
 
     private void StartFishing()
     {
@@ -184,6 +195,9 @@ public class FishingController : MonoBehaviour
     {
         Color color = GetColor(fish.fishRarity);
         playerStatusInfoManager.ShowStatusInfo(fish.name, color);
+
+        player.GetComponent<Player>().playerInventory.AddItem(Instantiate(crate));
+
         EndFishing();
     }
 
