@@ -3719,6 +3719,38 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4858456047514720832, guid: 734578db7433f7144ad5ae5325583731, type: 3}
   m_PrefabInstance: {fileID: 681897780}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &695596237
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 695596238}
+  m_Layer: 0
+  m_Name: WorldContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &695596238
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695596237}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.072, y: 0.357, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1897179747}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &705848250
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6585,6 +6617,7 @@ MonoBehaviour:
   noiseSettings: {fileID: 11400000, guid: 39dc71d50a99fe24c9451093621d724b, type: 2}
   tilemap: {fileID: 1787153484}
   tilemapDecoration: {fileID: 1607637158}
+  worldObjectsContainer: {fileID: 695596237}
   player: {fileID: 2099848746}
   waterTile: {fileID: 11400000, guid: d8591dc12b8b3f74295afecb0f450fe0, type: 2}
 --- !u!4 &1135087982
@@ -10009,14 +10042,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1897179745}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.072, y: -0.357, z: 0}
   m_LocalScale: {x: 6.25, y: 6.25, z: 6.25}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1787153482}
   - {fileID: 1607637156}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 695596238}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1901269843
 PrefabInstance:
@@ -11789,7 +11822,7 @@ SceneRoots:
   - {fileID: 760359223}
   - {fileID: 665414283}
   - {fileID: 759720347}
-  - {fileID: 1897179747}
+  - {fileID: 695596238}
   - {fileID: 1135087982}
   - {fileID: 238553842}
   - {fileID: 1215616541}

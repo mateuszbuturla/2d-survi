@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -10,6 +11,7 @@ public class WorldGenerator : MonoBehaviour
 
     public Tilemap tilemap;
     public Tilemap tilemapDecoration;
+    public GameObject worldObjectsContainer;
 
     private Dictionary<Vector2Int, Biomes> biomes;
     private Dictionary<Vector2Int, ChunkData> chunksData;
@@ -233,6 +235,7 @@ public class WorldGenerator : MonoBehaviour
             if (objects.ContainsKey(vkp.Key))
             {
                 GameObject newObject = Instantiate(objects[vkp.Key], (Vector3Int)tilePos, Quaternion.identity);
+                newObject.transform.SetParent(worldObjectsContainer.transform);
                 chunk.objects[vkp.Key] = newObject;
             }
         }
@@ -252,12 +255,13 @@ public class WorldGenerator : MonoBehaviour
                 tilemapDecoration.SetTile(new Vector3Int((chunkPos.x * chunkSize) + x, (chunkPos.y * chunkSize) + y, 0), null);
             }
         }
-        foreach (var obj in chunk.objects)
+
+        foreach (Vector2Int key in chunk.objects.Keys.ToList())
         {
-            if (obj.Value != null)
+            if (chunk.objects[key] != null)
             {
-                Destroy(obj.Value);
-                chunk.objects[obj.Key] = null;
+                Destroy(chunk.objects[key]);
+                chunk.objects[key] = null;
             }
         }
         chunks.Remove(chunkPos);
