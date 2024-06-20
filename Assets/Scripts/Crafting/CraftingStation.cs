@@ -36,6 +36,11 @@ public class CraftingStation : MonoBehaviour, IInteractable
 
     public void HandleCraftItem(CraftingRecipe craftingRecipe)
     {
+        foreach (CraftingIngredient craftingIngredient in craftingRecipe.craftingIngredients)
+        {
+            player.playerInventory.DecreaseItemCount(craftingIngredient.item.GetComponent<Item>(), craftingIngredient.count);
+        }
+
         player.playerInventory.AddItem(craftingRecipe.resultItem);
     }
 

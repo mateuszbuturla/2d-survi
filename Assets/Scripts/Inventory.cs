@@ -68,4 +68,32 @@ public class Inventory : MonoBehaviour
 
         return amountFound >= requiredAmount;
     }
+
+    public void DecreaseItemCount(Item item, int count = 1)
+    {
+        int amountDecreased = 0;
+
+        foreach (GameObject slot in itemSlots)
+        {
+            ItemSlot itemSlot = slot.GetComponent<ItemSlot>();
+            if (itemSlot.item != null && itemSlot.item.id == item.id)
+            {
+                if (itemSlot.item.amount >= count)
+                {
+                    itemSlot.DecreateItemCount(count);
+                    amountDecreased += count;
+                }
+                else
+                {
+                    amountDecreased += itemSlot.item.amount;
+                    itemSlot.DecreateItemCount(itemSlot.item.amount);
+                }
+            }
+
+            if (amountDecreased >= count)
+            {
+                break;
+            }
+        }
+    }
 }
