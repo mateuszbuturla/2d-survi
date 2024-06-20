@@ -59,8 +59,8 @@ MonoBehaviour:
   itemIconSprite: {fileID: 705826394855961295}
   transparentSprite: {fileID: 21300000, guid: 6eebee912e2752340b5e99736c57062b, type: 3}
   itemSlotSprite: {fileID: 7834176876080185585}
-  itemSlotDefaultSprite: {fileID: 21300000, guid: 8819f87ade1485e49b5de7be82f86fa7, type: 3}
-  itemSlotSelectedSprite: {fileID: 21300000, guid: d2adec72940ef6f47999ba5389348372, type: 3}
+  itemSlotDefaultSprite: {fileID: 21300000, guid: 42cc72414d601cb4db196d36ef70b476, type: 3}
+  itemSlotSelectedSprite: {fileID: 21300000, guid: e1429d833288c2f4cb09cde40b0a67f0, type: 3}
 --- !u!114 &7834176876080185585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,7 +81,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8819f87ade1485e49b5de7be82f86fa7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 42cc72414d601cb4db196d36ef70b476, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -135,7 +135,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 48, y: 48}
+  m_SizeDelta: {x: 32, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2175898230822905606
 CanvasRenderer:

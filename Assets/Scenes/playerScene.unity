@@ -1015,7 +1015,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 60}
-  m_SizeDelta: {x: 540, y: 64}
+  m_SizeDelta: {x: 740, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &201293625
 MonoBehaviour:
@@ -1074,7 +1074,7 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 0
+  m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 64, y: 64}
@@ -2269,6 +2269,161 @@ MonoBehaviour:
   - {fileID: 4390386229862251587, guid: 7e6ebcd7916cce74dbb712d90c5b40e3, type: 3}
   - {fileID: 4390386229862251587, guid: f4bee7e01779584479bd95ce30241c51, type: 3}
   - {fileID: 4390386229862251587, guid: 86192096dd67ef5479ca778ed97fcc9b, type: 3}
+--- !u!1 &462137806
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 462137809}
+  - component: {fileID: 462137808}
+  - component: {fileID: 462137807}
+  m_Layer: 0
+  m_Name: FishingString
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &462137807
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462137806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c49d8fe1b4a20e488756e9fd08adeb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  point1: {fileID: 212003690}
+  point2: {fileID: 1851176038}
+  numPoints: 50
+  maxCurveHeight: 1
+  transitionSpeed: 1
+  isBobberInWater: 0
+--- !u!120 &462137808
+LineRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462137806}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 0
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 834bff3fd7125004285e389c080f7b3f, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    serializedVersion: 3
+    widthMultiplier: 1
+    widthCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    colorGradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    numCornerVertices: 0
+    numCapVertices: 0
+    alignment: 0
+    textureMode: 0
+    textureScale: {x: 1, y: 1}
+    shadowBias: 0.5
+    generateLightingData: 0
+  m_MaskInteraction: 0
+  m_UseWorldSpace: 1
+  m_Loop: 0
+  m_ApplyActiveColorSpace: 1
+--- !u!4 &462137809
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462137806}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 29.94305, y: 30.211632, z: -0.06479694}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1450233457}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &466922338
 GameObject:
   m_ObjectHideFlags: 0
@@ -6870,6 +7025,54 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b0456ec5a17d47e40974f370e3d7c84c, type: 2}
   - {fileID: 11400000, guid: 6c809dd00b58fab4796c79b6cfa7c359, type: 2}
   threshold: 10
+--- !u!1 &1215616539
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1215616541}
+  - component: {fileID: 1215616540}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1215616540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215616539}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7055e93a119a4154bb813bc3a43d1382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultCursor: {fileID: 2800000, guid: 4dd233d974ba0a741a3224550fd1cf3f, type: 3}
+  fishingCursor: {fileID: 2800000, guid: 09edd1d1d28b4174a9fdf4116a32db81, type: 3}
+  tilemap: {fileID: 1787153484}
+  waterTile: {fileID: 11400000, guid: d8591dc12b8b3f74295afecb0f450fe0, type: 2}
+--- !u!4 &1215616541
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215616539}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 80.226166, y: 121.81058, z: -0.023953576}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1218133232
 GameObject:
   m_ObjectHideFlags: 0
@@ -8546,11 +8749,11 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 6
-  m_StartCorner: 2
+  m_ChildAlignment: 0
+  m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 64, y: 64}
-  m_Spacing: {x: 4, y: 4}
+  m_CellSize: {x: 48, y: 48}
+  m_Spacing: {x: 48, y: 48}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!114 &1631914973
@@ -10662,6 +10865,8 @@ GameObject:
   - component: {fileID: 2099848751}
   - component: {fileID: 2099848753}
   - component: {fileID: 2099848754}
+  - component: {fileID: 2099848755}
+  - component: {fileID: 2099848756}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -10705,12 +10910,13 @@ Transform:
   m_GameObject: {fileID: 2099848744}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 79, y: 120.2, z: 0}
   m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 998495462}
   - {fileID: 350724666}
+  - {fileID: 104549219}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2099848747
@@ -10918,6 +11124,97 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 2099848747}
+--- !u!114 &2099848755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099848744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1da777b3b87b1b548b5b228aad7fe8e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fishes:
+  - {fileID: 11400000, guid: 6dd7e6c1619e49a46b1603fa5e4920e8, type: 2}
+  - {fileID: 11400000, guid: ea5ad34ff9fad294381ecdaae3884fe8, type: 2}
+  - {fileID: 11400000, guid: a3992700265d7d24fbbe7c7bb6a11b54, type: 2}
+  - {fileID: 11400000, guid: cca098f0ca65ac54fba6cf1be44b7515, type: 2}
+  - {fileID: 11400000, guid: 257fee1f078d871489ea722851859b45, type: 2}
+  - {fileID: 11400000, guid: d2cd7b6b1676e1c4fb1dbabea162e6d4, type: 2}
+  - {fileID: 11400000, guid: 6d651bfdf8fc0cd41b60113e647feb9f, type: 2}
+  - {fileID: 11400000, guid: 60c2591d3b313ff468dd4387db000e6b, type: 2}
+  - {fileID: 11400000, guid: fa3c63059d67ba74cb6aac0e902de75c, type: 2}
+  - {fileID: 11400000, guid: 182e47e41b575f5439677547da5af958, type: 2}
+  - {fileID: 11400000, guid: 90d9e358da448c34185e4b0ae5770139, type: 2}
+  - {fileID: 11400000, guid: 6a46e778896d66241a4678c43bd95682, type: 2}
+  - {fileID: 11400000, guid: d54ce6862f4c81e45a0dc5ed22a54a43, type: 2}
+  - {fileID: 11400000, guid: fdf45080ec4c4de4cb799e4c6b8d82b0, type: 2}
+  - {fileID: 11400000, guid: 061767f49190fd945b3497804b60bb76, type: 2}
+  - {fileID: 11400000, guid: 244438e409c27854d8fab8d1f737c326, type: 2}
+  fishingPoint: {x: 0, y: 0}
+  fishingDuration: 3
+  catchProbability: 0.5
+  bobberSinkTime: 2
+  flySpeed: 30
+  fishTravelSpeed: 30
+  flyCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0055452827
+      value: 0.004716981
+      inSlope: 4.047563
+      outSlope: 4.047563
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.50100774
+      value: 2.0101323
+      inSlope: -0.00071502035
+      outSlope: -0.00071502035
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.56275105
+    - serializedVersion: 3
+      time: 1.0047574
+      value: 0.007835861
+      inSlope: -3.9747846
+      outSlope: -3.9747846
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  bobber: {fileID: 1851176036}
+  fishingString: {fileID: 462137806}
+  fishingRod: {fileID: 104549218}
+  fishingReward: {fileID: 1556700883}
+  tilemap: {fileID: 1787153484}
+  waterTile: {fileID: 11400000, guid: d8591dc12b8b3f74295afecb0f450fe0, type: 2}
+  playerStatusInfoManager: {fileID: 2099848756}
+  player: {fileID: 212003690}
+--- !u!114 &2099848756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2099848744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54151e758f02e0847b864f211868911f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textPrefab: {fileID: 3708863207832344837, guid: 16352cfa80c09494b9f5009d380a31f3, type: 3}
+  canvasTransform: {fileID: 998040667}
+  offset: {x: 0, y: 25, z: 0}
 --- !u!1 &2119763891
 GameObject:
   m_ObjectHideFlags: 0
@@ -11075,3 +11372,5 @@ SceneRoots:
   - {fileID: 1897179747}
   - {fileID: 1135087982}
   - {fileID: 238553842}
+  - {fileID: 1215616541}
+  - {fileID: 1450233457}
