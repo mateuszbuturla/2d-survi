@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 218873946d65f6c449bf3eded0a1d39d, type: 3}
-  m_Name: IronSwordRecipe
+  m_Name: HealingPotion
   m_EditorClassIdentifier: 
-  resultItem: {fileID: 5501643011694006989, guid: f24e185f95d28dc418415a1f8910768d, type: 3}
-  requiredCraftingStation: 1
+  resultItem: {fileID: 5501643011694006989, guid: 3109c5e14a1d5744791809e58a03f528, type: 3}
+  requiredCraftingStation: 0
   craftingIngredients:
-  - item: {fileID: 5501643011694006989, guid: 7188174de67e75d49933c748ad1292f3, type: 3}
+  - item: {fileID: 5501643011694006989, guid: c6b72a57cbe723b438732ea24e8c7717, type: 3}
     count: 1
-  - item: {fileID: 5501643011694006989, guid: f3053da613a9b3f4a8b261d6e2ddf177, type: 3}
-    count: 3
+  - item: {fileID: 5501643011694006989, guid: be325c0418c74054e8ae63caa3857ac5, type: 3}
+    count: 1

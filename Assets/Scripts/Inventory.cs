@@ -53,7 +53,7 @@ public class Inventory : MonoBehaviour
         slot.GetComponent<ItemSlot>().DecreateItemCount(amount);
     }
 
-    public bool CheckIfContainsItem(Item item, int requiredAmount = 1)
+    public int GetItemCount(Item item)
     {
         int amountFound = 0;
 
@@ -66,7 +66,12 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        return amountFound >= requiredAmount;
+        return amountFound;
+    }
+
+    public bool CheckIfContainsItem(Item item, int requiredAmount = 1)
+    {
+        return GetItemCount(item) >= requiredAmount;
     }
 
     public void DecreaseItemCount(Item item, int count = 1)

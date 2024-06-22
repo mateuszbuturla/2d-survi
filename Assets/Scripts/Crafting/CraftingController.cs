@@ -7,6 +7,7 @@ public class CraftingController : MonoBehaviour
     private bool isOpen;
     public Dictionary<int, GameObject> workingStationsInRange = new Dictionary<int, GameObject>();
     private GameObject craftingWindow;
+    private CraftingRecipe currentlySelectedRecipe;
 
     private void Start()
     {
@@ -26,10 +27,23 @@ public class CraftingController : MonoBehaviour
         }
     }
 
-    private void RenderRecipes()
+    public void SelectRecipe(CraftingRecipe craftingRecipe)
+    {
+        currentlySelectedRecipe = craftingRecipe;
+        craftingWindow.GetComponent<CraftingWindow>().DisplayRecipeDetails(craftingRecipe, this);
+    }
+
+    public int GetItemCount(Item item)
     {
         Inventory playerInventory = GetComponent<Player>().playerInventory;
 
+        int count = playerInventory.GetItemCount(item.GetComponent<Item>());
+
+        return count;
+    }
+
+    private void RenderRecipes()
+    {
         List<CraftingStationType> avaiableCraftingStations = new List<CraftingStationType>()
         {
             CraftingStationType.HAND,
@@ -54,18 +68,15 @@ public class CraftingController : MonoBehaviour
                 return false;
             }
 
-            foreach (CraftingIngredient craftingIngredient in r.craftingIngredients)
-            {
-                bool contains = playerInventory.CheckIfContainsItem(craftingIngredient.item.GetComponent<Item>(), craftingIngredient.count);
-
-                if (!contains)
-                {
-                    return false;
-                }
-            }
-
             return true;
         }).ToList();
+
+        avaiableToCraftRecipes.Sort((item1, item2) => item1.requiredCraftingStation.CompareTo(item2.requiredCraftingStation));
+
+        if (avaiableToCraftRecipes.Count > 0)
+        {
+            SelectRecipe(avaiableToCraftRecipes[0]);
+        }
 
         foreach (CraftingRecipe craftingRecipe in avaiableToCraftRecipes)
         {
@@ -81,19 +92,31 @@ public class CraftingController : MonoBehaviour
 
     private void ClearRecipes()
     {
+        currentlySelectedRecipe = null;
         craftingWindow.GetComponent<CraftingWindow>().RemoveAllCraftingRecipes();
     }
 
-    public void HandleCraftItem(CraftingRecipe craftingRecipe)
+    public void HandleCraftItem()
     {
         Inventory playerInventory = GetComponent<Player>().playerInventory;
 
-        foreach (CraftingIngredient craftingIngredient in craftingRecipe.craftingIngredients)
+        foreach (CraftingIngredient craftingIngredient in currentlySelectedRecipe.craftingIngredients)
+        {
+            bool contains = playerInventory.CheckIfContainsItem(craftingIngredient.item.GetComponent<Item>(), craftingIngredient.count);
+
+            if (!contains)
+            {
+                return;
+            }
+        }
+
+        foreach (CraftingIngredient craftingIngredient in currentlySelectedRecipe.craftingIngredients)
         {
             playerInventory.DecreaseItemCount(craftingIngredient.item.GetComponent<Item>(), craftingIngredient.count);
         }
 
-        playerInventory.AddItem(craftingRecipe.resultItem);
+        playerInventory.AddItem(currentlySelectedRecipe.resultItem);
+        RefreshCraftginWindow();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
