@@ -1,3 +1,7 @@
 hotbar items trigger onclick, inventory dont
 
 dropped items text fadeout
+
+add interaction text for anvil
+
+call RefreshCraftginWindow on every player inventory change

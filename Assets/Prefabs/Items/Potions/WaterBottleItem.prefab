@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1118020136057536444}
   - component: {fileID: -7188456755611505045}
   m_Layer: 0
-  m_Name: IronBar
+  m_Name: WaterBottleItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,10 +46,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 5501643011694006989}
   id: 9
-  name: Iron Bar
+  name: Watter bottle
   type: 0
   rarity: 0
-  sprite: {fileID: -989432824, guid: 605b32fb3cf98da40b24811c97a397b4, type: 3}
+  sprite: {fileID: -731928322, guid: 309830849cf16fc4fb4830c0509a194c, type: 3}
   maxStack: 32
   amount: 1
   hasDurability: 0
