@@ -1,0 +1,12 @@
+.node {
+    background-color: #282c34;
+    border: 1px solid #484d55;
+}
+
+.node .title {
+    color: #ffffff;
+}
+
+.port {
+    background-color: #ff9900;
+}
