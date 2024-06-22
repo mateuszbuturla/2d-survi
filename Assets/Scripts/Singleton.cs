@@ -10,4 +10,5 @@ public class Singleton : MonoBehaviour
     public AllItems allItems;
     public GameObject droppedItemPrefab;
     public AllRecipes allRecipes;
+    public GameObject craftingWindow;
 }

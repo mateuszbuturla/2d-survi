@@ -8,10 +8,10 @@ public class CraftingWindow : MonoBehaviour
 
     private List<GameObject> recipeObjects = new List<GameObject>();
 
-    public void AddCraftingRecipe(CraftingRecipe craftingRecipe, CraftingStation craftingStation)
+    public void AddCraftingRecipe(CraftingRecipe craftingRecipe, CraftingController craftingController)
     {
         GameObject newRecipe = Instantiate(craftingRecipePrefab);
-        newRecipe.GetComponent<CraftingRecipeObject>().Prepare(craftingRecipe, craftingStation);
+        newRecipe.GetComponent<CraftingRecipeObject>().Prepare(craftingRecipe, craftingController);
         newRecipe.transform.SetParent(craftingRecipeContainer.transform);
 
         recipeObjects.Add(newRecipe);
