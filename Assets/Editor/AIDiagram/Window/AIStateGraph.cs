@@ -38,6 +38,7 @@ public class AIStateGraph : GraphView
     {
         SetupZoom(ContentZoomer.DefaultMinScale, ContentZoomer.DefaultMaxScale);
         this.AddManipulator(new ContentDragger());
+        this.AddManipulator(CreateNodeContextualMenu("Create start node", AIDiagramNodeType.Start));
         this.AddManipulator(CreateNodeContextualMenu("Create state node", AIDiagramNodeType.State));
         this.AddManipulator(CreateNodeContextualMenu("Create action node", AIDiagramNodeType.Action));
         this.AddManipulator(CreateNodeContextualMenu("Create transition node", AIDiagramNodeType.Transition));

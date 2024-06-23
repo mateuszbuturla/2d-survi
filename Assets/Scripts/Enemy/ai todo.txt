@@ -1,0 +1,9 @@
+weighted random 
+timer
+health
+
+
+
+move to player 
+random teleport
+spawn attack projectile
