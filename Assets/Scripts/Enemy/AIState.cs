@@ -3,8 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New State", menuName = "AI/State")]
 public class AIState : ScriptableObject
 {
-    public AIAction[] Actions;
-    public Transition[] Transitions;
+    public AIAction[] actions;
+    public Transition[] transitions;
 
     public void UpdateState(AIController controller)
     {
@@ -14,7 +14,7 @@ public class AIState : ScriptableObject
 
     private void DoActions(AIController controller)
     {
-        foreach (var action in Actions)
+        foreach (var action in actions)
         {
             action.Act(controller);
         }
@@ -22,11 +22,20 @@ public class AIState : ScriptableObject
 
     private void CheckTransitions(AIController controller)
     {
-        foreach (var transition in Transitions)
+        foreach (var transition in transitions)
         {
-            if (transition.Decision.Decide(controller))
+            bool shouldChangeState = true;
+            foreach (AIDecision decision in transition.decisions)
             {
-                controller.TransitionToState(transition.TrueStateIndex);
+                if (!decision.Decide(controller))
+                {
+                    shouldChangeState = false;
+                }
+            }
+
+            if (shouldChangeState)
+            {
+                controller.TransitionToState(transition.state);
                 return;
             }
         }

@@ -3,22 +3,24 @@ using UnityEngine;
 public class AIController : MonoBehaviour
 {
     public Transform Player;
-    public AIState[] States;
-    private int currentStateIndex = 0;
+    public AIDiagram aIDiagram;
+    private AIState currentState;
+
+    void Start()
+    {
+        currentState = aIDiagram.mainState;
+    }
 
     void Update()
     {
-        if (States.Length > 0)
+        if (aIDiagram != null && currentState != null)
         {
-            States[currentStateIndex].UpdateState(this);
+            currentState.UpdateState(this);
         }
     }
 
-    public void TransitionToState(int newStateIndex)
+    public void TransitionToState(AIState aIState)
     {
-        if (newStateIndex < States.Length)
-        {
-            currentStateIndex = newStateIndex;
-        }
+        currentState = aIState;
     }
 }

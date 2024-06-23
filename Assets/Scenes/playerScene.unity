@@ -4483,6 +4483,66 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4858456047514720832, guid: 734578db7433f7144ad5ae5325583731, type: 3}
   m_PrefabInstance: {fileID: 755517979}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &755606635
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 755606638}
+  - component: {fileID: 755606637}
+  - component: {fileID: 755606636}
+  m_Layer: 0
+  m_Name: VisualScripting SceneVariables
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &755606636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755606635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 765181c9ef4b24d32a4f7cbd2ef370dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &755606637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755606635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e741851cba3ad425c91ecf922cc6b379, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _data:
+    _json: '{"declarations":{"Kind":"Scene","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
+    _objectReferences: []
+--- !u!4 &755606638
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755606635}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &756262286
 GameObject:
   m_ObjectHideFlags: 0
@@ -6782,6 +6842,7 @@ GameObject:
   - component: {fileID: 1049645733}
   - component: {fileID: 1049645732}
   - component: {fileID: 1049645734}
+  - component: {fileID: 1049645735}
   m_Layer: 0
   m_Name: Wizard_0
   m_TagString: Untagged
@@ -6869,9 +6930,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 2099848746}
-  States:
-  - {fileID: 11400000, guid: dd9c99d3e76bac2489428794bef604d7, type: 2}
-  - {fileID: 11400000, guid: ff9d341de3774c442b4c74edafea484f, type: 2}
+  aIDiagram: {fileID: 11400000, guid: 5ca092652a5fd4641beb42444d9d6971, type: 2}
+--- !u!114 &1049645735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049645731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1afe322d078eaa468b0bb5b568ea3f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tre:
+    test1:
+    - test2:
+      - test1: []
 --- !u!1 &1073146563
 GameObject:
   m_ObjectHideFlags: 0
@@ -13248,3 +13323,4 @@ SceneRoots:
   - {fileID: 4806527708868276426}
   - {fileID: 1861721231}
   - {fileID: 1049645733}
+  - {fileID: 755606638}
