@@ -10,7 +10,7 @@ public class AIDiagramDecisionNode : AIDiagramNode
     {
         base.Initialize(position);
 
-        type = AIDiagramNodeType.Action;
+        type = AIDiagramNodeType.Decision;
     }
 
     public override void Draw()

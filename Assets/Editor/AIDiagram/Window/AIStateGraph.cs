@@ -39,6 +39,7 @@ public class AIStateGraph : GraphView
         this.AddManipulator(CreateNodeContextualMenu("Create action node", AIDiagramNodeType.Action));
         this.AddManipulator(CreateNodeContextualMenu("Create transition node", AIDiagramNodeType.Transition));
         this.AddManipulator(CreateNodeContextualMenu("Create decision node", AIDiagramNodeType.Decision));
+        this.AddManipulator(CreateSaveContextealMenu("Save dialogue"));
         this.AddManipulator(new SelectionDragger());
         this.AddManipulator(new RectangleSelector());
     }
@@ -73,6 +74,15 @@ public class AIStateGraph : GraphView
         return contextualMenuManipulator;
     }
 
+    private IManipulator CreateSaveContextealMenu(string actionName)
+    {
+        ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator(
+            menuEvent => menuEvent.menu.AppendAction(actionName, action => Save())
+        );
+
+        return contextualMenuManipulator;
+    }
+
     private void AddGridBackground()
     {
         GridBackground gridBackground = new GridBackground();
@@ -85,5 +95,11 @@ public class AIStateGraph : GraphView
     private void ClearGraph()
     {
         graphElements.ForEach(graphElement => RemoveElement(graphElement));
+    }
+
+    private void Save()
+    {
+        AIDiagramFileManager.Initialize(this);
+        AIDiagramFileManager.Save("test");
     }
 }

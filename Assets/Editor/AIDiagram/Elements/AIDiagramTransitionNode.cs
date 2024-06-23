@@ -10,7 +10,7 @@ public class AIDiagramTransitionNode : AIDiagramNode
     {
         base.Initialize(position);
 
-        type = AIDiagramNodeType.Action;
+        type = AIDiagramNodeType.Transition;
     }
 
     public override void Draw()
