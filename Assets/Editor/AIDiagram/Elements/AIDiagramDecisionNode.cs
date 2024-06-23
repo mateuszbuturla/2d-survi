@@ -27,7 +27,7 @@ public class AIDiagramDecisionNode : AIDiagramNode
 
         ports.Add(transitionPort);
 
-        outputContainer.Add(transitionPort);
+        inputContainer.Add(transitionPort);
 
         RefreshExpandedState();
     }

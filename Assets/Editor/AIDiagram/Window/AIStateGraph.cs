@@ -3,9 +3,12 @@ using UnityEngine;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 using System;
+using UnityEditor;
 
 public class AIStateGraph : GraphView
 {
+    public string loadedFileName = "";
+
     public AIStateGraph()
     {
         AddManipulators();
@@ -39,7 +42,8 @@ public class AIStateGraph : GraphView
         this.AddManipulator(CreateNodeContextualMenu("Create action node", AIDiagramNodeType.Action));
         this.AddManipulator(CreateNodeContextualMenu("Create transition node", AIDiagramNodeType.Transition));
         this.AddManipulator(CreateNodeContextualMenu("Create decision node", AIDiagramNodeType.Decision));
-        this.AddManipulator(CreateSaveContextealMenu("Save dialogue"));
+        this.AddManipulator(CreateSaveContextealMenu("Save AI diagram"));
+        this.AddManipulator(CreateLoadContextealMenu("Load AI diagram"));
         this.AddManipulator(new SelectionDragger());
         this.AddManipulator(new RectangleSelector());
     }
@@ -47,13 +51,12 @@ public class AIStateGraph : GraphView
     public AIDiagramNode CreateNode(AIDiagramNodeType type, Vector2 position, bool isNewCreated = true)
     {
         Type nodeType = Type.GetType($"AIDiagram{type}Node");
-        AIDiagramNode node = (AIDiagramNode)Activator.CreateInstance(nodeType); // TEST
+        AIDiagramNode node = (AIDiagramNode)Activator.CreateInstance(nodeType);
 
         node.Initialize(position);
 
         if (isNewCreated)
         {
-            // node.choices.Add(new DialogueNodeOption());
             node.Draw();
         }
 
@@ -83,6 +86,15 @@ public class AIStateGraph : GraphView
         return contextualMenuManipulator;
     }
 
+    private IManipulator CreateLoadContextealMenu(string actionName)
+    {
+        ContextualMenuManipulator contextualMenuManipulator = new ContextualMenuManipulator(
+            menuEvent => menuEvent.menu.AppendAction(actionName, action => Load())
+        );
+
+        return contextualMenuManipulator;
+    }
+
     private void AddGridBackground()
     {
         GridBackground gridBackground = new GridBackground();
@@ -100,6 +112,20 @@ public class AIStateGraph : GraphView
     private void Save()
     {
         AIDiagramFileManager.Initialize(this);
-        AIDiagramFileManager.Save("test");
+        AIDiagramFileManager.Save(loadedFileName);
+    }
+
+    private void Load()
+    {
+        string filePath = EditorUtility.OpenFilePanel("AI Diagram Data", "Assets/ScriptableObjects/AI/Diagrams", "asset");
+
+        if (string.IsNullOrEmpty(filePath))
+        {
+            return;
+        }
+
+        ClearGraph();
+        AIDiagramFileManager.Initialize(this);
+        loadedFileName = AIDiagramFileManager.Load(filePath);
     }
 }

@@ -18,18 +18,13 @@ public class AIDiagramTransitionNode : AIDiagramNode
         base.Draw();
 
 
-        ObjectField choiceTriggerField = AIDiagramHelper.CreateGameObjectField<ScriptableObject>(null, null, cb => { });
-
-        mainContainer.Add(choiceTriggerField);
-
-
         Port statePort = InstantiatePort(Orientation.Horizontal, UnityEditor.Experimental.GraphView.Direction.Input, Port.Capacity.Single, typeof(bool));
 
         statePort.portName = "State";
 
         ports.Add(statePort);
 
-        outputContainer.Add(statePort);
+        inputContainer.Add(statePort);
 
 
         Port nextStatePort = InstantiatePort(Orientation.Horizontal, UnityEditor.Experimental.GraphView.Direction.Output, Port.Capacity.Single, typeof(float));

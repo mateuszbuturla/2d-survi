@@ -22,13 +22,13 @@ public class AIDiagramStateNode : AIDiagramNode
         mainContainer.Add(choiceTriggerField);
 
 
-        Port transitionInput = InstantiatePort(Orientation.Horizontal, UnityEditor.Experimental.GraphView.Direction.Input, Port.Capacity.Single, typeof(float));
+        Port transitionInput = InstantiatePort(Orientation.Horizontal, UnityEditor.Experimental.GraphView.Direction.Input, Port.Capacity.Multi, typeof(float));
 
         transitionInput.portName = "Transition input";
 
         ports.Add(transitionInput);
 
-        outputContainer.Add(transitionInput);
+        inputContainer.Add(transitionInput);
 
 
 

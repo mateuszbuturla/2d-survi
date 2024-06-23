@@ -17,7 +17,7 @@ public class AIDiagramActionNode : AIDiagramNode
     {
         base.Draw();
 
-        ObjectField choiceTriggerField = AIDiagramHelper.CreateGameObjectField<ScriptableObject>(null, null, cb => { });
+        ObjectField choiceTriggerField = AIDiagramHelper.CreateGameObjectField<ScriptableObject>(scriptableObject, null, cb => scriptableObject = cb.newValue as ScriptableObject);
 
         mainContainer.Add(choiceTriggerField);
 
@@ -27,7 +27,7 @@ public class AIDiagramActionNode : AIDiagramNode
 
         ports.Add(statePort);
 
-        outputContainer.Add(statePort);
+        inputContainer.Add(statePort);
 
         RefreshExpandedState();
     }

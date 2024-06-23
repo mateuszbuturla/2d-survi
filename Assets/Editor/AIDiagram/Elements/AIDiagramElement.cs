@@ -11,6 +11,7 @@ public class AIDiagramNode : Node
     public string content { get; set; }
     public List<Port> ports { get; set; }
     public AIDiagramNodeType type;
+    public ScriptableObject scriptableObject { get; set; }
 
     public virtual void Initialize(UnityEngine.Vector2 position)
     {

@@ -32,7 +32,7 @@ public class AIDiagramHelper : MonoBehaviour
         return textField;
     }
 
-    public static ObjectField CreateGameObjectField<T>(GameObject value = null, string label = null, EventCallback<ChangeEvent<Object>> onValueChanged = null, bool allowSceneObjects = false)
+    public static ObjectField CreateGameObjectField<T>(Object value = null, string label = null, EventCallback<ChangeEvent<Object>> onValueChanged = null, bool allowSceneObjects = false)
     {
         ObjectField objectField = new ObjectField()
         {

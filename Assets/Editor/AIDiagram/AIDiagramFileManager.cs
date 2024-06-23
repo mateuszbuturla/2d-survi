@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
@@ -45,13 +47,16 @@ public static class AIDiagramFileManager
             nodeToSave.position = node.GetPosition().position;
             nodeToSave.type = node.type;
 
+            if (node.scriptableObject)
+            {
+                nodeToSave.scriptableObjectPath = AssetDatabase.GetAssetPath(node.scriptableObject);
+            }
+
             for (int i = 0; i < node.ports.Count; i++)
             {
                 Port port = node.ports[i];
                 if (port.connected)
                 {
-                    // DialogueNodeOption newChoice = new DialogueNodeOption();
-
                     // Find the edge that is connected to a specific port
                     graphView.edges.ToList().ForEach(edge =>
                     {
@@ -77,11 +82,6 @@ public static class AIDiagramFileManager
                             }
                         }
                     });
-
-                    // newChoice.content = choice.content;
-                    // newChoice.triggerTag = choice.triggerTag;
-
-                    // nodeToSave.choices.Add(newChoice);
                 }
             }
 
@@ -93,7 +93,7 @@ public static class AIDiagramFileManager
         asset.nodes = nodesToSave;
     }
 
-    private static AIDiagramSO LoadDialogue(string path, string assetName)
+    private static AIDiagramSO LoadDiagram(string path, string assetName)
     {
         string fullPath = $"{path}/{assetName}.asset";
 
@@ -105,7 +105,7 @@ public static class AIDiagramFileManager
     {
         string fullPath = $"{path}/{assetName}.asset";
 
-        AIDiagramSO asset = LoadDialogue(path, assetName);
+        AIDiagramSO asset = LoadDiagram(path, assetName);
 
         if (asset == null)
         {
@@ -115,5 +115,98 @@ public static class AIDiagramFileManager
         }
 
         return asset;
+    }
+
+    //LOAD
+
+    public static string Load(string filePath)
+    {
+        string file = Path.GetFileNameWithoutExtension(filePath);
+
+        AIDiagramSO data = LoadDiagram("Assets/ScriptableObjects/AI/Diagrams", file);
+
+        if (data == null)
+        {
+            Debug.LogError("Could not find the file!");
+
+            return "";
+        }
+
+        LoadNodes(data.nodes);
+        LoadNodesConnections(data.nodes);
+
+        return file;
+    }
+
+    private static void LoadNodes(List<AIDiagramSONodes> nodes)
+    {
+        foreach (AIDiagramSONodes nodeData in nodes)
+        {
+            AIDiagramNode node = graphView.CreateNode(nodeData.type, nodeData.position, false);
+
+            node.id = nodeData.ID;
+            node.type = nodeData.type;
+
+            if (nodeData.scriptableObjectPath != null && nodeData.scriptableObjectPath.Length > 0)
+            {
+                node.scriptableObject = AssetDatabase.LoadAssetAtPath<ScriptableObject>(nodeData.scriptableObjectPath);
+            }
+
+            node.Draw();
+
+            loadedNodes.Add(node.id, node);
+
+            graphView.AddElement(node);
+        }
+    }
+
+    private static void LoadNodesConnections(List<AIDiagramSONodes> nodes)
+    {
+        foreach (var vkp in loadedNodes)
+        {
+            AIDiagramSONodes node = nodes.Find(r => r.ID == vkp.Value.id);
+
+            ConnectNodes(vkp.Value, node.actionIds, loadedNodes, typeof(int));
+            ConnectNodes(vkp.Value, node.transitionIds, loadedNodes, typeof(bool));
+            ConnectNodes(vkp.Value, node.decisionIds, loadedNodes, typeof(string));
+            ConnectNodes(vkp.Value, node.stateIds, loadedNodes, typeof(float));
+        }
+    }
+
+    private static void ConnectNodes(AIDiagramNode node, List<string> targetIds, Dictionary<string, AIDiagramNode> loadedNodes, Type portType)
+    {
+        foreach (string targetId in targetIds)
+        {
+            AIDiagramNode targetNode = loadedNodes.FirstOrDefault(n => n.Value.id == targetId).Value;
+
+            if (targetNode != null)
+            {
+                Port outputPort = GetOutputPort(node, portType);
+                Port inputPort = GetInputPort(targetNode, portType);
+
+                Edge edge = outputPort.ConnectTo(inputPort);
+
+                graphView.AddElement(edge);
+
+                RefreshPorts(node);
+            }
+        }
+    }
+
+    private static Port GetOutputPort(AIDiagramNode node, Type portType)
+    {
+        return node.outputContainer.Children().OfType<Port>()
+        .FirstOrDefault(p => p.portType == portType) as Port;
+    }
+
+    private static Port GetInputPort(AIDiagramNode node, Type portType)
+    {
+        return node.inputContainer.Children().OfType<Port>()
+        .FirstOrDefault(p => p.portType == portType) as Port;
+    }
+
+    private static void RefreshPorts(AIDiagramNode node)
+    {
+        node.RefreshPorts();
     }
 }
