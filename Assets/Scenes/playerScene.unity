@@ -6870,6 +6870,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 2099848746}
   aIDiagram: {fileID: 11400000, guid: a2c0d61130c118d45b01b1380184938a, type: 2}
+  currentState:
+    ID: 
+    position: {x: 0, y: 0}
+    type: 0
+    actionIds: []
+    transitionIds: []
+    decisionIds: []
+    stateIds: []
+    scriptableObjectPath: 
+  currentActions: []
+  currentTransitions: []
 --- !u!1 &1073146563
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -16,14 +17,22 @@ public class AIController : MonoBehaviour
     public AIDiagramSONodes currentState;
     public List<AIAction> currentActions = new List<AIAction>();
     public List<AITransition> currentTransitions = new List<AITransition>();
+    public Dictionary<string, AIDecision> allAIDecisions = new Dictionary<string, AIDecision>();
 
     void Start()
     {
+        aIDiagram = Instantiate(aIDiagram);
         AIDiagramSONodes startNode = aIDiagram.nodes.Find(r => r.type == AIDiagramNodeType.Start);
 
         if (startNode == null)
         {
             Debug.LogError("Missing start node in AI Diagram");
+        }
+
+        foreach (AIDiagramSONodes node in aIDiagram.nodes.Where(r => r.type == AIDiagramNodeType.Decision))
+        {
+            Debug.Log(node.scriptableObjectPath);
+            allAIDecisions[node.ID] = GetDecition(node.ID);
         }
 
         SetCurrentState(startNode.stateIds[0]);
@@ -33,14 +42,14 @@ public class AIController : MonoBehaviour
     {
         AIDiagramSONodes node = aIDiagram.nodes.Find(r => r.type == AIDiagramNodeType.Action && r.ID == id);
 
-        return AssetDatabase.LoadAssetAtPath<AIAction>(node.scriptableObjectPath);
+        return Instantiate(AssetDatabase.LoadAssetAtPath<AIAction>(node.scriptableObjectPath));
     }
 
     private AIDecision GetDecition(string id)
     {
         AIDiagramSONodes node = aIDiagram.nodes.Find(r => r.type == AIDiagramNodeType.Decision && r.ID == id);
 
-        return AssetDatabase.LoadAssetAtPath<AIDecision>(node.scriptableObjectPath);
+        return Instantiate(AssetDatabase.LoadAssetAtPath<AIDecision>(node.scriptableObjectPath));
     }
 
     private AITransition GetTransition(string id)
@@ -52,7 +61,7 @@ public class AIController : MonoBehaviour
 
         foreach (string decitionId in node.decisionIds)
         {
-            transition.decisions.Add(GetDecition(decitionId));
+            transition.decisions.Add(allAIDecisions[decitionId]);
         }
 
         return transition;
@@ -80,6 +89,11 @@ public class AIController : MonoBehaviour
 
     void Update()
     {
+        foreach (var vkp in allAIDecisions)
+        {
+            vkp.Value.UpdateData(this);
+        }
+
         foreach (AITransition transition in currentTransitions)
         {
             bool shouldChangeState = true;
@@ -95,6 +109,11 @@ public class AIController : MonoBehaviour
             if (shouldChangeState)
             {
                 SetCurrentState(transition.stateId);
+
+                foreach (AIDecision decisionId in transition.decisions)
+                {
+                    decisionId.ResetData(this);
+                }
             }
         }
 
