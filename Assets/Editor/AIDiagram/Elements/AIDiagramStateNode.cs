@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class AIDiagramStateNode : AIDiagramNode
 {
@@ -17,7 +18,7 @@ public class AIDiagramStateNode : AIDiagramNode
     {
         base.Draw();
 
-        ObjectField choiceTriggerField = AIDiagramHelper.CreateGameObjectField<ScriptableObject>(null, null, cb => { });
+        Toggle choiceTriggerField = AIDiagramHelper.CreateBoolField(isSequencer, "Sequencer", cb => isSequencer = cb.newValue);
 
         mainContainer.Add(choiceTriggerField);
 

@@ -13,6 +13,7 @@ public class AIDiagramSONodes
     public List<string> decisionIds = new List<string>();
     public List<string> stateIds = new List<string>();
     public string scriptableObjectPath;
+    public bool isSequencer;
 }
 
 [CreateAssetMenu(fileName = "AI Diagram", menuName = "AI/Diagram")]

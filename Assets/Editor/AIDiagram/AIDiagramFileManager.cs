@@ -46,6 +46,7 @@ public static class AIDiagramFileManager
             nodeToSave.ID = node.id;
             nodeToSave.position = node.GetPosition().position;
             nodeToSave.type = node.type;
+            nodeToSave.isSequencer = node.isSequencer;
 
             if (node.scriptableObject)
             {
@@ -146,6 +147,7 @@ public static class AIDiagramFileManager
 
             node.id = nodeData.ID;
             node.type = nodeData.type;
+            node.isSequencer = nodeData.isSequencer;
 
             if (nodeData.scriptableObjectPath != null && nodeData.scriptableObjectPath.Length > 0)
             {

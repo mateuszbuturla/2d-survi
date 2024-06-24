@@ -12,6 +12,7 @@ public class AIDiagramNode : Node
     public List<Port> ports { get; set; }
     public AIDiagramNodeType type;
     public ScriptableObject scriptableObject { get; set; }
+    public bool isSequencer { get; set; }
 
     public virtual void Initialize(UnityEngine.Vector2 position)
     {

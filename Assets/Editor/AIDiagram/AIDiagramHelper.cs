@@ -32,6 +32,23 @@ public class AIDiagramHelper : MonoBehaviour
         return textField;
     }
 
+    public static Toggle CreateBoolField(bool value = false, string label = null, EventCallback<ChangeEvent<bool>> onValueChanged = null)
+    {
+        Toggle toggleField = new Toggle()
+        {
+            value = value,
+            label = label,
+            style = { width = 250 }
+        };
+
+        if (onValueChanged != null)
+        {
+            toggleField.RegisterValueChangedCallback(onValueChanged);
+        }
+
+        return toggleField;
+    }
+
     public static ObjectField CreateGameObjectField<T>(Object value = null, string label = null, EventCallback<ChangeEvent<Object>> onValueChanged = null, bool allowSceneObjects = false)
     {
         ObjectField objectField = new ObjectField()
